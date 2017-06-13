@@ -9,42 +9,27 @@
 	<link href="css/materialize.min.css" type="text/css" rel="stylesheet" media="screen,projection"/>
 	<script src="js/jquery-3.2.1.min.js"></script>
 	<script src="js/materialize.min.js"></script>
+	<link rel="stylesheet" href="css/style.css">
 	<link rel="stylesheet" href="icons/css/font-awesome.min.css">
 
 </head>
 <body>
-<style>
-body{
-background-color:#eee;
-}
-.row .col {
-    float: left;
-    box-sizing: border-box;
-    padding: 0 .75rem;
-    min-height: 1px;
-    padding: 0px;
-}
 
-.shop-details{
-	  padding: 10px 0px 0px 10px !important;
-}
-.shop-rating{
-padding-top:5px !important;
-}
-.shop-rating i{
-color:green;
-}
-</style>
  <nav>
     <div class="nav-wrapper">
-      <a href="#" class="brand-logo center">Shopkeeper</a>
-      <ul id="nav-mobile" class="left hide-on-med-and-down">
-        
-       
-      </ul>
+      <a href="#" class="brand-logo center">Cartway</a>
+      
     </div>
 </nav>
 
+<style>
+.carousel {
+    margin-top: -75px;
+	}
+.btn{
+width:100%;
+}
+</style>
 
 <ul id="slide-out" class="side-nav ">
     <li><div class="userView">
@@ -55,239 +40,140 @@ color:green;
       <a href="#!name"><span class="white-text name">Sheo Shankar</span></a>
       <a href="#!email"><span class="white-text email">sheointime@gmail.com</span></a>
     </div></li>
-    <li><a href="#!"><i class="fa fa-cloud "></i>First Link With Icon</a></li>
-    <li><a href="#!">Second Link</a></li>
-    <li><div class="divider"></div></li>
-    <li><a class="subheader">Subheader</a></li>
-    <li><a class="waves-effect" href="#!">Third Link With Waves</a></li>
+    <li><a class="waves-effect"  href="#!">Home</a></li>
+	<li><a class="waves-effect"  href="#!">Fav Shop</a></li>
+    <li><a class="waves-effect"  href="#!">Order Now</a></li>
+    <li><a class="waves-effect"  href="#">Current Order</a></li>
+    <li><a class="waves-effect"  href="#!">Order History</a></li>
+	<li><a class="waves-effect"  href="#!">Profile</a></li>
+	<li><a class="waves-effect"  href="#!">Log Out</a></li>
+	 <li><div class="divider"></div></li>
+	<li><a class="waves-effect"  href="#!">About App</a></li>
+	<li><a class="waves-effect"  href="#!">Privacy Policy </a></li>
+	<li><a class="waves-effect"  href="#!">Terms of use</a></li>
   </ul>
   <a href="#" data-activates="slide-out" class="button-collapse"><i class="fa fa-bars" aria-hidden="true" style="position:absolute;top:18px;left:8px;color:#fff;font-size:23px;"></i></a>
 
+<div class="row">
+	<div class="col s10 offset-s1" >
+	
+		
+		<div class="card" style="padding:5px;">
+			<div class="row" style="margin-bottom:2px;" >
+					<div class="col s3">
+						<img class="responsive-img" src="images/user.jpeg"></img>
+					</div>
+					<div class="col s9" style="padding:10px;">
+						Sudhir Singh<br>
+						789 Naya Khand2 First Floor<br>
+						Indrapuram Ghaziabad<br>
+					</div>
+			</div>
+			<div class="row" style="text-align:center;">
+				<div class="col s6" style="padding:3px;">
+						<a class="waves-effect waves-light btn">Call</a>
+				</div>
+				<div class="col s6" style="padding:3px;">
+				
+						<a class="waves-effect waves-light btn">Chat</a>
+				</div>
+			</div>
+			<div class="row" style="font-size:18px;">
+			<hr style="border-color:#eee;">
+				<p>Shop Images</p>
+				  <div class="carousel">
+					<a class="carousel-item" href="#one!"><img src="images/g-1.jpg"></a>
+					<a class="carousel-item" href="#two!"><img  src="images/g-2.jpg"></a>
+					<a class="carousel-item" href="#three!"><img src="images/g-3.jpg"></a>
+					<a class="carousel-item" href="#four!"><img src="images/g-4.jpg"></a>
+					<a class="carousel-item" href="#five!"><img  src="images/g-5.jpg"></a>
+				  </div>
+      
+			</div>
+			<div class="row" style="font-size:18px;margin-top:-130px;">
+			<hr style="border-color:#eee;">
+			<p>Details</p>
+			<table class="bordered"style="font-size:15px;">
+				<thead>
+				  <tr>
+					  <th>Name</th>
+					  <th>Deatils</th>
+					 
+				  </tr>
+				</thead>
 
-
-	<div class="row card">
-       <div class="col s4">
-			<img src="images/g-1.jpg" class="responsive-img"></img>
-			 
-		</div>
-		<div class="col s8 shop-details">
-				<div class="col s12">
-						Aditya Birla Grp. Ltd
-				</div>
-				<div class="col s12">
-						<div class="col s6 shop-rating">
-							<span>
+				<tbody>
+				  <tr>
+					<td>Shop Name</td>
+					<td>Aditya Birla Grp. Ltd</td>
+					
+				  </tr>
+				  <tr>
+					<td>Category</td>
+					<td>Grocery,Bakery</td>
+					
+				  </tr>
+				  <tr>
+					<td>Shop Owner</td>
+					<td>Sudhir Singh</td>
+					
+				  </tr>
+				  <tr>
+					<td>Mobile Nummber</td>
+					<td>+91 7838750375</td>
+					
+				  </tr>
+				   <tr>
+					<td>Address</td>
+					<td>789 Naya Khand2 First Floor</td>
+					
+				  </tr>
+				  <tr>
+					<td>Location</td>
+					<td>Indrapuram Ghaziabad</td>
+					
+				  </tr>
+				  <tr>
+					<td>Description</td>
+					<td>
+						 You can describe what you sell,what's special about it, how long you've been in business, your area of expertise, 
+						and so on. 
+					</td>
+					
+				  </tr>
+				  <tr>
+					<td>Shipping</td>
+					<td>Charges Rs 25/- , Free Shipping above Rs 500/-</td>
+					
+				  </tr>
+				  <tr>
+					<td>Rating</td>
+					<td>
+						<span>
 								<i class="fa fa-star" aria-hidden="true"></i>
 								<i class="fa fa-star" aria-hidden="true"></i>
 								<i class="fa fa-star" aria-hidden="true"></i>
 								<i class="fa fa-star" aria-hidden="true"></i>
 								<i class="fa fa-star-half-o" aria-hidden="true"></i>
 							</span>
-						</div>
-						<div class="col s6">
-							
-								<div class="chip">
-									0.3 km
-								 </div>
-							
-						</div>
-				</div>
-				
-         </div>
+					</td>
+					
+				  </tr>
+				</tbody>
+			  </table>
             
-    </div>
-	
-	
-		<div class="row card">
-       <div class="col s4">
-			<img src="images/g-2.jpg" class="responsive-img"></img>
-			 
+			
+			
+			</div>
+			
 		</div>
-		<div class="col s8 shop-details">
-				<div class="col s12">
-						Greendrop Retail
-				</div>
-				<div class="col s12">
-						<div class="col s6 shop-rating">
-							<span>
-								<i class="fa fa-star" aria-hidden="true"></i>
-								<i class="fa fa-star" aria-hidden="true"></i>
-								<i class="fa fa-star" aria-hidden="true"></i>
-								<i class="fa fa-star" aria-hidden="true"></i>
-								<i class="fa fa-star-half-o" aria-hidden="true"></i>
-							</span>
-						</div>
-						<div class="col s6">
-							
-								<div class="chip">
-									0.8 km
-								 </div>
-							
-						</div>
-				</div>
-				
-         </div>
-            
+       
     </div>
-	
-		<div class="row card">
-       <div class="col s4">
-			<img src="images/g-3.jpg" class="responsive-img"></img>
-			 
-		</div>
-		<div class="col s8 shop-details">
-				<div class="col s12">
-						SRS Value Bazaar
-				</div>
-				<div class="col s12">
-						<div class="col s6 shop-rating">
-							<span>
-								<i class="fa fa-star" aria-hidden="true"></i>
-								<i class="fa fa-star" aria-hidden="true"></i>
-								<i class="fa fa-star" aria-hidden="true"></i>
-								<i class="fa fa-star" aria-hidden="true"></i>
-								<i class="fa fa-star-half-o" aria-hidden="true"></i>
-							</span>
-						</div>
-						<div class="col s6">
-							
-								<div class="chip">
-									2 km
-								 </div>
-							
-						</div>
-				</div>
-				
-         </div>
-            
-    </div>
-	
-		<div class="row card">
-       <div class="col s4">
-			<img src="images/g-4.jpg" class="responsive-img"></img>
-			 
-		</div>
-		<div class="col s8 shop-details">
-				<div class="col s12">
-						Home Buddy
-				</div>
-				<div class="col s12">
-						<div class="col s6 shop-rating">
-							<span>
-								<i class="fa fa-star" aria-hidden="true"></i>
-								<i class="fa fa-star" aria-hidden="true"></i>
-								<i class="fa fa-star" aria-hidden="true"></i>
-								<i class="fa fa-star" aria-hidden="true"></i>
-								<i class="fa fa-star-half-o" aria-hidden="true"></i>
-							</span>
-						</div>
-						<div class="col s6">
-							
-								<div class="chip">
-									5 km
-								 </div>
-							
-						</div>
-				</div>
-				
-         </div>
-            
-    </div>
-		<div class="row card">
-       <div class="col s4">
-			<img src="images/g-1.jpg" class="responsive-img"></img>
-			 
-		</div>
-		<div class="col s8 shop-details">
-				<div class="col s12">
-						Empire the Supermarket
-				</div>
-				<div class="col s12">
-						<div class="col s6 shop-rating">
-							<span>
-								<i class="fa fa-star" aria-hidden="true"></i>
-								<i class="fa fa-star" aria-hidden="true"></i>
-								<i class="fa fa-star" aria-hidden="true"></i>
-								<i class="fa fa-star" aria-hidden="true"></i>
-								<i class="fa fa-star-half-o" aria-hidden="true"></i>
-							</span>
-						</div>
-						<div class="col s6">
-							
-								<div class="chip">
-									5 km
-								 </div>
-							
-						</div>
-				</div>
-				
-         </div>
-            
-    </div>
-	
-		<div class="row card">
-       <div class="col s4">
-			<img src="images/g-5.jpg" class="responsive-img"></img>
-			 
-		</div>
-		<div class="col s8 shop-details">
-				<div class="col s12">
-						Shop Name
-				</div>
-				<div class="col s12">
-						<div class="col s6 shop-rating">
-							<span>
-								<i class="fa fa-star" aria-hidden="true"></i>
-								<i class="fa fa-star" aria-hidden="true"></i>
-								<i class="fa fa-star" aria-hidden="true"></i>
-								<i class="fa fa-star" aria-hidden="true"></i>
-								<i class="fa fa-star-half-o" aria-hidden="true"></i>
-							</span>
-						</div>
-						<div class="col s6">
-							
-								<div class="chip">
-									25 km
-								 </div>
-							
-						</div>
-				</div>
-				
-         </div>
-            
-    </div>
-	
-		<div class="row card">
-       <div class="col s4">
-			<img src="images/g-1.jpg" class="responsive-img"></img>
-			 
-		</div>
-		<div class="col s8 shop-details">
-				<div class="col s12">
-						Shop Name
-				</div>
-				<div class="col s12">
-						<div class="col s6 shop-rating">
-							<span>
-								<i class="fa fa-star" aria-hidden="true"></i>
-								<i class="fa fa-star" aria-hidden="true"></i>
-								<i class="fa fa-star" aria-hidden="true"></i>
-								<i class="fa fa-star" aria-hidden="true"></i>
-								<i class="fa fa-star-half-o" aria-hidden="true"></i>
-							</span>
-						</div>
-						<div class="col s6">
-							
-								<div class="chip">
-									25 km
-								 </div>
-							
-						</div>
-				</div>
-				
-         </div>
-            
-    </div>
+</div>		 
+  <div style="position:fixed;bottom:0px;width:100%;">
+	<a href="order-now.html" class="waves-effect waves-light btn">Order Now</a>
+</div>  
+ 
 	  
 	  
 	  
@@ -300,6 +186,10 @@ color:green;
 				  $(".button-collapse").sideNav();
 				  // Initialize collapsible (uncomment the line below if you use the dropdown variation)
 				  //$('.collapsible').collapsible();
+				  
+				 
+					$('.carousel').carousel();
+
 						
 		});
 		</script>

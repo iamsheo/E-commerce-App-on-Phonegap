@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0"/>
+  <title>Mobile App</title>
+
+  
+	<link href="../css/materialize.min.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+	<script src="../js/jquery-3.2.1.min.js"></script>
+	<script src="../js/materialize.min.js"></script>
+	<link rel="stylesheet" href="../css/style.css">
+	<link rel="stylesheet" href="../icons/css/font-awesome.min.css">
+
+</head>
+<body>
+
+ <nav>
+    <div class="nav-wrapper">
+      <a href="#" class="brand-logo center">Cartway</a>
+     
+    </div>
+</nav>
+
+
+
+
+	<div class="row card">
+	<br>
+	
+	<div class="col s8 offset-s2" style="border: 1px dashed #eee;padding:15px;margin-bottom:40px;">
+	<img src="images/logo.png" style="width:100%;"></img>
+	<p style="font-weight:600;text-align:center;">Please add your details </p>
+	<hr style="border: 1px solid #eee;">
+	
+		<form action="thankyou.html">
+			<div class="input-field col s12">
+			  <input id="house" type="text" class="validate" required>
+			  <label for="house">Shop Name</label>
+			</div>
+			<div class="input-field col s12">
+			  <input id="block" type="text" class="validate" required>
+			  <label for="block">Shop Category</label>
+			</div>
+			<div class="input-field col s12">
+			  <input id="loation" type="text" class="validate" required>
+			  <label for="location">Location</label>
+			</div>
+			
+			<div class="input-field col s12">
+			  <input id="address" type="text" class="validate" required>
+			  <label for="address">Address</label>
+			</div>
+			
+			<div class="input-field col s12">
+			  <input id="owner" type="text" class="validate" required>
+			  <label for="owner">Shop Owner</label>
+			</div>
+			
+			<div class="input-field col s12">
+			  <input id="mobile" type="text" class="validate" required>
+			  <label for="mobile">Mobile</label>
+			</div>
+			
+			 <button class="btn waves-effect waves-light" type="submit" id="submit">Submit
+				
+			  </button>
+		</form>
+		<br>
+		<div id="info" style="color:red;"></div>
+		<br>
+		<div id="localstorage" style="color:red;"></div>
+		
+		
+	</div>
+	
+	<br><br><br>
+	<img src="images/bg.png" class="responsive-img " >
+	</div>
+	
+	  
+	  
+	  
+		
+	  
+	  
+<script type="text/javascript" src="cordova.js"></script>
+<script type="text/javascript">
+        app.initialize();
+</script>
+	  
+</body>
+</html>

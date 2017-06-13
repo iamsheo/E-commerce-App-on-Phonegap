@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0"/>
+  <title>Mobile App</title>
+
+  
+	<link href="css/materialize.min.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+	<script src="js/jquery-3.2.1.min.js"></script>
+	<script src="js/materialize.min.js"></script>
+	<link rel="stylesheet" href="css/style.css">
+	<link rel="stylesheet" href="icons/css/font-awesome.min.css">
+
+</head>
+<body>
+
+ <nav>
+    <div class="nav-wrapper">
+      <a href="#" class="brand-logo center">Cartway</a>
+     
+    </div>
+</nav>
+<ul id="slide-out" class="side-nav ">
+    <li><div class="userView">
+      <div class="background">
+        <img src="images/office.jpg">
+      </div>
+      <a href="#!user"><img class="circle" src="images/user.jpeg"></a>
+      <a href="#!name"><span class="white-text name">Sheo Shankar</span></a>
+      <a href="#!email"><span class="white-text email">sheointime@gmail.com</span></a>
+    </div></li>
+    <li><a class="waves-effect"  href="#!">Home</a></li>
+	<li><a class="waves-effect"  href="#!">Fav Shop</a></li>
+    <li><a class="waves-effect"  href="#!">Order Now</a></li>
+    <li><a class="waves-effect"  href="#">Current Order</a></li>
+    <li><a class="waves-effect"  href="#!">Order History</a></li>
+	<li><a class="waves-effect"  href="#!">Profile</a></li>
+	<li><a class="waves-effect"  href="#!">Log Out</a></li>
+	 <li><div class="divider"></div></li>
+	<li><a class="waves-effect"  href="#!">About App</a></li>
+	<li><a class="waves-effect"  href="#!">Privacy Policy </a></li>
+	<li><a class="waves-effect"  href="#!">Terms of use</a></li>
+  </ul>
+  <a href="#" data-activates="slide-out" class="button-collapse"><i class="fa fa-bars" aria-hidden="true" style="position:absolute;top:18px;left:8px;color:#fff;font-size:23px;"></i></a>
+
+
+
+<style>
+.shop ul{
+overflow:auto;
+}
+.shop li{
+
+border:1px solid #eee;
+width:100px;
+height:120px;
+float:left;
+text-align:center;
+vertical-align:middel;
+padding-top:20px;
+}
+
+.shop li img{
+width:50px;
+}
+</style>
+
+
+
+	<div class="row card">
+	<br>
+	
+	<div class="col s10 offset-s1" style="border: 1px dashed #eee;padding:15px;margin-bottom:40px;">
+	<h6>Search Shop Near By You</h6>
+	
+	
+		<a href="shop-list.html">
+		<div class="shop">
+				<ul>
+					<li>
+					<img src="images/groceries.svg"></img><br>
+					Grocery</li>
+					<li>
+						<img src="images/cake.svg"></img><br>
+						Bakery
+					</li>
+					<li>
+						<img src="images/pills.svg"></img><br>
+						Medical Store
+					</li>
+					<li>
+						<img src="images/chicken.svg"></img><br>
+						Chicken Shop
+					</li>
+					<li>
+						<img src="images/cart-man.svg"></img><br>
+						Others
+					</li>
+				<ul>
+				
+					
+		</div>
+		</a>
+		<div style="clear:both;"></div>
+		<br>
+		
+		<div id="info" style="color:red;"></div>
+		<br>
+		<div id="localstorage" style="color:red;"></div>
+		
+		
+	</div>
+	
+	<br><br>
+	<img src="images/bg.png" class="responsive-img " >
+	</div>
+	
+	  
+	  <script>
+		$(document).ready(function(){
+			
+				
+					// Initialize collapse button
+				  $(".button-collapse").sideNav();
+				  // Initialize collapsible (uncomment the line below if you use the dropdown variation)
+				  //$('.collapsible').collapsible();
+						
+		});
+		</script>
+	  
+		
+	  
+	  
+<script type="text/javascript" src="cordova.js"></script>
+<script type="text/javascript">
+        app.initialize();
+</script>
+	  
+</body>
+</html>
