@@ -32,10 +32,7 @@
     margin-bottom: 5px;
 }
 
-
 </style>
-
-  <div id="loading-image"></div>
 
 <ul id="slide-out" class="side-nav ">
     <li><div class="userView">
@@ -60,50 +57,121 @@
   </ul>
   <a href="#" data-activates="slide-out" class="button-collapse"><i class="fa fa-bars" aria-hidden="true" style="position:absolute;top:18px;left:8px;color:#fff;font-size:23px;"></i></a>
 
+  <style>
+.product-list li{
 
-<form class="col s12">
-     <div class="row" style="margin:0px;padding:0px;">
-        <div class="input-field col s10" style="padding-left:5px;">
-          <input  id="first_name" type="text" class="validate">
-          <label for="first_name">Search shop </label>
-        </div>
-		<button class="btn waves-effect waves-light col s2" type="submit" name="action">Go
-   
-		</button>
-        
+border-bottom:1px solid #eee;
+padding:10px;
+}
+</style>
+	<div class="row" style="margin-bottom:2px;">
+		<div class="col s10 offset-s1">
+			<div class="card row" style="padding:10px;postion:fixed" >
+			
+			 <form class="col s12" >
+			  <div class="row" style="margin-bottom:2px;">
+				<div class="input-field col s8">
+				  <input placeholder="Item name -- Qty" id="item" type="text" class="validate">
+				  <label for="item">Make List</label>
+				</div>
+				<div class="input-field col s4">
+				  <button class="btn waves-effect waves-light" type="button" id="add" name="action">Add</button>
+				  
+				</div>
+			</div>
+			</form>
+		</div>
+		<div class="card row">
+			<ul class="product-list" id="item-list" style="height:230px;overflow-y: scroll;">
+				
+			</ul>
+			 <a  style="margin:10px;"class="btn waves-effect waves-light" id="ordernow" >Order Now</a>
+			 <br>
+		</div>
 	</div>
-</form>
-
-	
-	
-<div id="info"></div>
-		 
-            
- 
+</div>
 	  
 	  
 	  
 	  
 		<script>
 		$(document).ready(function(){
+			$(".button-collapse").sideNav();
 			
-				 $(".button-collapse").sideNav();
-				 
+			
+			
+			$i=1;
 				
-				 
-							$.ajax({
+				$("#add").click(function(){
+				
+					$item=$("#item").val();
+					if($item!=""){
+						$("#item").val("");
+						$("#item-list").append('<li id="'+$i+'">'+$i+'&nbsp;&nbsp;'+$item+'<i class="fa fa-trash pull-right delete-item" aria-hidden="true" style="color:red"></i><i class="fa fa-pencil-square-o pull-right edit-item" aria-hidden="true" style="color:green;margin-right:10px;"></i> </li></li>');
+					
+						$i++;
+					}
+				});
+				
+				
+		});
+		
+		$(document).on('click','.delete-item',function(){
+		
+			$(this).parent().css('text-decoration','line-through');
+			$id=$(this).parent().attr('id');
+			$(this).parent().css('text-decor','');
+			
+		
+		});
+		
+		$(document).on('dblclick','.delete-item',function(){
+		
+		
+			$(this).parent().css('text-decoration','');
+			$id=$(this).parent().attr('id');
+			$text=$(this).parent().text();
+			
+			
+		
+		});
+		
+		$(document).on('click','.edit-item',function(){
+		
+		
+		});
+		
+		
+		</script>
+		
+		<script>
+		$(document).ready(function(){
+	  
+	  if (typeof(Storage) !== "undefined") {
+										
+									$shopkeeper_id=localStorage.getItem("shop_id");
+									$customer_id=localStorage.getItem("mobile");
+									
+									
+									$("#ordernow").click(function(){
+									
+									$("#shopkeeper_id").val($shopkeeper_id);
+									$("#customer_id").val($customer_id);
+									$item_list=$("#item-list").text();
+									
+									
+									$.ajax({
 									type: 'GET',
-									url: 'http://cartway.in/app-work/web-api/public/shop-list',
+									url: 'http://cartway.in/app-work/web-api/public/order-upload-list',
 									data: {
-										location:'loaction',
-										category:'category',
+									customer_id:$customer_id,
+									shopkeeper_id:$shopkeeper_id,
+									list:$item_list,
 									},
 									dataType: 'jsonp',
 									crossDomain: true,
 									
 							}).done(function(response){
-									console.log(response);
-									
 									$.each( response, function( key, val ) {
 												//alert( key+ val.response  );
 												
@@ -115,63 +183,16 @@
 												}else{
 												
 													
+													localStorage.setItem("order_id",val.order_id);
 													
-													$shoplist=val.shoplist;
-													
-													$.each( $shoplist, function( key, val ) {
-													
-													//alert(val.shop_name);
-													
-													$str='<div class="shop" id="'+val.id+'">';
-													
-													$str =$str+'<div class="row card " style="padding-top:5px;">';
-													$str =$str+'<div class="col s4">';
-													$str =$str+'<img src="images/g-1.jpg" class="responsive-img"></img>';
-													$str =$str+'</div>';
-													$str =$str+'<div class="col s8 shop-details">';
-													$str =$str+'<div class="col s6">'+val.shop_name+'</div>';
-													$str =$str+'<div class="col s6 pull-right">';
-													$str =$str+'<div class="col s12 shop-rating ">';
-													$str =$str+'<span>';
-													$str =$str+'<i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i>	<i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star-half-o" aria-hidden="true"></i>';
-													$str =$str+'</span>';
-													$str =$str+'</div>';
-													$str =$str+'</div>';
-													$str =$str+'<div class="col s12">';
-													$str =$str+'<div class="km">';
-													$str =$str+'0.3 km';
-													$str =$str+'</div>';
-													$str =$str+'</div>';
-													$str =$str+'<div class="col s12 offers"><span>';
-													$str =$str+'<span>';
-													$str =$str+'<b>Freeshipping above Rs 350/- | charges 25/-</b>';
-													$str =$str+'</span>';
-													$str =$str+'</div>';
-													$str =$str+'</div>';
-													$str =$str+'</div>';
-													$str =$str+'</div>';
-													
-													$str =$str+'</div>';
-													
-								
-													$("body").append($str);
-													
-	
+													window.location.replace("pickup-time.html");
 													
 													
-													
-													
-													
-													
-													
-													});
 													
 												
 												}
 												
-												 $('#loading-image').hide();
-												
-											});
+									});
 									
 									
 									
@@ -181,35 +202,27 @@
 							});
 					
 					
-					
-				
-				
-				  
-						
-		});
-		</script>
-		
-		<script>
-			$(document).on("click",".shop", function(){
-				
-				$id=$(this).attr('id');
-				
-				
-									if (typeof(Storage) !== "undefined") {
+									
+									
+									
+									
+									
 										
-										localStorage.setItem("shop_id", $id);
-										window.location.href="shop-details.html";
-											
-									} else {
+									
+									});
+									
+						} else {
 										$("#localstorage").html("Sorry, your browser does not support Web Storage...");
 									}
-									
-				
-				
-				
-			});
-		</script>
+
+		
 	  
+	  
+	  
+	});
+		
+		
+		</script>  
 	  
 <script type="text/javascript" src="cordova.js"></script>
 <script type="text/javascript">

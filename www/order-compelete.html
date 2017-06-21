@@ -11,6 +11,7 @@
 	<script src="js/materialize.min.js"></script>
 	<link rel="stylesheet" href="css/style.css">
 	<link rel="stylesheet" href="icons/css/font-awesome.min.css">
+	<script src="js/jquery-uploadPreview.min.js"></script>
 
 </head>
 <body>
@@ -18,9 +19,22 @@
  <nav>
     <div class="nav-wrapper">
       <a href="#" class="brand-logo center">Cartway</a>
-     
+      
     </div>
 </nav>
+
+<style>
+.card {
+    position: relative;
+    background-color: #fff;
+    transition: box-shadow .25s;
+    border-radius: 2px;
+    margin: 0px;
+    margin-bottom: 5px;
+}
+
+</style>
+
 <ul id="slide-out" class="side-nav ">
     <li><div class="userView">
       <div class="background">
@@ -44,94 +58,50 @@
   </ul>
   <a href="#" data-activates="slide-out" class="button-collapse"><i class="fa fa-bars" aria-hidden="true" style="position:absolute;top:18px;left:8px;color:#fff;font-size:23px;"></i></a>
 
+  <style>
+.product-list li{
 
-
-<style>
-.shop ul{
-overflow:auto;
-}
-.shop li{
-
-border:1px solid #eee;
-border-radius:5px;
-
-width:50%;
-height:150px;
-float:left;
-text-align:center;
-vertical-align:middel;
-padding-top:20px;
-}
-
-.shop li img{
-width:80px;
+border-bottom:1px solid #eee;
+padding:10px;
 }
 </style>
-
-
-
-	<div class="row card">
-	<br>
-	
-	<div class="col s10 offset-s1" style="border: 1px dashed #eee;padding:15px;margin-bottom:40px;">
-	<h6>Search Shop Near By You</h6>
-	
-	
-		<a href="shop-list.html">
-		<div class="shop">
-				<ul>
-					<li>
-					<img src="images/grocerry.png"></img><br>
-					Rashan</li>
-					<li>
-						<img src="images/resturant.png"></img><br>
-						Resturant/Bakery
-					</li>
-					<li>
-						<img src="images/medical-store.png"></img><br>
-						Medical Store
-					</li>
-					<li>
-						<img src="images/meat-shop.png"></img><br>
-						Meat Shop
-					</li>
-					<li>
-						<img src="images/cart.png"></img><br>
-						Others
-					</li>
-				<ul>
-				
-					
+	<div class="row" style="margin-bottom:2px;">
+		<div class="col s10 offset-s1" >
+		
+		 <div class="row">
+			<br><br>
+				<h5>Your Order has been received <br> your order id is : #<span id="order_id"></span></h5>
+				<p>You will get notification when you order approved or packed.Thank you for your order...</p>
+				<br><br>
+				<a class="waves-effect waves-light btn" href="shop-type.html">Continue Shopping</a>
+		
+			
 		</div>
-		</a>
-		<div style="clear:both;"></div>
-		<br>
-		
-		<div id="info" style="color:red;"></div>
-		<br>
-		<div id="localstorage" style="color:red;"></div>
-		
-		
 	</div>
-	
-	<br><br>
-	<img src="images/bg.png" class="responsive-img " >
 	</div>
-	
+
 	  
-	  <script>
+	  
+	  
+	  
+		<script>
 		$(document).ready(function(){
 			
-				
-					// Initialize collapse button
-				  $(".button-collapse").sideNav();
-				  // Initialize collapsible (uncomment the line below if you use the dropdown variation)
-				  //$('.collapsible').collapsible();
-						
+				 $(".button-collapse").sideNav();
+				  
+				  $order_id=localStorage.getItem("order_id");
+				   $("#order_id").html($order_id);
+					
+				  	
+
 		});
-		</script>
-	  
 		
+		
+		
+
+		</script>
+		
+
 	  
 	  
 <script type="text/javascript" src="cordova.js"></script>

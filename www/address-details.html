@@ -3,7 +3,7 @@
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0"/>
-  <title>Mobile App</title>
+  <title>Cartway App</title>
 
   
 	<link href="css/materialize.min.css" type="text/css" rel="stylesheet" media="screen,projection"/>
@@ -43,11 +43,11 @@
 			  <label for="block">Block/Society/Appartment</label>
 			</div>
 			<div class="input-field col s12">
-			  <input id="loation" type="text" class="validate" required>
+			  <input id="location" type="text" class="validate" required>
 			  <label for="location">Location</label>
 			</div>
 			
-			 <button class="btn waves-effect waves-light" type="submit" id="submit">Submit
+			 <button class="btn waves-effect waves-light" type="button" id="submit">Submit
 				
 			  </button>
 		</form>
@@ -64,7 +64,99 @@
 	</div>
 	
 	  
-	  
+	
+<script>
+		$(document).ready(function(){
+		
+		$name="";;
+		$mobile="";;
+		
+				
+									// Check browser support
+									if (typeof(Storage) !== "undefined") {
+										
+										$name=localStorage.getItem("name");
+										$mobile=localStorage.getItem("mobile");
+										
+										
+										
+										
+									} else {
+										$("#localstorage").html("Sorry, your browser does not support Web Storage...");
+									}
+				  
+				  
+		
+			
+				$("#submit").click(function(){
+				
+					$house=$("#house").val();
+					$block=$("#block").val();
+					$location=$("#location").val();
+				
+					$address=$house+",  "+$block+", "+$location;
+					
+					
+					if(($location.length <2) && ($house.length <2) && ($block.length <2) )
+						{
+							
+							$("#info").html("Please fill the details");
+						}
+						else
+						{
+							
+						
+								$.ajax({
+									type: 'GET',
+									url: 'http://cartway.in/app-work/web-api/public/update-address',
+									data: {
+										house: $house,
+										block: $block,
+										location: $location,
+										address: $address, 
+										mobile: $mobile,
+									},
+									dataType: 'jsonp',
+									crossDomain: true,
+									
+							}).done(function(response){
+									console.log(response);
+									
+									$.each( response, function( key, val ) {
+												//alert( key+ val.response  );
+												
+												$status=val.response;
+												$str="Error"
+												
+												if($status == $str){
+													$("#info").html("Please Enter Valid OTP");
+												}else{
+												
+													localStorage.setItem("user_status", "address_update");
+													$("#info").html("Verified");
+													window.location.replace("shop-type.html");
+												
+												}
+											});
+									
+									
+									
+							}).fail(function(error){
+									console.log(error.statusText);
+							});
+					
+					
+					}
+				
+				});
+					
+				  
+				  
+				  
+				  
+						
+		});
+		</script>	  
 	  
 		
 	  

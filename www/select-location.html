@@ -3,7 +3,7 @@
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0"/>
-  <title>Mobile App</title>
+  <title>Cartway App</title>
 
   
 	<link href="css/materialize.min.css" type="text/css" rel="stylesheet" media="screen,projection"/>
@@ -78,12 +78,12 @@ nav .brand-logo {
 </nav>
  <form  style="position:absolute;top:60px;z-index:10;background:#fff;width:100%;" action="address-details.html">
       <div class="row">
-        <div class="input-field col s9">
+        <div class="input-field col s9" style="padding-left:10px;">
           <input  id="search-location" type="text" class="validate controls" Placeholder="Pin you home location" required>
-          <label for="location">Pin Your Address for Best Result</label>
+          <label for="search-location">Pin Your Address for Best Result</label>
         </div>
 		  <div class="input-field col s3">
-       	 <button class="btn waves-effect waves-light" type="submit" name="action">go</button>
+       	 <button class="btn waves-effect waves-light" type="button" id="submit" >go</button>
 		 </div>
 	  </div>
 </form>
@@ -165,6 +165,95 @@ nav .brand-logo {
     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAE5f8nvcgndanDyr0Sawp8De82en_KngE&callback=initMap&libraries=places">
     </script>  
 
+	
+<script>
+		$(document).ready(function(){
+		
+		$name="";;
+		$mobile="";;
+		
+				
+									// Check browser support
+									if (typeof(Storage) !== "undefined") {
+										
+										$name=localStorage.getItem("name");
+										$mobile=localStorage.getItem("mobile");
+										
+										
+										
+										
+									} else {
+										$("#localstorage").html("Sorry, your browser does not support Web Storage...");
+									}
+				  
+				  
+		
+			
+				$("#submit").click(function(){
+				
+				
+				
+					$location=$("#search-location").val();
+					
+					
+					if($location.length<4)
+						{
+							alert("Please fill the details");
+						}
+						else
+						{
+							
+						
+								$.ajax({
+									type: 'GET',
+									url: 'http://cartway.in/app-work/web-api/public/update-location',
+									data: {
+										location: $location, 
+										mobile: $mobile,
+									},
+									dataType: 'jsonp',
+									crossDomain: true,
+									
+							}).done(function(response){
+									console.log(response);
+									
+									$.each( response, function( key, val ) {
+												//alert( key+ val.response  );
+												
+												$status=val.response;
+												$str="Error"
+												
+												if($status == $str){
+													$("#info").html("Please Enter Valid OTP");
+												}else{
+												
+													localStorage.setItem("user_status", "location_update");
+													$("#info").html("Verified");
+													window.location.replace("address-details.html");
+												
+												}
+											});
+									
+									
+									
+							}).fail(function(error){
+									console.log(error.statusText);
+							});
+					
+					
+					}
+				
+				});
+					
+				  
+				  
+				  
+				  
+						
+		});
+		</script>	
+	  
+	  
 	  
 	  
 <script type="text/javascript" src="cordova.js"></script>

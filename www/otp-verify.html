@@ -3,7 +3,7 @@
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0"/>
-  <title>Mobile App</title>
+  <title>Cartway App</title>
 
   
 	<link href="css/materialize.min.css" type="text/css" rel="stylesheet" media="screen,projection"/>
@@ -101,7 +101,7 @@
 						
 								$.ajax({
 									type: 'GET',
-									url: 'http://explodiv.com/demo/cartwayapp/otp-verify.php',
+									url: 'http://cartway.in/app-work/web-api/public/verify-otp',
 									data: {
 										otp: $otp , 
 										mobile: $mobile,
@@ -116,15 +116,15 @@
 												//alert( key+ val.response  );
 												
 												$status=val.response;
-												$str="Not Verified"
+												$str="Error"
 												
 												if($status == $str){
 													$("#info").html("Please Enter Valid OTP");
 												}else{
 												
-													localStorage.setItem("user_profile", "Mobile Verified");
+													localStorage.setItem("user_status", "mobile_number_verified");
 													$("#info").html("Verified");
-													window.location.href = "select-location.html";
+													window.location.replace("select-location.html");
 												
 												}
 											});

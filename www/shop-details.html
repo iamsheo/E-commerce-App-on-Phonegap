@@ -28,6 +28,7 @@
 	}
 .btn{
 width:100%;
+font-size: 18px;
 }
 </style>
 
@@ -64,18 +65,19 @@ width:100%;
 						<img class="responsive-img" src="images/user.jpeg"></img>
 					</div>
 					<div class="col s9" style="padding:10px;">
-						Sudhir Singh<br>
-						789 Naya Khand2 First Floor<br>
-						Indrapuram Ghaziabad<br>
+						<span id="shop_name"></span><br>
+						<span id="shop_address"></span>
 					</div>
 			</div>
 			<div class="row" style="text-align:center;">
-				<div class="col s6" style="padding:3px;">
-						<a class="waves-effect waves-light btn">Call</a>
+				<div class="col s9" style="padding:3px;">
+						<a href="tel:9971664662" class="waves-effect waves-light btn"><i class="fa fa-phone" aria-hidden="true"></i>
+ &nbsp;Call Now</a>
 				</div>
-				<div class="col s6" style="padding:3px;">
+				<div class="col s3" style="padding:3px;">
 				
-						<a class="waves-effect waves-light btn">Chat</a>
+						<a class="waves-effect waves-light btn"><i class="fa fa-comments" aria-hidden="true"></i>
+</a>
 				</div>
 			</div>
 			<div class="row" style="font-size:18px;">
@@ -171,7 +173,7 @@ width:100%;
     </div>
 </div>		 
   <div style="position:fixed;bottom:0px;width:100%;">
-	<a href="order-now.html" class="waves-effect waves-light btn">Order Now</a>
+	<a href="order-now.html" class="waves-effect waves-light btn btn-large">Order Now</a>
 </div>  
  
 	  
@@ -182,13 +184,85 @@ width:100%;
 		$(document).ready(function(){
 			
 				
-					// Initialize collapse button
+					
 				  $(".button-collapse").sideNav();
-				  // Initialize collapsible (uncomment the line below if you use the dropdown variation)
-				  //$('.collapsible').collapsible();
 				  
+				 $('.carousel').carousel();
 				 
-					$('.carousel').carousel();
+					if (typeof(Storage) !== "undefined") {
+										
+									$id=localStorage.getItem("shop_id");
+									
+									
+									
+									
+							$.ajax({
+									type: 'GET',
+									url: 'http://cartway.in/app-work/web-api/public/shop-details',
+									data: {
+										shop_id:$id,
+										
+									},
+									dataType: 'jsonp',
+									crossDomain: true,
+									
+							}).done(function(response){
+									console.log(response);
+									
+									$.each( response, function( key, val ) {
+												//alert( key+ val.response  );
+												
+												$status=val.response;
+												$str="Error"
+												
+												if($status == $str){
+													$("#info").html("Error Not Data Found");
+												}else{
+												
+													
+													
+													$shopdetails=val.shopdetails;
+													
+													$.each( $shopdetails, function( key, val ) {
+													
+													$("#shop_name").html(val.shop_name);
+													$("#shop_address").html(val.shop_address);
+													
+													
+													});
+													
+												
+												}
+												
+												 $('#loading-image').hide();
+												
+											});
+									
+									
+									
+							}).fail(function(error){
+									console.log(error.statusText);
+									$('#loading-image').hide();
+							});
+					
+					
+									
+									
+									
+									
+									
+									
+									
+									
+									
+									
+									
+									
+									
+											
+									} else {
+										$("#localstorage").html("Sorry, your browser does not support Web Storage...");
+									}
 
 						
 		});

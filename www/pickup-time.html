@@ -11,6 +11,7 @@
 	<script src="js/materialize.min.js"></script>
 	<link rel="stylesheet" href="css/style.css">
 	<link rel="stylesheet" href="icons/css/font-awesome.min.css">
+	<script src="js/jquery-uploadPreview.min.js"></script>
 
 </head>
 <body>
@@ -32,10 +33,7 @@
     margin-bottom: 5px;
 }
 
-
 </style>
-
-  <div id="loading-image"></div>
 
 <ul id="slide-out" class="side-nav ">
     <li><div class="userView">
@@ -60,26 +58,68 @@
   </ul>
   <a href="#" data-activates="slide-out" class="button-collapse"><i class="fa fa-bars" aria-hidden="true" style="position:absolute;top:18px;left:8px;color:#fff;font-size:23px;"></i></a>
 
+  <style>
+.product-list li{
 
-<form class="col s12">
-     <div class="row" style="margin:0px;padding:0px;">
-        <div class="input-field col s10" style="padding-left:5px;">
-          <input  id="first_name" type="text" class="validate">
-          <label for="first_name">Search shop </label>
-        </div>
-		<button class="btn waves-effect waves-light col s2" type="submit" name="action">Go
-   
-		</button>
-        
+border-bottom:1px solid #eee;
+padding:10px;
+}
+</style>
+	<div class="row" style="margin-bottom:2px;">
+		<div class="col s10 offset-s1" >
+		
+		 <div class="row">
+			
+			<form class="col s12">
+			<br><br>
+			  <div class="row">
+				<h5>When </h5>
+				   <div class="col s4">
+					  <input name="day" type="radio"  id="today" value="Today"/>
+						<label for="today">Today</label>
+					</div>
+					<div class="col s4">
+					   <input name="day" type="radio" id="tomorrow" value="Tomorrow"/>
+						<label for="tomorrow">Tomorrow</label>
+					</div>
+					<div class="col s4">
+					<input name="day" type="radio" id="after2days" value="After 2 Days" />
+					<label for="after2days">After 2 Days</label>
+					</div>
+					
+				
+			</div>
+			 <div class="row"><br>
+			 <h5>Time </h5>
+				<div class="input-field col s6">
+					<input id="time_slot" placeholder="9am-11am" type="text" class="validate">
+					<label for="time_slot">Please Enter Time Slot</label>
+				</div>
+			</div>
+			 <div class="row"><br>
+			 <h5>Service </h5>
+			<div class="col s6">
+					  <input name="service" type="radio"  id="home_delivery" value="Home Delivery" />
+						<label for="home_delivery">Home Delivery</label>
+					</div>
+					<div class="col s6">
+					   <input name="service" type="radio" id="pick_up" value="Self Pick Up" />
+						<label for="pick_up">Self Pick Up</label>
+					</div>
+			</div>
+			<br>
+			<button class="btn waves-effect waves-light" type="button" name="action" id="btn">Submit
+			
+			</button>
+			
+			</form>
+			
+		  </div>
+		
+			
+		</div>
 	</div>
-</form>
 
-	
-	
-<div id="info"></div>
-		 
-            
- 
 	  
 	  
 	  
@@ -88,15 +128,31 @@
 		$(document).ready(function(){
 			
 				 $(".button-collapse").sideNav();
-				 
-				
-				 
-							$.ajax({
+				  
+				   
+					
+				  	if (typeof(Storage) !== "undefined") {
+										
+									$order_id=localStorage.getItem("order_id");
+									
+									
+									
+									$("#btn").click(function(){
+									
+									$day=$('input[name=day]:checked').val();
+									$service=$('input[name=service]:checked').val();
+									$time_slot=$('#time_slot').val();
+									
+									
+									$.ajax({
 									type: 'GET',
-									url: 'http://cartway.in/app-work/web-api/public/shop-list',
+									url: 'http://cartway.in/app-work/web-api/public/update-time-slot',
 									data: {
-										location:'loaction',
-										category:'category',
+										order_id:$order_id,
+										day:$day,
+										service:$service,
+										time_slot:$time_slot,
+										
 									},
 									dataType: 'jsonp',
 									crossDomain: true,
@@ -114,58 +170,7 @@
 													$("#info").html("Error Not Data Found");
 												}else{
 												
-													
-													
-													$shoplist=val.shoplist;
-													
-													$.each( $shoplist, function( key, val ) {
-													
-													//alert(val.shop_name);
-													
-													$str='<div class="shop" id="'+val.id+'">';
-													
-													$str =$str+'<div class="row card " style="padding-top:5px;">';
-													$str =$str+'<div class="col s4">';
-													$str =$str+'<img src="images/g-1.jpg" class="responsive-img"></img>';
-													$str =$str+'</div>';
-													$str =$str+'<div class="col s8 shop-details">';
-													$str =$str+'<div class="col s6">'+val.shop_name+'</div>';
-													$str =$str+'<div class="col s6 pull-right">';
-													$str =$str+'<div class="col s12 shop-rating ">';
-													$str =$str+'<span>';
-													$str =$str+'<i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i>	<i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star-half-o" aria-hidden="true"></i>';
-													$str =$str+'</span>';
-													$str =$str+'</div>';
-													$str =$str+'</div>';
-													$str =$str+'<div class="col s12">';
-													$str =$str+'<div class="km">';
-													$str =$str+'0.3 km';
-													$str =$str+'</div>';
-													$str =$str+'</div>';
-													$str =$str+'<div class="col s12 offers"><span>';
-													$str =$str+'<span>';
-													$str =$str+'<b>Freeshipping above Rs 350/- | charges 25/-</b>';
-													$str =$str+'</span>';
-													$str =$str+'</div>';
-													$str =$str+'</div>';
-													$str =$str+'</div>';
-													$str =$str+'</div>';
-													
-													$str =$str+'</div>';
-													
-								
-													$("body").append($str);
-													
-	
-													
-													
-													
-													
-													
-													
-													
-													});
-													
+													window.location.replace("order-compelete.html");
 												
 												}
 												
@@ -180,35 +185,37 @@
 									$('#loading-image').hide();
 							});
 					
-					
-					
-				
-				
-				  
-						
-		});
-		</script>
-		
-		<script>
-			$(document).on("click",".shop", function(){
-				
-				$id=$(this).attr('id');
-				
-				
-									if (typeof(Storage) !== "undefined") {
+									
+									
+									
+									
+									
+									
+									
+									
+									
+									
+									
+									
+									});
+									
+									
 										
-										localStorage.setItem("shop_id", $id);
-										window.location.href="shop-details.html";
-											
-									} else {
+									
+									
+									
+						} else {
 										$("#localstorage").html("Sorry, your browser does not support Web Storage...");
 									}
-									
-				
-				
-				
-			});
+
+		});
+		
+		
+		
+
 		</script>
+		
+
 	  
 	  
 <script type="text/javascript" src="cordova.js"></script>

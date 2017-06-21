@@ -11,6 +11,7 @@
 	<script src="js/materialize.min.js"></script>
 	<link rel="stylesheet" href="css/style.css">
 	<link rel="stylesheet" href="icons/css/font-awesome.min.css">
+	<script src="js/jquery-uploadPreview.min.js"></script>
 
 </head>
 <body>
@@ -65,35 +66,32 @@ padding:10px;
 }
 </style>
 	<div class="row" style="margin-bottom:2px;">
-		<div class="col s10 offset-s1">
-			<div class="card row" style="padding:10px;postion:fixed" >
-			
-			 <form class="col s12" >
-			  <div class="row" style="margin-bottom:2px;">
-				<div class="input-field col s8">
-				  <input placeholder="Make List" id="first_name" type="text" class="validate">
-				  <label for="first_name">Make List</label>
-				</div>
-				<div class="input-field col s4">
-				  <button class="btn waves-effect waves-light" type="submit" name="action">Add</button>
-				  
-				</div>
+		<div class="col s10 offset-s1" style="text-align:center;">
+			<div class="card row" style="padding:10px;text-align:center;" >
+			<form enctype="multipart/form-data">
+			<div id="image-preview-1" class="image-preview">
+					<label for="image-upload-1" id="image-label-1" >Upload Item List</label>
+					<input type="file" name="image" id="image-upload-1" />
 			</div>
+			<br>
+			<input type="hidden" name="customer_id" id="customer_id" value=""/>
+			<input type="hidden" name="shopkeeper_id" id="shopkeeper_id" value=""/>
+			<a class="waves-effect waves-light btn" id="submit"> Upload <i class="fa fa-cloud-upload" aria-hidden="true"></i>
+</a>
 			</form>
+			</div>	
+			
 		</div>
-		<div class="card row">
-			<ul class="product-list">
-				<li>Item 1 <i class="fa fa-trash pull-right" aria-hidden="true" style="color:red"></i> </li>
-				<li>Item 2 <i class="fa fa-trash pull-right" aria-hidden="true" style="color:red"></i> </li>
-				<li>Item 3 <i class="fa fa-trash pull-right" aria-hidden="true" style="color:red"></i> </li>
-				<li>Item 4 <i class="fa fa-trash pull-right" aria-hidden="true" style="color:red"></i> </li>
-				<li>Item 5 <i class="fa fa-trash pull-right" aria-hidden="true" style="color:red"></i> </li>
-			</ul>
-			 <a href="thankyou.html" style="margin:10px;"class="btn waves-effect waves-light" >Order Now</a>
-			 <br>
+		
+		<div class="col s10 offset-s1" style="text-align:center;">
+		
+		<br><br>
+
+			<a href="make-list.html"><img src="images/make-list.svg" style="width:40px;"></img><h6>Create Item List</h6></a>
+		</div>
 		</div>
 	</div>
-</div>
+
 	  
 	  
 	  
@@ -101,14 +99,93 @@ padding:10px;
 		<script>
 		$(document).ready(function(){
 			
-				
-					// Initialize collapse button
-				  $(".button-collapse").sideNav();
-				  // Initialize collapsible (uncomment the line below if you use the dropdown variation)
-				  //$('.collapsible').collapsible();
-						
+				 $(".button-collapse").sideNav();
+				  
+				  
+				  	if (typeof(Storage) !== "undefined") {
+										
+									$shopkeeper_id=localStorage.getItem("shop_id");
+									$customer_id=localStorage.getItem("mobile");
+									
+									
+									$("#submit").click(function(){
+									
+									$("#shopkeeper_id").val($shopkeeper_id);
+									$("#customer_id").val($customer_id);
+									
+									
+									$.ajax({
+									type: 'GET',
+									url: 'http://cartway.in/app-work/web-api/public/order-upload-imgage',
+									data: {
+									customer_id:$customer_id,
+									shopkeeper_id:$shopkeeper_id,
+									},
+									dataType: 'jsonp',
+									crossDomain: true,
+									
+							}).done(function(response){
+									$.each( response, function( key, val ) {
+												//alert( key+ val.response  );
+												
+												$status=val.response;
+												$str="Error"
+												
+												if($status == $str){
+													$("#info").html("Error Not Data Found");
+												}else{
+												
+													
+													localStorage.setItem("order_id",val.order_id);
+													
+													window.location.replace("pickup-time.html");
+													
+													
+													
+												
+												}
+												
+									});
+									
+									
+									
+							}).fail(function(error){
+									console.log(error.statusText);
+									$('#loading-image').hide();
+							});
+					
+					
+									
+									
+									
+									
+									
+										
+									
+									});
+									
+						} else {
+										$("#localstorage").html("Sorry, your browser does not support Web Storage...");
+									}
+
 		});
+		
+		
+		
+
 		</script>
+		
+<script type="text/javascript">
+$(document).ready(function() {
+  $.uploadPreview({
+    input_field: "#image-upload-1",
+    preview_box: "#image-preview-1",
+    label_field: "#image-label-1",
+    no_label: false     
+  });
+  
+  });
+</script>
 	  
 	  
 <script type="text/javascript" src="cordova.js"></script>
