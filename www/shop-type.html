@@ -36,7 +36,7 @@
     <li><a class="waves-effect"  href="#">Current Order</a></li>
     <li><a class="waves-effect"  href="#!">Order History</a></li>
 	<li><a class="waves-effect"  href="#!">Profile</a></li>
-	<li><a class="waves-effect"  href="#!">Log Out</a></li>
+	<li><a class="waves-effect"   id="logout">Log Out</a></li>
 	 <li><div class="divider"></div></li>
 	<li><a class="waves-effect"  href="#!">About App</a></li>
 	<li><a class="waves-effect"  href="#!">Privacy Policy </a></li>
@@ -127,7 +127,9 @@ width:80px;
 				  $(".button-collapse").sideNav();
 				  // Initialize collapsible (uncomment the line below if you use the dropdown variation)
 				  //$('.collapsible').collapsible();
-						
+						$("#logout").click(function(){
+							localStorage.setItem("user_status", "");
+						});
 		});
 		</script>
 	  
