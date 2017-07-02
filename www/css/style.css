@@ -1,5 +1,21 @@
 body{
-background-color:#fff;
+
+background:   #fff; 
+}
+nav {
+    color: #fff;
+    background-color:#9c27b0;
+}
+
+.btn{
+	background:#fff;
+	color:#9c27b0;
+	width:150px;
+	height:45px;
+	border-color:#9c27b0;
+	border: 1px solid #9c27b0;
+	border-radius:3px;
+	
 }
 .row .col {
     float: left;
@@ -17,7 +33,7 @@ background-color:#fff;
 padding-top:5px !important;
 }
 .shop-rating i{
-color:green;
+color:#9c27b0;
 }
 
 nav .brand-logo {
@@ -27,6 +43,20 @@ nav .brand-logo {
     font-size: 15px;
     padding: 0;
     white-space: nowrap;
+}
+.side-nav li>a {
+    color: rgba(0,0,0,0.87);
+    display: block;
+    font-size: 16px;
+    font-weight: 500;
+    height: 48px;
+    line-height: 48px;
+    padding: 0 15px;
+}
+.side-nav li>a>i{
+    
+    margin: 0 2px 0 0;
+   
 }
 
 .km {

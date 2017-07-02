@@ -70,16 +70,18 @@
 										
 										$name=localStorage.getItem("name");
 										$mobile=localStorage.getItem("mobile");
+										$profile_status=localStorage.getItem("profile_status");
 										
 										
 										// Retrieve
-										$("#localstorage").html(
+									/*	$("#localstorage").html(
 										
 											localStorage.getItem("response")+" | "+
 											localStorage.getItem("name")+" | "+
 											localStorage.getItem("mobile")+" | "+
 											localStorage.getItem("otp")
 										);
+									*/
 										
 									} else {
 										$("#localstorage").html("Sorry, your browser does not support Web Storage...");
@@ -91,6 +93,8 @@
 				$("#submit").click(function(){
 				
 					$otp=$("#otp").val();
+					
+					
 					
 					if($otp.length!=4)
 						{
@@ -105,6 +109,7 @@
 									data: {
 										otp: $otp , 
 										mobile: $mobile,
+										status:$profile_status,
 									},
 									dataType: 'jsonp',
 									crossDomain: true,
@@ -124,7 +129,8 @@
 												
 													localStorage.setItem("user_status", "mobile_number_verified");
 													$("#info").html("Verified");
-													window.location.replace("select-location.html");
+													
+													//window.location.replace("select-location.html");
 												
 												}
 											});
@@ -132,7 +138,7 @@
 									
 									
 							}).fail(function(error){
-									console.log(error.statusText);
+									alert("error");
 							});
 					
 					

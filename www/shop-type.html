@@ -23,24 +23,22 @@
 </nav>
 <ul id="slide-out" class="side-nav ">
     <li><div class="userView">
-      <div class="background">
-        <img src="images/office.jpg">
+      <div class="background" style="background:#9c27b0">
+        
       </div>
       <a href="#!user"><img class="circle" src="images/user.jpeg"></a>
       <a href="#!name"><span class="white-text name">Sheo Shankar</span></a>
       <a href="#!email"><span class="white-text email">sheointime@gmail.com</span></a>
     </div></li>
-    <li><a class="waves-effect"  href="#!">Home</a></li>
-	<li><a class="waves-effect"  href="#!">Fav Shop</a></li>
-    <li><a class="waves-effect"  href="#!">Order Now</a></li>
-    <li><a class="waves-effect"  href="#">Current Order</a></li>
-    <li><a class="waves-effect"  href="#!">Order History</a></li>
-	<li><a class="waves-effect"  href="#!">Profile</a></li>
-	<li><a class="waves-effect"   id="logout">Log Out</a></li>
+    <li><a class="waves-effect"  href="shop-type.html"><i class="fa fa-shopping-cart" aria-hidden="true" style="color:#9c27b0;"></i>Shop Now</a></li>
+	<li><a class="waves-effect"  href="#!"><i class="fa fa-list" aria-hidden="true" style="color:#9c27b0;"></i>Fav Shop</a></li>
+    <li><a class="waves-effect"  href="#!"><i class="fa fa-inr" aria-hidden="true" style="color:#9c27b0;"></i>Last Bills</a></li>
+    <li><a class="waves-effect"  href="#"><i class="fa fa-times" aria-hidden="true" style="color:#9c27b0;"></i>Unpaid Bills</a></li>
+	<li><a class="waves-effect"  id="logout"><i class="fa fa-sign-out" aria-hidden="true" style="color:#9c27b0;"></i>Log Out</a></li>
 	 <li><div class="divider"></div></li>
-	<li><a class="waves-effect"  href="#!">About App</a></li>
-	<li><a class="waves-effect"  href="#!">Privacy Policy </a></li>
-	<li><a class="waves-effect"  href="#!">Terms of use</a></li>
+	<li><a class="waves-effect"  href="#!"><i class="fa fa-info-circle" aria-hidden="true" style="color:#9c27b0;"></i>About App</a></li>
+	<li><a class="waves-effect"  href="#!"><i class="fa fa-user-secret" aria-hidden="true" style="color:#9c27b0;"></i>Privacy Policy </a></li>
+	<li><a class="waves-effect"  href="#!"><i class="fa fa-user-circle-o" aria-hidden="true" style="color:#9c27b0;"></i>Terms of use</a></li>
   </ul>
   <a href="#" data-activates="slide-out" class="button-collapse"><i class="fa fa-bars" aria-hidden="true" style="position:absolute;top:18px;left:8px;color:#fff;font-size:23px;"></i></a>
 
@@ -52,7 +50,7 @@ overflow:auto;
 }
 .shop li{
 
-border:1px solid #eee;
+
 border-radius:5px;
 
 width:50%;
@@ -65,40 +63,48 @@ padding-top:20px;
 
 .shop li img{
 width:80px;
+height:80px;
+border:2px solid #9c27b0;
+border-radius:50%;
+
+}
+
+
+.shop li div{
+color:#9c27b0;
 }
 </style>
 
 
 
-	<div class="row card">
-	<br>
+	<div class="row card" style="text-align:center;">
+	 <img class="materialboxed" data-caption="" width="100%" src="images/offer.jpg">
+	<br><br>
 	
 	<div class="col s10 offset-s1" style="border: 1px dashed #eee;padding:15px;margin-bottom:40px;">
-	<h6>Search Shop Near By You</h6>
+	<h6 style="background:#9c27b0;color:#fff;padding:10px;">Search Shop Near By You</h6>
 	
 	
 		<a href="shop-list.html">
 		<div class="shop">
 				<ul>
 					<li>
-					<img src="images/grocerry.png"></img><br>
-					Rashan</li>
-					<li>
-						<img src="images/resturant.png"></img><br>
-						Resturant/Bakery
+					<img src="images/grocery.jpg"></img><br>
+					<div>Rashan</div>
 					</li>
 					<li>
-						<img src="images/medical-store.png"></img><br>
-						Medical Store
+						<img src="images/bakery.jpg"></img><br>
+						<div>Resturant/Bakery</div>
 					</li>
 					<li>
-						<img src="images/meat-shop.png"></img><br>
-						Meat Shop
+						<img src="images/medicine.jpg"></img><br>
+						<div>Medical Store</div>
 					</li>
 					<li>
-						<img src="images/cart.png"></img><br>
-						Others
+						<img src="images/checken.png"></img><br>
+						<div>Meat Shop</div>
 					</li>
+				
 				<ul>
 				
 					
@@ -128,7 +134,9 @@ width:80px;
 				  // Initialize collapsible (uncomment the line below if you use the dropdown variation)
 				  //$('.collapsible').collapsible();
 						$("#logout").click(function(){
-							localStorage.setItem("user_status", "");
+							
+							 localStorage.clear();
+							 window.location.replace("login.html");
 						});
 		});
 		</script>

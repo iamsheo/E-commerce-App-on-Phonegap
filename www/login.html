@@ -31,12 +31,13 @@
 		<img src="images/logo.png" class="img-responsive"></img>
 		<br><br>
 	<div class="row">
-		<div class="col s6">
+		<div class="col s12">
 			<button class="waves-effect waves-light btn" id="customer">Customer</button>
 			
 		</div>
-		<div class="col s6">
-			
+		
+		<div class="col s12">
+			<div style="margin:10px;font-size:20px;color:#9c27b0">OR</div>
 			<button class="waves-effect waves-light btn" id="shopkeeper">Shopkeeper</button>
 		</div>
 	</div>
@@ -64,25 +65,7 @@
 					window.location.replace("seller-pannel/home.html");
 				});
 				
-				if (typeof(Storage) !== "undefined") {
-										
-						$user_status=localStorage.getItem("user_status");
-						
-						if($user_status=="mobile_number_verified"){
-							window.location.replace("select-location.html");
-						}
-						if($user_status=="location_update"){
-							window.location.replace("address-details.html");
-						}
-						if($user_status=="address_update"){
-							window.location.replace("shop-type.html");
-						}
-						
-										
-										
-				} else {
-					$("#localstorage").html("Sorry, your browser does not support Web Storage...");
-				}
+				
 				 
 					
 		});
