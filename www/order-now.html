@@ -12,16 +12,17 @@
 	<link rel="stylesheet" href="css/style.css">
 	<link rel="stylesheet" href="icons/css/font-awesome.min.css">
 	<script src="js/jquery-uploadPreview.min.js"></script>
-
+	<link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
 </head>
 <body>
 
- <nav>
-    <div class="nav-wrapper">
-      <a href="#" class="brand-logo center">Cartway</a>
-      
-    </div>
-</nav>
+ <div class="navbar-fixed">
+		<nav>
+			<div class="nav-wrapper">
+				<a href="#" class="brand-logo center">CARTway</a>
+			</div>
+		</nav>
+	</div>
 
 <style>
 .card {
@@ -37,25 +38,23 @@
 
 <ul id="slide-out" class="side-nav ">
     <li><div class="userView">
-      <div class="background">
-        <img src="images/office.jpg">
-      </div>
-      <a href="#!user"><img class="circle" src="images/user.jpeg"></a>
-      <a href="#!name"><span class="white-text name">Sheo Shankar</span></a>
-      <a href="#!email"><span class="white-text email">sheointime@gmail.com</span></a>
-    </div></li>
-    <li><a class="waves-effect"  href="#!">Home</a></li>
-	<li><a class="waves-effect"  href="#!">Fav Shop</a></li>
-    <li><a class="waves-effect"  href="#!">Order Now</a></li>
-    <li><a class="waves-effect"  href="#">Current Order</a></li>
-    <li><a class="waves-effect"  href="#!">Order History</a></li>
-	<li><a class="waves-effect"  href="#!">Profile</a></li>
-	<li><a class="waves-effect"  href="#!">Log Out</a></li>
-	 <li><div class="divider"></div></li>
-	<li><a class="waves-effect"  href="#!">About App</a></li>
-	<li><a class="waves-effect"  href="#!">Privacy Policy </a></li>
-	<li><a class="waves-effect"  href="#!">Terms of use</a></li>
-  </ul>
+		<div class="background" style="background:#A82E30"></div>
+			<a href="#!user"><img class="circle" src="images/user.jpeg"></a>
+			<a href="#!name"><span class="white-text name">Sheo Shankar</span></a>
+			<a href="#!email"><span class="white-text email">sheointime@gmail.com</span></a>
+		</div>
+	</li>
+	<li><a class="waves-effect"  href="shop-type.html"><i class="fa fa-home" aria-hidden="true" style="color:#A82E30;"></i>Home</a></li>
+    <li><a class="waves-effect"  href="shop-type.html"><i class="fa fa-shopping-cart" aria-hidden="true" style="color:#A82E30;"></i>Shop Now</a></li>
+	<li><a class="waves-effect"  href="#!"><i class="fa fa-list" aria-hidden="true" style="color:#A82E30;"></i>Fav Shop</a></li>
+    <li><a class="waves-effect"  href="#!"><i class="fa fa-inr" aria-hidden="true" style="color:#A82E30;"></i>Last Bills</a></li>
+    <li><a class="waves-effect"  href="#"><i class="fa fa-times" aria-hidden="true" style="color:#A82E30;"></i>Unpaid Bills</a></li>
+	<li><a class="waves-effect"  id="logout"><i class="fa fa-sign-out" aria-hidden="true" style="color:#A82E30;"></i>Log Out</a></li>
+	<li><div class="divider"></div></li>
+	<li><a class="waves-effect"  href="#!"><i class="fa fa-info-circle" aria-hidden="true" style="color:#A82E30;"></i>About App</a></li>
+	<li><a class="waves-effect"  href="#!"><i class="fa fa-user-secret" aria-hidden="true" style="color:#A82E30;"></i>Privacy Policy </a></li>
+	<li><a class="waves-effect"  href="#!"><i class="fa fa-user-circle-o" aria-hidden="true" style="color:#A82E30;"></i>Terms of use</a></li>
+</ul>
   <a href="#" data-activates="slide-out" class="button-collapse"><i class="fa fa-bars" aria-hidden="true" style="position:absolute;top:18px;left:8px;color:#fff;font-size:23px;"></i></a>
 
   <style>
@@ -65,8 +64,8 @@ border-bottom:1px solid #eee;
 padding:10px;
 }
 </style>
-	<div class="row" style="margin-bottom:2px;">
-		<div class="col s10 offset-s1" style="text-align:center;">
+	<div class="row" style="padding:5px 5px 0px 5px;margin-bottom:2px;">
+		<div class="col s12" style="text-align:center;">
 			<div class="card row" style="padding:10px;text-align:center;" >
 			<form enctype="multipart/form-data">
 			<div id="image-preview-1" class="image-preview">
@@ -83,7 +82,7 @@ padding:10px;
 			
 		</div>
 		
-		<div class="col s10 offset-s1" style="text-align:center;">
+		<div class="card col s10 offset-s1" style="text-align:center;">
 		
 		<br><br>
 

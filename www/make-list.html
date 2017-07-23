@@ -4,24 +4,41 @@
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0"/>
   <title>Mobile App</title>
-
-  
 	<link href="css/materialize.min.css" type="text/css" rel="stylesheet" media="screen,projection"/>
 	<script src="js/jquery-3.2.1.min.js"></script>
 	<script src="js/materialize.min.js"></script>
 	<link rel="stylesheet" href="css/style.css">
 	<link rel="stylesheet" href="icons/css/font-awesome.min.css">
-
+	<link rel="stylesheet" href="css/dropzone.css" >
+	<script src="js/dropzone.js"></script>
+	<link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
 <body>
-
- <nav>
-    <div class="nav-wrapper">
-      <a href="#" class="brand-logo center">Cartway</a>
-      
+<div class="navbar-fixed">
+		<nav>
+			<div class="nav-wrapper">
+				<a href="#" class="brand-logo center">CARTway</a>
+			</div>
+		</nav>
+</div>
+<div id="modal1" class="modal">
+    <div class="modal-content">
+      <form class="col s12" >
+								<div class="row" style="margin-bottom:2px;">
+									<div class="input-field col s12">
+										<input id="item1" type="text" name="item" class="validate"  required>
+										<label for="item1">Add Items</label>
+									</div>
+									
+									<div class="input-field col s2">
+										<button class="btn waves-effect waves-light " type="button" id="editadd" name="action" style="background-color:#A82E30;width:150px;height:35px;">Add To List</button>
+									</div>
+								</div>
+							</form>
     </div>
-</nav>
-
+    
+  </div>
 <style>
 .card {
     position: relative;
@@ -31,71 +48,109 @@
     margin: 0px;
     margin-bottom: 5px;
 }
-
-</style>
-
-<ul id="slide-out" class="side-nav ">
-    <li><div class="userView">
-      <div class="background">
-        <img src="images/office.jpg">
-      </div>
-      <a href="#!user"><img class="circle" src="images/user.jpeg"></a>
-      <a href="#!name"><span class="white-text name">Sheo Shankar</span></a>
-      <a href="#!email"><span class="white-text email">sheointime@gmail.com</span></a>
-    </div></li>
-    <li><a class="waves-effect"  href="#!">Home</a></li>
-	<li><a class="waves-effect"  href="#!">Fav Shop</a></li>
-    <li><a class="waves-effect"  href="#!">Order Now</a></li>
-    <li><a class="waves-effect"  href="#">Current Order</a></li>
-    <li><a class="waves-effect"  href="#!">Order History</a></li>
-	<li><a class="waves-effect"  href="#!">Profile</a></li>
-	<li><a class="waves-effect"  href="#!">Log Out</a></li>
-	 <li><div class="divider"></div></li>
-	<li><a class="waves-effect"  href="#!">About App</a></li>
-	<li><a class="waves-effect"  href="#!">Privacy Policy </a></li>
-	<li><a class="waves-effect"  href="#!">Terms of use</a></li>
-  </ul>
-  <a href="#" data-activates="slide-out" class="button-collapse"><i class="fa fa-bars" aria-hidden="true" style="position:absolute;top:18px;left:8px;color:#fff;font-size:23px;"></i></a>
-
-  <style>
 .product-list li{
 
 border-bottom:1px solid #eee;
 padding:10px;
 }
+.input-field .prefix {
+    position: absolute;
+    width: 0rem;
+    font-size: 2rem;
+    transition: color .2s;
+    padding-top: 13px;
+    
+}
+.input-field .prefix ~ input, .input-field .prefix ~ textarea, .input-field .prefix ~ label, .input-field .prefix ~ .validate ~ label, .input-field .prefix ~ .autocomplete-content {
+    margin-left: 2rem;
+    width: 92%;
+    width: calc(100% - 3rem);
+}
+
 </style>
-	<div class="row" style="margin-bottom:2px;">
-		<div class="col s10 offset-s1">
-			<div class="card row" style="padding:10px;postion:fixed" >
-			
-			 <form class="col s12" >
-			  <div class="row" style="margin-bottom:2px;">
-				<div class="input-field col s8">
-				  <input placeholder="Item name -- Qty" id="item" type="text" class="validate">
-				  <label for="item">Make List</label>
-				</div>
-				<div class="input-field col s4">
-				  <button class="btn waves-effect waves-light" type="button" id="add" name="action">Add</button>
-				  
-				</div>
+<a href="shop-details.html"><i class="fa fa-angle-left" aria-hidden="true"  style="z-index: 999;position:fixed;top:13px;left:8px;color:#fff;font-size:30px;"></i>
+</a>
+
+	<div class="row" style="margin-bottom:2px;padding:0px 5px 0px 5px">
+		<div class="row">
+			<div class="col s12">
+				<ul class="tabs">
+					<li class="tab col s3"><a class="active" href="#test1" ><i class="fa fa-list" aria-hidden="true"></i> &nbsp;&nbsp;List</a></li>
+					<li class="tab col s3"><a  href="#test2"><i class="fa fa-cloud-upload" aria-hidden="true"></i> &nbsp;Upload List</a></li>
+				</ul>
 			</div>
-			</form>
-		</div>
-		<div class="card row">
-			<ul class="product-list" id="item-list" style="height:230px;overflow-y: scroll;">
+			<div id="test1" class="col s12" style="margin-top:5px;">
+				<div class="col s12">
+					<span style="font-size:15px; margin-bottom:10px;">Create Your Own Item List</span>
+						<div class="card row" style="padding:5px;postion:fixed" >
+							<form class="col s12" >
+								<div class="row" style="margin-bottom:2px;">
+									<div class="input-field col s7">
+										<input id="item" type="text" name="item" class="validate"  required>
+										<label for="item">Add Items</label>
+									</div>
+									<div class="input-field col s1">
+									</div>
+									<div class="input-field col s4">
+										<input id="quantity" type="text" name="quantity" class="validate" required >
+										<label for="quantity">Quantity</label>
+									</div>
+									<div class="input-field col s2">
+										<button class="btn waves-effect waves-light " type="button" id="add" name="action" style="background-color:#A82E30;width:150px;height:35px;">Add To List</button>
+									</div>
+								</div>
+							</form>
+						</div>
+						<div class="card row">
+							<div style="font-size:15px;text-align:center;border-bottom:1px solid #f2f2f2;padding:5px;">Item List</div>
+								<ul class="product-list" id="item-list" style="height:410px;overflow-y: scroll;">
+									<img src="images/images.png" style="width:100%" id="img"/>
+								</ul>
+								<ul id="item-list1" style="display:none">
+								
+								</ul>
+								<a  style="background-color:#A82E30;margin:10px;"class="btn" id="ordernow" >Continue</a>
+								<br>
+							</div>
+						</div>
+			</div>
+			<div id="test2" class="col s12">
+				<div class="col s12" style="">
+					<span style="font-size:15px; margin-bottom:10px;">Upload Item List</span>
+						<div class="card row" style="padding:5px;postion:fixed;padding-bottom:35%;" >
+							<form action="http://cartway.in/fileupload/fileupload.php" class="col s12 dropzone" id="my-awesome-dropzone">
+								<div class="row" style="margin-bottom:2px;">
+									<div class="input-field col s12">
+										<div class="file-field">
+											<div class="fallback">
+											<div  style="background-color:#A82E30;width:300px;">
+												
+												<input type="file" name="file" multiple>
+												<input name="id" type="hidden" value ="121"  />
+											</div>
+											
+											</div>
+										</div>
+									</div>
+									
+								</div>
+							</form>
+							
+							<div class="input-field col s2">
+								<button class="btn waves-effect waves-light " type="button" id="submit" name="action" style="background-color:#A82E30;">Upload</button>
+							</div>
+							<a class="waves-effect waves-light btn modal-trigger" href="#modal1">Modal</a>
+						</div>
+				</div>
 				
-			</ul>
-			 <a  style="margin:10px;"class="btn waves-effect waves-light" id="ordernow" >Order Now</a>
-			 <br>
+			</div>
+	
 		</div>
-	</div>
-</div>
-	  
-	  
-	  
-	  
-		<script>
+		<img src="images/bg.png" class="responsive-img " >
+    </div>
+	<script>
 		$(document).ready(function(){
+		
 			$(".button-collapse").sideNav();
 			
 			
@@ -105,11 +160,17 @@ padding:10px;
 				$("#add").click(function(){
 				
 					$item=$("#item").val();
+					$quantity=$("#quantity").val();
 					if($item!=""){
 						$("#item").val("");
-						$("#item-list").append('<li id="'+$i+'">'+$i+'&nbsp;&nbsp;'+$item+'<i class="fa fa-trash pull-right delete-item" aria-hidden="true" style="color:red"></i><i class="fa fa-pencil-square-o pull-right edit-item" aria-hidden="true" style="color:green;margin-right:10px;"></i> </li></li>');
+						$("#quantity").val("");
+						$("#item-list").append('<li id="'+$i+'" style="padding:5px;border-bottom:1px solid #A82E30;"><b>'+$i+'.</b>&nbsp;&nbsp;'+$item+'&nbsp;&nbsp;('+$quantity+')<i class="fa fa-trash pull-right delete-item" aria-hidden="true" style="color:red;font-size:20px;"></i><a href="#modal1"><i class="fa fa-pencil-square-o fa-3x pull-right edit-item" aria-hidden="true" style="color:green;margin-right:10px;font-size:20px;"></i> </a></li>');
+						$("#item-list1").append('<li id="'+$i+'">'+$item+'('+$quantity+')</li>');
 					
 						$i++;
+					}
+					if($item>"0"){
+						$("#img").hide();
 					}
 				});
 				
@@ -136,29 +197,30 @@ padding:10px;
 		
 		});
 		
-		$(document).on('click','.edit-item',function(){
 		
-		
-		});
 		
 		
 		</script>
 		
 		<script>
 		$(document).ready(function(){
-	  
+		
+
+      
 	  if (typeof(Storage) !== "undefined") {
 										
 									$shopkeeper_id=localStorage.getItem("shop_id");
 									$customer_id=localStorage.getItem("mobile");
-									
+									$shop_name=localStorage.getItem("shop_name");
 									
 									$("#ordernow").click(function(){
 									
 									$("#shopkeeper_id").val($shopkeeper_id);
 									$("#customer_id").val($customer_id);
-									$item_list=$("#item-list").text();
+									$("#shop_name").val($shop_name);
 									
+									$quantity=$("#quantity").text();
+									$item_list=$("#item-list1").text();
 									
 									$.ajax({
 									type: 'GET',
@@ -166,7 +228,10 @@ padding:10px;
 									data: {
 									customer_id:$customer_id,
 									shopkeeper_id:$shopkeeper_id,
+									quantity:$quantity,
+									shop_name:$shop_name,
 									list:$item_list,
+									
 									},
 									dataType: 'jsonp',
 									crossDomain: true,
@@ -186,10 +251,6 @@ padding:10px;
 													localStorage.setItem("order_id",val.order_id);
 													
 													window.location.replace("pickup-time.html");
-													
-													
-													
-												
 												}
 												
 									});
@@ -200,16 +261,7 @@ padding:10px;
 									console.log(error.statusText);
 									$('#loading-image').hide();
 							});
-					
-					
-									
-									
-									
-									
-									
-										
-									
-									});
+					});
 									
 						} else {
 										$("#localstorage").html("Sorry, your browser does not support Web Storage...");
@@ -223,7 +275,157 @@ padding:10px;
 		
 		
 		</script>  
-	  
+		
+		
+		
+		<script>
+		$(document).on("click",".edit-item",function(){
+		
+		$val=$(this).parent().parent().text();
+		$("#item1").val($val);
+		
+		
+		//alert($val);	
+			
+		
+		});
+		$(document).on("click","#editadd",function(){
+		$item=$("#item1").val();
+					
+					if($item!=""){
+						$("#item").val("");
+						
+						$("#item-list").append('<li id="'+$i+'" style="padding:5px;border-bottom:1px solid #A82E30;"><b>'+$i+'.</b>&nbsp;&nbsp;'+$item+'&nbsp;&nbsp;('+$quantity+')<i class="fa fa-trash pull-right delete-item" aria-hidden="true" style="color:red;font-size:20px;"></i><a href="#modal1"><i class="fa fa-pencil-square-o fa-3x pull-right edit-item" aria-hidden="true" style="color:green;margin-right:10px;font-size:20px;"></i> </a></li>');
+						//$("#item-list1").append('<li id="'+$i+'">'+$item+'('+$quantity+')</li>');
+					
+						//$i++;
+					}
+		
+		
+		
+		alert("");	
+			
+		
+		});
+</script>
+<script>
+var images=[];
+
+var myDropzone = new Dropzone("#my-awesome-dropzone");
+
+
+myDropzone.on("complete", function(file,response) {
+  //myDropzone.removeFile(file);
+  
+  //alert("Redirect code comes here ");
+ // console.log(file);
+  //console.log(file.name);
+  //console.log(file.xhr.responseURL);
+  
+  images.push(file.xhr.responseURL+"/"+file.name);
+images.push("http://cartway.in/fileupload/uploads/"+file.name);
+  
+});
+
+
+
+
+ $(document).ready(function(){
+	
+ $("#submit").click(function(){
+ 
+ var str = "";
+	for (i = 0; i < images.length; i++) { 
+    str += images[i] + ", ";
+	$img='"'+str+'"';
+}
+	
+	//alert("Images : "+str);
+ if (typeof(Storage) !== "undefined") {	
+	localStorage.setItem("images",str);
+	//alert(localStorage.getItem("images"));
+	$shopkeeper_id=localStorage.getItem("shop_id");
+	$customer_id=localStorage.getItem("mobile");
+	$shop_name=localStorage.getItem("shop_name");
+	
+	
+									$.ajax({
+									type: 'GET',
+									url: 'http://cartway.in/app-work/web-api/public/order-upload-image',
+									data: {
+									customer_id:$customer_id,
+									shopkeeper_id:$shopkeeper_id,
+									shop_name:$shop_name,
+									images:$img,
+									
+									},
+									dataType: 'jsonp',
+									crossDomain: true,
+									
+							}).done(function(response){
+									$.each( response, function( key, val ) {
+												//alert( key+ val.response  );
+												
+												$status=val.response;
+												$str="Error"
+												
+												if($status == $str){
+													$("#info").html("Error Not Data Found");
+												}else{
+												
+													
+													localStorage.setItem("order_id",val.order_id);
+													
+													window.location.replace("pickup-time.html");
+												}
+												
+									});
+									
+									
+									
+							}).fail(function(error){
+									console.log(error.statusText);
+									$('#loading-image').hide();
+							});
+				
+	
+
+} else {
+										$("#localstorage").html("Sorry, your browser does not support Web Storage...");
+									}
+	
+ 
+ });
+ 
+ });
+
+</script>
+<script>
+
+  $(document).ready(function(){
+    // the "href" attribute of the modal trigger must specify the modal ID that wants to be triggered
+    
+  
+          
+ $('.modal').modal({
+      dismissible: true, // Modal can be dismissed by clicking outside of the modal
+      opacity: .5, // Opacity of modal background
+      inDuration: 300, // Transition in duration
+      outDuration: 200, // Transition out duration
+      startingTop: '4%', // Starting top style attribute
+      endingTop: '10%', // Ending top style attribute
+      ready: function(modal, trigger) { // Callback for Modal open. Modal and trigger parameters available.
+        
+        console.log(modal, trigger);
+      },
+      complete: function() {  } // Callback for Modal close
+	 
+    }
+	
+  );
+   $('#editadd').modal('close');
+  });
+</script>
 <script type="text/javascript" src="cordova.js"></script>
 <script type="text/javascript">
         app.initialize();

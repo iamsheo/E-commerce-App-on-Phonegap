@@ -11,16 +11,31 @@
 	<script src="js/materialize.min.js"></script>
 	<link rel="stylesheet" href="css/style.css">
 	<link rel="stylesheet" href="icons/css/font-awesome.min.css">
-
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet"> 
 </head>
+<style>
+ul,li,div,nav{
+font-family: 'Lato', sans-serif;
+}
+.input-field .prefix {
+    position: absolute;
+    width: 0rem;
+    font-size: 2rem;
+    transition: color .2s;
+    padding-top: 13px;
+    
+}
+</style>
 <body>
 
- <nav>
-    <div class="nav-wrapper">
-      <a href="#" class="brand-logo center">Cartway</a>
-     
-    </div>
-</nav>
+<div class="navbar-fixed">
+		<nav>
+			<div class="nav-wrapper">
+				<a href="#" class="brand-logo center">CARTway</a>
+			</div>
+		</nav>
+	</div>
 
 
 
@@ -28,14 +43,15 @@
 	<div class="row card">
 	<br>
 	
-	<div class="col s8 offset-s2" style="border: 1px dashed #eee;padding:15px;margin-bottom:40px;">
-	<img src="images/logo.png" style="width:100%;"></img>
+	<div class="col s10 offset-s1" style="padding:15px;margin-bottom:40px;text-align:center;">
+	<img src="images/logo.png" style="position:relative;width:155px;"></img>
 	<p style="font-weight:600;text-align:center;">Please Verify Your Number </p>
 	<hr style="border: 1px solid #eee;">
 	
 		<form action="select-location.html">
 			<div class="input-field col s12">
-			  <input id="otp" type="text" class="validate">
+				<i class="material-icons prefix">copyright</i>
+			  <input id="otp" type="text" class="validate" required>
 			  <label for="otp">Enter OTP</label>
 			</div>
 			
@@ -70,19 +86,10 @@
 										
 										$name=localStorage.getItem("name");
 										$mobile=localStorage.getItem("mobile");
-										$profile_status=localStorage.getItem("profile_status");
+										$profile_status=localStorage.getItem("user_status");
 										
 										
-										// Retrieve
-									/*	$("#localstorage").html(
-										
-											localStorage.getItem("response")+" | "+
-											localStorage.getItem("name")+" | "+
-											localStorage.getItem("mobile")+" | "+
-											localStorage.getItem("otp")
-										);
-									*/
-										
+									
 									} else {
 										$("#localstorage").html("Sorry, your browser does not support Web Storage...");
 									}
@@ -127,10 +134,34 @@
 													$("#info").html("Please Enter Valid OTP");
 												}else{
 												
-													localStorage.setItem("user_status", "mobile_number_verified");
-													$("#info").html("Verified");
+														
+										
+														$user_status=localStorage.getItem("user_status");
+														
+														$str1="mobile_number_verified";
+														$str2="location_update";
+														$str3="address_update";
+														
+														if($user_status==$str1){
+															window.location.replace("select-location.html");
+														}
+														else if($user_status==$str2){
+															window.location.replace("address-details.html");
+														}
+														else if($user_status==$str3){
+															window.location.replace("shop-type.html");
+														}
+														else{
+														localStorage.setItem("user_status", "mobile_number_verified");
 													
-													window.location.replace("select-location.html");
+													
+														window.location.replace("select-location.html");
+														
+														}
+														
+														$("#info").html("Verified");
+										
+													
 												
 												}
 											});

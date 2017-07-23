@@ -10,44 +10,56 @@
 	<script src="../js/jquery-3.2.1.min.js"></script>
 	<script src="../js/materialize.min.js"></script>
 	<link rel="stylesheet" href="../css/style.css">
-	<link rel="stylesheet" href="../icons/css/font-awesome.min.css">
-
+	<link rel="stylesheet" href="icons/css/font-awesome.min.css">
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet"> 
 </head>
+<style>
+ul,li,div,nav{
+font-family: 'Lato', sans-serif;
+}
+.input-field .prefix {
+    position: absolute;
+    width: 0rem;
+    font-size: 2rem;
+    transition: color .2s;
+    padding-top: 13px;
+    
+}
+</style>
 <body>
 
- <nav>
-    <div class="nav-wrapper">
-      <a href="#" class="brand-logo center">Cartway</a>
-     
-    </div>
-</nav>
+<div class="navbar-fixed">
+		<nav>
+			<div class="nav-wrapper">
+				<a href="#" class="brand-logo center">CARTway</a>
+			</div>
+		</nav>
+	</div>
+<a href="../login.html" data-activates="slide-out" >
+<i class="fa fa-angle-left" aria-hidden="true"  style="z-index: 999;position:fixed;top:13px;left:8px;color:#fff;font-size:30px;"></i>
+</a>
 
 
 
-
-	<div class="row card">
+	<div class="row card" style="margin:4px">
 	<br><br>
-	<div class="col s8 offset-s2"  style="border: 1px dashed #eee;padding:15px;margin-bottom:40px;">
-	<img src="images/logo.png" style="width:100%;"></img>
+	<div class="col s10 offset-s1" style="text-align:center;padding:15px;margin-bottom:40px;">
+	<img src="images/logo.png" style="position:relative;width:155px;"></img>
 		<p style="font-weight:600;text-align:center;">Shopkeeper Registartion </p>
 		<hr style="border: 1px solid #eee;">
 		<form >
 		
+			
 			<div class="input-field col s12">
-			  <input id="shop_name" type="text" class="validate" required>
-			  <label for="shop_name">Shop Name</label>
+				<i class="material-icons prefix">account_circle</i>
+				<input id="name" type="text" class="validate" required>
+				<label for="name">Name</label>
 			</div>
 			<div class="input-field col s12">
-			  <input id="location" type="text" class="validate" required>
-			  <label for="location">Location</label>
-			</div>
-			<div class="input-field col s12">
-			  <input id="name" type="text" class="validate" required>
-			  <label for="name">Name</label>
-			</div>
-			<div class="input-field col s12">
-			  <input id="mobile_number" type="text" class="validate"  required>
-			  <label for="mobile_number">Mobile</label>
+				<i class="material-icons prefix">smartphone</i>
+				<input id="mobile_number" type="text" class="validate"  required>
+				<label for="mobile_number">Mobile</label>
 			</div>
 			
 			 <button class="btn waves-effect waves-light" type="button" id="submit" >Submit Your Request

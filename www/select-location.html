@@ -10,7 +10,8 @@
 	<script src="js/jquery-3.2.1.min.js"></script>
 	<script src="js/materialize.min.js"></script>
 	<link rel="stylesheet" href="icons/css/font-awesome.min.css">
-
+	<link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet"> 
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
 <body>
 <style>
@@ -19,11 +20,11 @@ background-color:#eee;
 }
 nav {
     color: #fff;
-    background-color:#9c27b0;
+    background-color:#A82E30;
 }
 .btn{
-	background:#fff;
-	color:#9c27b0;
+	background:#A82E30;
+	color:#fff;
 	width:70px;
 	height:43px;
 	border-color:#9c27b0;
@@ -74,28 +75,36 @@ nav .brand-logo {
     padding: 0;
     white-space: nowrap;
 }
+ul,li,div,nav{
+font-family: 'Lato', sans-serif;
+}
 
-</style>
- <style>
        #map {
         height: 500px;
         width: 100%;
        }
+	   .input-field .prefix {
+    position: absolute;
+    width: 0rem;
+    font-size: 2rem;
+    transition: color .2s;
+    padding-top: 13px;
+    
+}
  </style>
- <nav>
-    <div class="nav-wrapper">
-      <a href="#" class="brand-logo center">Cartway</a>
-      <ul id="nav-mobile" class="left hide-on-med-and-down">
-        
-       
-      </ul>
-    </div>
-</nav>
- <form  style="position:absolute;top:60px;z-index:10;background:#fff;width:100%;" action="address-details.html">
-      <div class="row">
+<div class="navbar-fixed">
+		<nav>
+			<div class="nav-wrapper">
+				<a href="#" class="brand-logo center">CARTway</a>
+			</div>
+		</nav>
+	</div>
+ <form  style="position:absolute;top:60px;z-index:10;background:#fff;width:100%;margin:4px;" action="address-details.html">
+      <div class="row" style="margin:4px;">
         <div class="input-field col s9" style="padding-left:10px;">
-          <input  id="search-location" type="text" class="validate controls" Placeholder="Pin you home location" required>
-          <label for="search-location">Pin Your Address for Best Result</label>
+		<i class="material-icons prefix">location_on</i>
+          <input  id="search-location" type="text" class="validate controls" Placeholder="Pin Your Address" required>
+          <label for="search-location">Pin Your Address</label>
         </div>
 		  <div class="input-field col s3">
        	 <button class="btn waves-effect waves-light" type="button" id="submit" >go</button>

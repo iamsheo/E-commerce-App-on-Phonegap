@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0"/>
+  <title>Mobile App</title>
+
+  
+	<link href="../css/materialize.min.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+	<script src="../js/jquery-3.2.1.min.js"></script>
+	<script src="../js/materialize.min.js"></script>
+	<link rel="stylesheet" href="../css/style.css">
+	
+
+<script src="https://use.fontawesome.com/5a32e4d79d.js"></script>
+<link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet"> 
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+</head>
+<style>
+
+.input-field .prefix {
+    position: absolute;
+    width: 0rem;
+    font-size: 2rem;
+    transition: color .2s;
+    padding-top: 13px;
+    padding-left: 15px;
+}
+
+</style>
+<body>
+<div class="navbar-fixed">
+		<nav>
+			<div class="nav-wrapper">
+				<a href="#" class="brand-logo center"><b><span  style="color:blue">CART</span><span style="color:green">way</span></b></a>
+			</div>
+		</nav>
+</div>
+<a href="dashboard.html" >
+<i class="fa fa-angle-left" aria-hidden="true"  style="z-index: 999;position:fixed;top:13px;left:8px;color:#fff;font-size:30px;"></i>
+</a>
+<div class="row">
+	<div class="col s12" style="padding:0px 5px 0px 5px">
+		<div class="card" style="padding:3px;">
+			<div class="row" style="margin-bottom:2px;" >
+					
+					<div class="col s12">
+						<h5>Order Manage</h5><hr>
+						<form>
+								
+						<div class="order">
+						
+						<div id="info"></div>
+						</div>		
+								
+								
+						</form>
+					</div>
+			</div><br><br><br>
+		</div>
+	</div>
+</div>
+<script>
+	$(document).ready(function(){
+		$(".button-collapse").sideNav();
+			$('.carousel').carousel();
+			
+			if (typeof(Storage) !== "undefined") {
+							$order=localStorage.getItem("order_id");
+							$admin=localStorage.getItem("admin_id");
+							
+							
+							$.ajax({
+									type: 'GET',
+									url: 'http://cartway.in/app-work/web-api/public/ordermange',
+									data: {
+										order:$order,
+										admin:$admin,
+									},
+									dataType: 'jsonp',
+									crossDomain: true,
+									
+							}).done(function(response){
+									console.log(response);
+									
+									$.each( response, function( key, val ) {
+												//alert( key+ val.response  );
+												
+												$status=val.response;
+												$str="Error"
+												
+												if($status == $str){
+													$("#info").html("Error Not Data Found");
+												}else{
+													$ordermange=val.ordermange;
+													$str="";
+													$.each( $ordermange, function( key, val ) {
+														$str =$str+'<label class=" col s3" style="padding-top:10%;">Total Amount</label>';
+														$str =$str+'<div class="input-field col s9">';
+															$str =$str+'<i class="material-icons prefix">monetization_on</i>';
+															$str =$str+'<input id="amount" type="text" value="'+val.amount+'">';
+															
+														$str =$str+'</div>';
+														$str =$str+'<label class="col s3" style="padding-top:10%;">Remaining Amount</label>';
+														$str =$str+'<div class="input-field col s9">';
+															$str =$str+'<i class="material-icons prefix">attach_money</i>';
+															$str =$str+'<input id="remaning" type="text" value="'+val.remaning_amount+'">';
+															
+														$str =$str+'</div>';
+														$str =$str+'<label class=" col s3" style="padding-top:10%;">Paid Amount</label>';
+														$str =$str+'<div class="input-field col s9">';
+															$str =$str+'<i class="material-icons prefix">money_off</i>';
+															$str =$str+'<input id="paid" type="text" value="'+val.paid_amount+'">';
+															
+														$str =$str+'</div>';
+														$str =$str+'<label class="col s3" style="padding-top:10%;">Recived By</label>';
+														$str =$str+'<div class="input-field col s9">';
+															$str =$str+'<i class="material-icons prefix">person_pin</i>';
+															$str =$str+'<input id="recieved" type="text" value="'+val.recieved_by+'">';
+														$str =$str+'</div>';
+														
+														
+														$str =$str+'<label class="col s4" style="padding-top:10%;">Status</label>';
+														$str =$str+'<div class="input-field col s8" >';
+															$str =$str+'<select class="browser-default" id="status">';
+																
+																$str =$str+'<option value="'+val.status+'">'+val.status+'</option>';
+																$str =$str+'<option value="Packed">Packed</option>';
+																$str =$str+'<option value="Deliverd">Deliverd</option>';
+															$str =$str+'</select>';
+														$str =$str+'</div>';
+														
+														$str =$str+'<label class=" col s4" style="padding-top:10%;">Payment Status</label>';
+														$str =$str+'<div class="input-field col s8" >';
+															$str =$str+'<select class="browser-default" id="paystatus">';
+																$str =$str+'<option value="'+val.Pay_status+'">'+val.Pay_status+'</option>';
+																$str =$str+'<option value="Remaining">Remaining</option>';
+																$str =$str+'<option value="Complete">Complete</option>';
+															$str =$str+'</select>';
+														$str =$str+'</div>';
+														$str =$str+'<div class="col s12">';
+															$str =$str+'<button class="btn waves-effect waves-light " type="button" id="update" name="action" style="background-color:#A82E30;width:150px;">Update</button>';
+														$str =$str+'</div>';
+												});
+												$(".order").append($str);
+												}
+												
+												$('#loading-image').hide();
+											});
+											
+							}).fail(function(error){
+									console.log(error.statusText);
+									$('#loading-image').hide();
+							});
+					} else {
+							$("#localstorage").html("Sorry, your browser does not support Web Storage...");
+						} 
+						
+						
+						
+						
+	});
+</script>
+<script>
+	$(document).ready(function(){
+	$(document).on("click","#update", function(){
+			$val=$("#amount").val();
+			$val1=$("#remaning").val();
+			$val2=$("#paid").val();
+			$val3=$("#recieved").val();
+			$val4=$("#status").val();
+			$val5=$("#paystatus").val();
+			$order=localStorage.getItem("order_id");
+			
+			$.ajax({
+						type: 'GET',
+						url: 'http://cartway.in/app-work/web-api/public/omange',
+						data: {
+								amount:$val,
+								remaning:$val1,
+								paid:$val2,
+								recived:$val3,
+								status:$val4,
+								paystatus:$val5,
+								ordernumb:$order,
+						},
+							dataType: 'jsonp',
+							crossDomain: true,
+							
+			})
+			alert("Order Updated");
+			location.reload();
+	});
+	
+	});
+</script>
+
+<script type="text/javascript" src="cordova.js"></script>
+<script type="text/javascript">
+        app.initialize();
+</script>
+	  
+</body>
+</html>

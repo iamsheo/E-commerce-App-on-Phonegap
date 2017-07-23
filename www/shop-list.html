@@ -11,13 +11,13 @@
 	<script src="js/materialize.min.js"></script>
 	<link rel="stylesheet" href="css/style.css">
 	<link rel="stylesheet" href="icons/css/font-awesome.min.css">
-
+	<link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
 </head>
 <body>
 
  <nav>
     <div class="nav-wrapper">
-      <a href="#" class="brand-logo center">Cartway</a>
+      <a href="#" class="brand-logo center">CARTway</a>
       
     </div>
 </nav>
@@ -25,6 +25,9 @@
 <style>
 body{
 background:#eee;
+}
+ul,li,div,nav{
+font-family: 'Lato', sans-serif;
 }
 .card {
     position: relative;
@@ -42,35 +45,16 @@ background:#eee;
 
   <div id="loading-image"></div>
 
-<ul id="slide-out" class="side-nav ">
-    <li><div class="userView">
-      <div class="background" style="background:#9c27b0">
-        
-      </div>
-      <a href="#!user"><img class="circle" src="images/user.jpeg"></a>
-      <a href="#!name"><span class="white-text name">Sheo Shankar</span></a>
-      <a href="#!email"><span class="white-text email">sheointime@gmail.com</span></a>
-    </div></li>
-    <li><a class="waves-effect"  href="shop-type.html"><i class="fa fa-shopping-cart" aria-hidden="true" style="color:#9c27b0;"></i>Shop Now</a></li>
-	<li><a class="waves-effect"  href="#!"><i class="fa fa-list" aria-hidden="true" style="color:#9c27b0;"></i>Fav Shop</a></li>
-    <li><a class="waves-effect"  href="#!"><i class="fa fa-inr" aria-hidden="true" style="color:#9c27b0;"></i>Last Bills</a></li>
-    <li><a class="waves-effect"  href="#"><i class="fa fa-times" aria-hidden="true" style="color:#9c27b0;"></i>Unpaid Bills</a></li>
-	<li><a class="waves-effect"  id="logout"><i class="fa fa-sign-out" aria-hidden="true" style="color:#9c27b0;"></i>Log Out</a></li>
-	 <li><div class="divider"></div></li>
-	<li><a class="waves-effect"  href="#!"><i class="fa fa-info-circle" aria-hidden="true" style="color:#9c27b0;"></i>About App</a></li>
-	<li><a class="waves-effect"  href="#!"><i class="fa fa-user-secret" aria-hidden="true" style="color:#9c27b0;"></i>Privacy Policy </a></li>
-	<li><a class="waves-effect"  href="#!"><i class="fa fa-user-circle-o" aria-hidden="true" style="color:#9c27b0;"></i>Terms of use</a></li>
-  </ul>
-  <a href="#" data-activates="slide-out" class="button-collapse"><i class="fa fa-bars" aria-hidden="true" style="position:absolute;top:18px;left:8px;color:#fff;font-size:23px;"></i></a>
-
-
+<a href="shop-type.html" >
+<i class="fa fa-angle-left" aria-hidden="true"  style="z-index: 999;position:absolute;top:13px;left:8px;color:#fff;font-size:30px;"></i>
+</a>
 <form class="col s12">
      <div class="row" style="margin:0px;padding:0px;">
         <div class="input-field col s10" style="padding-left:5px;">
-          <input  id="first_name" type="text" class="validate">
-          <label for="first_name">Search shop </label>
+          <input  id="search" type="text" class="validate">
+          <label for="search">Search shop </label>
         </div>
-		<button class="btn waves-effect waves-light col s2 input-field " type="submit" name="action">Go
+		<button class="btn waves-effect waves-light col s2 input-field " type="button" name="search" id="searchbtn" style="background-color:#A82E30">Go
    
 		</button>
         
@@ -80,18 +64,21 @@ background:#eee;
 	
 	
 <div id="info"></div>
-		 
+<div class="response">
+
+
+</div>		 
             
- 
+			
 	  
 	  
 	  
 	  
 		<script>
 		$(document).ready(function(){
-			
-				 $(".button-collapse").sideNav();
-				 
+							
+							$(".button-collapse").sideNav();
+							$category=localStorage.getItem("category");
 				
 				 
 							$.ajax({
@@ -99,7 +86,7 @@ background:#eee;
 									url: 'http://cartway.in/app-work/web-api/public/shop-list',
 									data: {
 										location:'loaction',
-										category:'category',
+										category:$category,
 									},
 									dataType: 'jsonp',
 									crossDomain: true,
@@ -114,7 +101,7 @@ background:#eee;
 												$str="Error"
 												
 												if($status == $str){
-													$("#info").html("Error Not Data Found");
+													$("#info").html("Data Not Found");
 												}else{
 												
 													
@@ -125,14 +112,13 @@ background:#eee;
 													
 													//alert(val.shop_name);
 													
-													$str='<div class="shop" id="'+val.id+'">';
-													
+													$str='<div class="shop" id="'+val.id+'"  href="'+val.shop_name+'">';
 													$str =$str+'<div class="row card " style="padding-top:5px;">';
-													$str =$str+'<div class="col s4">';
-													$str =$str+'<img src="images/g-1.jpg" class="responsive-img"></img>';
+													$str =$str+'<div class="col s4" style="margin-top: 2px;padding-left:4px;">';
+													$str =$str+'<img src="'+val.image+'" style="width:100px;height:90px;"></img>';
 													$str =$str+'</div>';
 													$str =$str+'<div class="col s8 shop-details">';
-													$str =$str+'<div class="col s6">'+val.shop_name+'</div>';
+													$str =$str+'<div class="col s12">'+val.shop_name+'</div>';
 													$str =$str+'<div class="col s6 pull-right">';
 													$str =$str+'<div class="col s12 shop-rating ">';
 													$str =$str+'<span>';
@@ -140,15 +126,17 @@ background:#eee;
 													$str =$str+'</span>';
 													$str =$str+'</div>';
 													$str =$str+'</div>';
+													$str =$str+'<div class="col s6 pull-right" style="margin-top: 3px;">';
 													$str =$str+'<div class="col s12">';
 													$str =$str+'<div class="km">';
 													$str =$str+'0.3 km';
 													$str =$str+'</div>';
 													$str =$str+'</div>';
+													$str =$str+'</div>';
 													$str =$str+'<div class="col s12 offers"><span>';
-													$str =$str+'<br><span>Other Offers will come here<span><br>';
+													$str =$str+'<span style="font-size:12px">'+val.shop_offers+'<span><br>';
 													$str =$str+'<span>';
-													$str =$str+'<b>Freeshipping above Rs 350/- | charges 25/-</b>';
+													$str =$str+'<span  style="font-size:10px"><span style="color:green">Free Home Delivery Min Order </span>'+val.shop_shipping+' /- </span>';
 													$str =$str+'</span>';
 													$str =$str+'</div>';
 													$str =$str+'</div>';
@@ -158,9 +146,9 @@ background:#eee;
 													$str =$str+'</div>';
 													
 								
-													$("body").append($str);
+													$(".response").append($str);
 													
-	
+													
 													
 													
 													
@@ -192,16 +180,129 @@ background:#eee;
 						
 		});
 		</script>
+		<script>
+		$(document).ready(function(){
+				
+						
+				 $("#searchbtn").click(function(){
+				 
+					$val=$("#search").val();
+					
+					$category=localStorage.getItem("category");
+				 
+							$.ajax({
+									type: 'GET',
+									url: 'http://cartway.in/app-work/web-api/public/shop-list-search',
+									data: {
+										location:$val,
+										category:$category,
+									},
+									dataType: 'jsonp',
+									crossDomain: true,
+									
+							}).done(function(response){
+									console.log(response);
+									
+									$(".response").html("");
+									$.each( response, function( key, val ) {
+												//alert( key+ val.response  );
+												
+												$status=val.response;
+												$str="Error"
+												
+												if($status == $str){
+													$("#info").html("Error Not Data Found");
+												}else{
+												
+													
+													
+													$shoplist=val.shoplist;
+													
+													$.each( $shoplist, function( key, val ) {
+													
+													//alert(val.shop_name);
+													
+													$str='<div class="shop" id="'+val.id+'"  href="'+val.shop_name+'">';
+													$str =$str+'<div class="row card " style="padding-top:5px;">';
+													$str =$str+'<div class="col s4" style="margin-top: 2px;padding-left:4px;">';
+													$str =$str+'<img src="images/g-1.jpg" style="width:100px;height:90px;"></img>';
+													$str =$str+'</div>';
+													$str =$str+'<div class="col s8 shop-details">';
+													$str =$str+'<div class="col s12">'+val.shop_name+'</div>';
+													$str =$str+'<div class="col s6 pull-right">';
+													$str =$str+'<div class="col s12 shop-rating ">';
+													$str =$str+'<span>';
+													$str =$str+'<i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i>	<i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star-half-o" aria-hidden="true"></i>';
+													$str =$str+'</span>';
+													$str =$str+'</div>';
+													$str =$str+'</div>';
+													$str =$str+'<div class="col s6 pull-right" style="margin-top: 3px;">';
+													$str =$str+'<div class="col s12">';
+													$str =$str+'<div class="km">';
+													$str =$str+'0.3 km';
+													$str =$str+'</div>';
+													$str =$str+'</div>';
+													$str =$str+'</div>';
+													$str =$str+'<div class="col s12 offers"><span>';
+													$str =$str+'<span style="font-size:12px">'+val.shop_offers+'<span><br>';
+													$str =$str+'<span>';
+													$str =$str+'<span  style="font-size:10px"><span style="color:green">Free Home Delivery Min Order </span>'+val.shop_shipping+' /- </span>';
+													$str =$str+'</span>';
+													$str =$str+'</div>';
+													$str =$str+'</div>';
+													$str =$str+'</div>';
+													$str =$str+'</div>';
+													
+													$str =$str+'</div>';
+													
+								
+													$(".response").append($str);
+													
+													
+													
+													
+													
+													
+													
+													
+													
+													});
+													
+												
+												}
+												
+												 $('#loading-image').hide();
+												
+											});
+									
+									
+									
+							}).fail(function(error){
+									console.log(error.statusText);
+									$('#loading-image').hide();
+							});
+					
+					
+					
+				
+			});	
+				  
+						
+		});
+		</script>
 		
 		<script>
 			$(document).on("click",".shop", function(){
 				
 				$id=$(this).attr('id');
+				$shop_name=$(this).attr('href');
+				
 				
 				
 									if (typeof(Storage) !== "undefined") {
 										
 										localStorage.setItem("shop_id", $id);
+										localStorage.setItem("shop_name", $shop_name);
 										window.location.href="shop-details.html";
 											
 									} else {

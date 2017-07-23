@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0"/>
+  <title>Mobile App</title>
+
+  
+	<link href="../css/materialize.min.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+	<script src="../js/jquery-3.2.1.min.js"></script>
+	<script src="../js/materialize.min.js"></script>
+	<link rel="stylesheet" href="../css/style.css">
+	
+
+<script src="https://use.fontawesome.com/5a32e4d79d.js"></script>
+<link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet"> 
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+</head>
+<style>
+
+.input-field .prefix {
+    position: absolute;
+    width: 0rem;
+    font-size: 2rem;
+    transition: color .2s;
+    padding-top: 13px;
+    padding-left: 15px;
+}
+
+</style>
+<body>
+<div class="navbar-fixed">
+		<nav>
+			<div class="nav-wrapper">
+				<a href="#" class="brand-logo center"><b><span  style="color:blue">CART</span><span style="color:green">way</span></b></a>
+			</div>
+		</nav>
+</div>
+<a href="dashboard.html" >
+<i class="fa fa-angle-left" aria-hidden="true"  style="z-index: 999;position:fixed;top:13px;left:8px;color:#fff;font-size:30px;"></i>
+</a>
+<div class="row">
+	<div class="col s12" style="padding:0px 5px 0px 5px">
+		<div class="card" style="padding:3px;">
+			<div class="row" style="margin-bottom:2px;" >
+					
+					<div class="col s12">
+						<p style="margin:3px">Profile Update</p><hr>
+						<form>
+								
+						<div class="order">
+						
+						<div id="info"></div>
+						</div>		
+								
+								
+						</form>
+					</div>
+			</div><br><br>
+		</div>
+	</div>
+</div>
+<script>
+	$(document).ready(function(){
+		$(".button-collapse").sideNav();
+			$('.carousel').carousel();
+			
+			if (typeof(Storage) !== "undefined") {
+							
+							$admin=localStorage.getItem("admin_id");
+							
+							
+							$.ajax({
+									type: 'GET',
+									url: 'http://cartway.in/app-work/web-api/public/dashboard',
+									data: {
+										
+										user_id:$admin,
+									},
+									dataType: 'jsonp',
+									crossDomain: true,
+									
+							}).done(function(response){
+									console.log(response);
+									
+									$.each( response, function( key, val ) {
+												//alert( key+ val.response  );
+												
+												$status=val.response;
+												$str="Error"
+												
+												if($status == $str){
+													$("#info").html("Error Not Data Found");
+												}else{
+													$shopkeepers=val.shopkeepers;
+													$str="";
+													$.each( $shopkeepers, function( key, val ) {
+														$str =$str+'<label class=" col s3" style="padding-top:10%;">Owner Name</label>';
+														$str =$str+'<div class="input-field col s9">';
+															$str =$str+'<i class="material-icons prefix">person</i>';
+															$str =$str+'<input id="name" type="text" value="'+val.name+'" style="padding-left:7px;">';
+														$str =$str+'</div>';
+														$str =$str+'<label class="col s3" style="padding-top:10%;">Shop Description</label>';
+														$str =$str+'<div class="input-field col s9">';
+															$str =$str+'<i class="material-icons prefix">description</i>';
+															$str =$str+'<input id="des" type="text" value="'+val.shop_description+'" style="padding-left:7px;">';
+															
+														$str =$str+'</div>';
+														$str =$str+'<label class=" col s3" style="padding-top:10%;">Shipping</label>';
+														$str =$str+'<div class="input-field col s9">';
+															$str =$str+'<i class="material-icons prefix">local_shipping</i>';
+															$str =$str+'<input id="shipping" type="text" value="'+val.shop_shipping+'" style="padding-left:7px;">';
+															
+														$str =$str+'</div>';
+														$str =$str+'<label class="col s3" style="padding-top:10%;">Offers</label>';
+														$str =$str+'<div class="input-field col s9">';
+															$str =$str+'<i class="material-icons prefix">local_offer</i>';
+															$str =$str+'<input id="offer" type="text" value="'+val.shop_offers+'" style="padding-left:7px;">';
+														$str =$str+'</div>';
+														
+														$str =$str+'</div>';
+														$str =$str+'<label class="col s3" style="padding-top:10%;">Alternative Number</label>';
+														$str =$str+'<div class="input-field col s9">';
+															$str =$str+'<i class="material-icons prefix">smartphone</i>';
+															$str =$str+'<input id="anumber" type="text" value="'+val.anumber+'" style="padding-left:7px;">';
+														$str =$str+'</div>';
+														
+														
+														$str =$str+'<div class="col s8 offset-s4" style="margin-top:10px;">';
+															$str =$str+'<button class="btn waves-effect waves-light " type="button" id="update" name="action" style="background-color:#A82E30;width:150px;">Update</button>';
+														$str =$str+'</div>';
+												});
+												$(".order").append($str);
+												}
+												
+												$('#loading-image').hide();
+											});
+											
+							}).fail(function(error){
+									console.log(error.statusText);
+									$('#loading-image').hide();
+							});
+					} else {
+							$("#localstorage").html("Sorry, your browser does not support Web Storage...");
+						} 
+						
+						
+						
+						
+	});
+</script>
+<script>
+	$(document).ready(function(){
+	$(document).on("click","#update", function(){
+			$val=$("#name").val();
+			$val1=$("#des").val();
+			$val2=$("#shipping").val();
+			$val3=$("#offer").val();
+			$val4=$("#anumber").val();
+			
+			$admin=localStorage.getItem("admin_id");
+			
+			$.ajax({
+						type: 'GET',
+						url: 'http://cartway.in/app-work/web-api/public/editprofile',
+						data: {
+								name:$val,
+								des:$val1,
+								shipping:$val2,
+								offer:$val3,
+								anumber:$val4,
+								
+								admin:$admin,
+						},
+							dataType: 'jsonp',
+							crossDomain: true,
+							
+			})
+			alert("Profile Updated");
+			location.reload();
+	});
+	
+	});
+</script>
+
+<script type="text/javascript" src="cordova.js"></script>
+<script type="text/javascript">
+        app.initialize();
+</script>
+	  
+</body>
+</html>

@@ -9,8 +9,10 @@
 	<link href="../css/materialize.min.css" type="text/css" rel="stylesheet" media="screen,projection"/>
 	<script src="../js/jquery-3.2.1.min.js"></script>
 	<script src="../js/materialize.min.js"></script>
+	<link rel="stylesheet" href="../css/style.css">
 	<link rel="stylesheet" href="../icons/css/font-awesome.min.css">
-
+<link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet"> 
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
 <body>
 <style>
@@ -60,35 +62,45 @@ nav .brand-logo {
     white-space: nowrap;
 }
 
-</style>
- <style>
-       #map {
+#map {
         height: 500px;
         width: 100%;
        }
+	  ul,li,div,nav{
+font-family: 'Lato', sans-serif;
+}
+.input-field .prefix {
+    position: absolute;
+    width: 0rem;
+    font-size: 2rem;
+    transition: color .2s;
+    padding-top: 13px;
+    
+}
  </style>
- <nav>
-    <div class="nav-wrapper">
-      <a href="#" class="brand-logo center">Cartway</a>
-      <ul id="nav-mobile" class="left hide-on-med-and-down">
-        
-       
-      </ul>
-    </div>
-</nav>
+<div class="navbar-fixed">
+		<nav>
+			<div class="nav-wrapper">
+				<a href="#" class="brand-logo center">CARTway</a>
+			</div>
+		</nav>
+	</div>
+	<div class="row" style="margin:2px">
+	<div class=" col s12">
  <form  style="position:absolute;top:60px;z-index:10;background:#fff;width:100%;" action="address-details.html">
       <div class="row">
         <div class="input-field col s9">
-          <input  id="search-location" type="text" class="validate controls" Placeholder="Pin you Shop location" required>
-          <label for="location">Pin Your Address for Best Result</label>
+			<i class="material-icons prefix">location_on</i>
+			<input  id="search-location" type="text" class="validate controls" Placeholder="Pin you Shop location" required>
+			<label for="location">Pin you Shop location</label>
         </div>
 		  <div class="input-field col s3">
-       	 <button class="btn waves-effect waves-light" type="submit" name="action">go</button>
+       	 <button class="btn waves-effect waves-light" type="submit" name="action" style="width: 70px;">go</button>
 		 </div>
 	  </div>
 </form>
-
-
+</div>
+</div>
   <div id="map"></div>
 
 

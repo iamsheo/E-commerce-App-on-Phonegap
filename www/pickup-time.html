@@ -4,26 +4,19 @@
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0"/>
   <title>Mobile App</title>
-
-  
 	<link href="css/materialize.min.css" type="text/css" rel="stylesheet" media="screen,projection"/>
 	<script src="js/jquery-3.2.1.min.js"></script>
 	<script src="js/materialize.min.js"></script>
 	<link rel="stylesheet" href="css/style.css">
 	<link rel="stylesheet" href="icons/css/font-awesome.min.css">
 	<script src="js/jquery-uploadPreview.min.js"></script>
-
+<link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet"> 
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
-<body>
-
- <nav>
-    <div class="nav-wrapper">
-      <a href="#" class="brand-logo center">Cartway</a>
-      
-    </div>
-</nav>
-
 <style>
+ul,li,div,nav{
+font-family: 'Lato', sans-serif;
+}
 .card {
     position: relative;
     background-color: #fff;
@@ -32,99 +25,135 @@
     margin: 0px;
     margin-bottom: 5px;
 }
-
-</style>
-
-<ul id="slide-out" class="side-nav ">
-    <li><div class="userView">
-      <div class="background">
-        <img src="images/office.jpg">
-      </div>
-      <a href="#!user"><img class="circle" src="images/user.jpeg"></a>
-      <a href="#!name"><span class="white-text name">Sheo Shankar</span></a>
-      <a href="#!email"><span class="white-text email">sheointime@gmail.com</span></a>
-    </div></li>
-    <li><a class="waves-effect"  href="#!">Home</a></li>
-	<li><a class="waves-effect"  href="#!">Fav Shop</a></li>
-    <li><a class="waves-effect"  href="#!">Order Now</a></li>
-    <li><a class="waves-effect"  href="#">Current Order</a></li>
-    <li><a class="waves-effect"  href="#!">Order History</a></li>
-	<li><a class="waves-effect"  href="#!">Profile</a></li>
-	<li><a class="waves-effect"  href="#!">Log Out</a></li>
-	 <li><div class="divider"></div></li>
-	<li><a class="waves-effect"  href="#!">About App</a></li>
-	<li><a class="waves-effect"  href="#!">Privacy Policy </a></li>
-	<li><a class="waves-effect"  href="#!">Terms of use</a></li>
-  </ul>
-  <a href="#" data-activates="slide-out" class="button-collapse"><i class="fa fa-bars" aria-hidden="true" style="position:absolute;top:18px;left:8px;color:#fff;font-size:23px;"></i></a>
-
-  <style>
 .product-list li{
 
 border-bottom:1px solid #eee;
 padding:10px;
+
+}
+.input-field .prefix {
+    position: absolute;
+    width: 0rem;
+    font-size: 2rem;
+    transition: color .2s;
+    padding-top: 13px;
+    
 }
 </style>
-	<div class="row" style="margin-bottom:2px;">
-		<div class="col s10 offset-s1" >
-		
-		 <div class="row">
-			
-			<form class="col s12">
-			<br><br>
-			  <div class="row">
-				<h5>When </h5>
-				   <div class="col s4">
-					  <input name="day" type="radio"  id="today" value="Today"/>
-						<label for="today">Today</label>
-					</div>
-					<div class="col s4">
-					   <input name="day" type="radio" id="tomorrow" value="Tomorrow"/>
-						<label for="tomorrow">Tomorrow</label>
-					</div>
-					<div class="col s4">
-					<input name="day" type="radio" id="after2days" value="After 2 Days" />
-					<label for="after2days">After 2 Days</label>
-					</div>
-					
-				
+<body>
+
+ 	<div class="navbar-fixed">
+		<nav>
+			<div class="nav-wrapper">
+				<a href="#" class="brand-logo center">CARTway</a>
 			</div>
+		</nav>
+	</div>
+
+  <a href="make-list.html" ><i class="fa fa-angle-left" aria-hidden="true"  style="z-index: 999;position:fixed;top:13px;left:8px;color:#fff;font-size:30px;"></i>
+</a>
+
+	<div class="card row" style="margin:4px;margin-bottom:2px;padding-bottom:10px;">
+		<div class="col s10 offset-s1" >
+			<form >
+				<div class="row">
+					<h5>When </h5>
+					<div class="col s3">
+					  <input name="day" type="radio"  id="today" value="Today" required/>
+						<label for="today" style="padding-left: 22px;">Today</label>
+					</div>
+					<div class="col s5 center">
+					   <input name="day" type="radio" id="tomorrow" value="Tomorrow" required/>
+						<label for="tomorrow" style="padding-left: 22px;">Tomorrow</label>
+					</div>
+					<div class="col s4">
+						<input name="day" type="radio" id="after2days" value="Other Day"  required/>
+						<label for="after2days" style="padding-left: 22px;">Other Day</label>
+					</div>
+				</div>
 			 <div class="row"><br>
 			 <h5>Time </h5>
-				<div class="input-field col s6">
-					<input id="time_slot" placeholder="9am-11am" type="text" class="validate">
-					<label for="time_slot">Please Enter Time Slot</label>
+				<div class="input-field col s8" required>
+					<i class="material-icons prefix">access_time</i>
+					<input id="time_slot" type="text" class="validate">
+					<label for="time_slot">Time (9am-11am)</label>
+				</div>
+				<div class="input-field col s4" >
+						<select class="browser-default" id="time" required>
+							
+							<option value="AM">AM</option>
+							<option value="PM">PM</option>
+						</select>
 				</div>
 			</div>
-			 <div class="row"><br>
+			 <div class="row">
 			 <h5>Service </h5>
 			<div class="col s6">
-					  <input name="service" type="radio"  id="home_delivery" value="Home Delivery" />
-						<label for="home_delivery">Home Delivery</label>
+					  <input name="service" type="radio"  id="home_delivery" value="Home Delivery"  required/>
+						<label for="home_delivery" style="padding-left: 22px;">Home Delivery</label>
 					</div>
 					<div class="col s6">
-					   <input name="service" type="radio" id="pick_up" value="Self Pick Up" />
-						<label for="pick_up">Self Pick Up</label>
+					   <input name="service" type="radio" id="pick_up" value="Self Pick Up"  required/>
+						<label for="pick_up" style="padding-left: 22px;">Self Pick Up</label>
 					</div>
 			</div>
-			<br>
-			<button class="btn waves-effect waves-light" type="button" name="action" id="btn">Submit
+			<div class="row">
+			 <br><h5>Payment mode </h5>
+					<div class="col s3">
+					  <input name="payment" type="radio"  id="cash" value="Cash"  required/>
+						<label for="cash" style="padding-left: 22px;">Cash</label>
+					</div>
+					<div class="col s5 center">
+					   <input name="payment" type="radio" id="card" value="Card/Paytm"  required/>
+						<label for="card" style="padding-left: 22px;">Card/Paytm</label>
+					</div>
+					<div class="col s4">
+					   <input name="payment" type="radio" id="pay_later" value="Paylater"  required/>
+						<label for="pay_later" style="padding-left: 22px;">Paylater</label>
+					</div>
+			</div>
+			<!--<div class="row" id="payoption">
+			<div class="col s6">
+					  <input name="paylater" type="radio"  id="today1" value="Today" />
+						<label for="today1" style="padding-left: 22px;">Today</label>
+					</div>
+					<div class="col s6 center">
+					   <input name="paylater" type="radio" id="tomorrow1" value="Tomorrow" />
+						<label for="tomorrow1" style="padding-left: 22px;">Tomorrow</label>
+					</div>
+					<div class="input-field col s12">
+						<input id="date" type="text" name="paylater" class="validate">
+						<label for="date">Date</label>
+					</div>
 			
-			</button>
+			</div>-->
+			<br>
+			<button class="btn waves-effect waves-light" type="button" name="action" id="btn" style="background-color:#A82E30;">Order Now</button>
 			
 			</form>
 			
 		  </div>
 		
 			
-		</div>
-	</div>
+		</div><br>
+	<img src="images/bg.png" class="responsive-img " >
 
 	  
-	  
-	  
-	  
-		<script>
+	  <script>
+	$(document).ready(function(){
+		$("#payoption").hide();
+		$("#pay_later").click(function(){
+			$("#payoption").show();
+		});
+		$("#card").click(function(){
+			$("#payoption").hide();
+		});
+		$("#cash").click(function(){
+			$("#payoption").hide();
+		});
+	});
+</script>
+<script>
 		$(document).ready(function(){
 			
 				 $(".button-collapse").sideNav();
@@ -141,7 +170,10 @@ padding:10px;
 									
 									$day=$('input[name=day]:checked').val();
 									$service=$('input[name=service]:checked').val();
+									$payment=$('input[name=payment]').val();
+									$paylater=$('input[name=paylater]:checked').val();
 									$time_slot=$('#time_slot').val();
+									
 									
 									
 									$.ajax({
@@ -152,6 +184,8 @@ padding:10px;
 										day:$day,
 										service:$service,
 										time_slot:$time_slot,
+										
+										payment:$payment,
 										
 									},
 									dataType: 'jsonp',
@@ -184,36 +218,13 @@ padding:10px;
 									console.log(error.statusText);
 									$('#loading-image').hide();
 							});
-					
-									
-									
-									
-									
-									
-									
-									
-									
-									
-									
-									
-									
-									});
-									
-									
-										
-									
-									
-									
-						} else {
-										$("#localstorage").html("Sorry, your browser does not support Web Storage...");
-									}
+					});
+				} else {
+						$("#localstorage").html("Sorry, your browser does not support Web Storage...");
+						}
 
 		});
-		
-		
-		
-
-		</script>
+</script>
 		
 
 	  
