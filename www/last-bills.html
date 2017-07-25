@@ -32,6 +32,7 @@ font-family: 'Lato', sans-serif;
 			<span style="font-size:15px;color:#A82E30;">Last Bills</span>
 			
 		</div>
+		<div class="error">No Data Found OR Check Your Internet Connection</div>
 		<div id="info"></div>
 <script>
 		$(document).ready(function(){
@@ -53,7 +54,7 @@ font-family: 'Lato', sans-serif;
 									
 							}).done(function(response){
 									console.log(response);
-									
+									$(".error").html("");
 									$.each( response, function( key, val ) {
 												//alert( key+ val.response  );
 												
@@ -61,7 +62,8 @@ font-family: 'Lato', sans-serif;
 												$str="Error"
 												
 												if($status == $str){
-													$("#info").html("Error Not Data Found");
+													$("#info").html("Data Not Found");
+													
 												}else{
 												
 													

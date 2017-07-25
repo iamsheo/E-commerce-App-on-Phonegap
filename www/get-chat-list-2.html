@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0"/>
+	<title>Mobile App</title>
+	<link href="css/materialize.min.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+	<script src="js/jquery-3.2.1.min.js"></script>
+	<script src="js/materialize.min.js"></script>
+	<link rel="stylesheet" href="css/style.css">
+	<link rel="stylesheet" href="icons/css/font-awesome.min.css">
+	<link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+</head>
+	<body>
+		<div class="navbar-fixed">
+			<nav>
+				<div class="nav-wrapper">
+					<a href="#" class="brand-logo center">CARTway</a>
+					
+				</div>
+			</nav>
+		</div>
+	<div class="row">
+		<div class="chat">
+				
+				
+				
+					
+				</div>
+	</div>
+	<a href="shop-type.html" data-activates="slide-out" >
+<i class="fa fa-angle-left" aria-hidden="true"  style="z-index: 999;position:fixed;top:13px;left:8px;color:#fff;font-size:30px;"></i>
+</a>
+<script>
+
+	$(document).ready(function(){
+	
+	if (typeof(Storage) !== "undefined") {
+		$id=localStorage.getItem("mobile");
+		
+		$.ajax({
+									type: 'GET',
+									url: 'http://cartway.in/app-work/web-api/public/get-chat-list',
+									data: {
+										
+										customer_id:$id,
+										
+									},
+									dataType: 'jsonp',
+									crossDomain: true,
+									
+							}).done(function(response){
+									console.log(response);
+									
+									$.each( response, function( key, val ) {
+												//alert( key+ val.response  );
+												$status=val.response;
+												$str="Error";
+												
+												if($status == $str){
+													$("#info").html("Error Not Data Found");
+												}else{
+												
+													$shoplist=val.list;
+													$str="";
+													$.each( $shoplist, function( key, val2 ) {
+													$str=$str+'<div class="chatview" id="'+val2.shopkeeper_id+'" shop_name="'+val2.shop+'">';
+													$str =$str+'<div class="row card " style="padding-top:5px;margin:4px;padding-bottom:5px;border-top:3px solid #A82E30;">';
+													
+													$str =$str+'<div class="col s12 shop-details" ><span style="margin-top: 2px;padding-left:4px;color:#a5a5a5;">'+val2.shop+'</span></div>';													
+													$str =$str+'</div>';
+													$str =$str+'</div>';
+													
+													});
+													$(".chat").append($str);
+												}
+												
+												$('#loading-image').hide();
+											});
+											
+											
+											
+							}).fail(function(error){
+									console.log(error.statusText);
+									$('#loading-image').hide();
+							});
+	}
+	});
+</script>
+<script>
+			$(document).on("click",".chatview", function(){
+				
+				$id=$(this).attr('id');
+				
+				if (typeof(Storage) !== "undefined") {
+										localStorage.setItem("shop_id", $id);
+										localStorage.setItem("customer_id", $id);
+										
+										window.location.href="chat2.html";
+											
+									} else {
+										$("#localstorage").html("Sorry, your browser does not support Web Storage...");
+									}
+				
+				
+									
+									
+				
+				
+				
+			});
+</script>
+<script type="text/javascript" src="cordova.js"></script>
+<script type="text/javascript">
+        app.initialize();
+</script>
+	  
+</body>
+</html>		

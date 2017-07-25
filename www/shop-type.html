@@ -32,20 +32,24 @@ font-family: 'Lato', sans-serif;
 		</nav>
 	</div>
 <ul id="slide-out" class="side-nav ">
-    <li><div class="userView">
+    <li>
+	<div class="userView">
       <div class="background" style="background:#A82E30">
         
       </div>
-      <a href="#!user"><img class="circle" src="images/male.png"></a>
+      <a href="#!user"><img class="circle" src="images/User.png"></a>
       <a href="#!name"><span class="white-text name"></span></a>
       <a href="#!email"><span class="white-text mobile"></span></a>
-    </div></li>
+    </div>
+</li>
 	<li><a class="waves-effect"  href="shop-type.html"><i class="fa fa-home" aria-hidden="true" style="color:#A82E30;"></i>Home</a></li>
     <li><a class="waves-effect"  href="shop-type.html"><i class="fa fa-shopping-cart" aria-hidden="true" style="color:#A82E30;"></i>Shop Now</a></li>
 	<li><a class="waves-effect"  href="fav-shop.html"><i class="fa fa-list" aria-hidden="true" style="color:#A82E30;"></i>Fav Shop</a></li>
     <li><a class="waves-effect"  href="track-order.html"><i class="fa fa-first-order" aria-hidden="true" style="color:#A82E30;"></i>Track Order</a></li>
 	<li><a class="waves-effect"  href="last-bills.html"><i class="fa fa-inr" aria-hidden="true" style="color:#A82E30;"></i>Last Bills</a></li>
     <li><a class="waves-effect"  href="unpaid-bills.html"><i class="fa fa-times" aria-hidden="true" style="color:#A82E30;"></i>Unpaid Bills</a></li>
+	<li><a class="waves-effect"  href="get-chat-list-2.html"><i class="fa fa-comments" aria-hidden="true" style="color:#A82E30;"></i>Chat</a></li>
+	<li><a class="waves-effect"  href="select-location.html"><i class="fa fa-map" aria-hidden="true" style="color:#A82E30;"></i>Change Location</a></li>
 	<li><a class="waves-effect"  id="logout"><i class="fa fa-sign-out" aria-hidden="true" style="color:#A82E30;"></i>Log Out</a></li>
 	 <li><div class="divider"></div></li>
 	<li><a class="waves-effect"  href="about.html"><i class="fa fa-info-circle" aria-hidden="true" style="color:#A82E30;"></i>About App</a></li>
@@ -98,10 +102,12 @@ color:#A82E30;
 	
 	  
   <div class="carousel carousel-slider">
+	
     <a class="carousel-item" href="#one!"><img src="images/img/slider.jpg"></a>
     <a class="carousel-item" href="#two!"><img src="images/img/slider2.jpg"></a>
     <a class="carousel-item" href="#three!"><img src="images/img/slider5.jpg"></a>
     <a class="carousel-item" href="#four!"><img src="images/img/slider4.jpg"></a>
+	
   </div>
         
 	
@@ -124,7 +130,7 @@ color:#A82E30;
 						<img src="images/img/medicine.jpg"></img><br>
 						<div>Medical </div>
 					</li>
-					<li class="forth">
+					<li class="forthshop">
 						<img src="images/img/chicken-meat.jpg"></img><br>
 						<div>Meat Shop</div>
 					</li>
@@ -153,8 +159,11 @@ color:#A82E30;
 		$(document).ready(function(){
 			
 			$('.carousel.carousel-slider').carousel({fullWidth: true});
-        
-				
+			autoplay()   
+			function autoplay() {
+				$('.carousel').carousel('next');
+				setTimeout(autoplay, 3000);
+			}		
 				
 					// Initialize collapse button
 				  $(".button-collapse").sideNav();
@@ -231,7 +240,7 @@ color:#A82E30;
 				localStorage.setItem("category", "Medical");
 				window.location.href="shop-list.html";
 			});
-		$(".four").click(function(){
+		$(".forthshop").click(function(){
 				localStorage.setItem("category", "Meat Shop");
 				window.location.href="shop-list.html";
 			});			

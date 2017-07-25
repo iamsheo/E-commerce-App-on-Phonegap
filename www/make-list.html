@@ -22,23 +22,7 @@
 			</div>
 		</nav>
 </div>
-<div id="modal1" class="modal">
-    <div class="modal-content">
-      <form class="col s12" >
-								<div class="row" style="margin-bottom:2px;">
-									<div class="input-field col s12">
-										<input id="item1" type="text" name="item" class="validate"  required>
-										<label for="item1">Add Items</label>
-									</div>
-									
-									<div class="input-field col s2">
-										<button class="btn waves-effect waves-light " type="button" id="editadd" name="action" style="background-color:#A82E30;width:150px;height:35px;">Add To List</button>
-									</div>
-								</div>
-							</form>
-    </div>
-    
-  </div>
+
 <style>
 .card {
     position: relative;
@@ -67,7 +51,90 @@ padding:10px;
     width: calc(100% - 3rem);
 }
 
+.s_modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    padding-top: 100px; /* Location of the box */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* Modal Content */
+.s_modal-content {
+    background-color: #fefefe;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+}
+
+/* The Close Button */
+.close {
+    color: #aaaaaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.tabs .indicator {
+    position: absolute;
+    bottom: 0;
+    height: 2px;
+    background-color: #fff;
+    will-change: left, right;
+}
+.tabs .tab {
+    text-align: center;
+    line-height: 22px;
+	text-transform: none;
+}
+.tabs .tab a:hover, .tabs .tab a.active {
+    background-color: #fff;
+    color: green;
+    
+}
+.tabs .tab a:hover, .tabs .tab a.active {
+    background-color: #fff;
+    color: green;
+    border:none;
+}
+.tabs .tab a:hover, .tabs .tab a.hover {
+    background-color: #fff;
+    color: green;
+    border:none;
+}
+.tabs .tab a {
+    color: rgba(238,110,115,0.7);
+    display: block;
+    width: 100%;
+    height: 100%;
+    padding: 0 24px;
+        padding-top: 0px;
+    font-size: 14px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    transition: color .28s ease;
+    padding-top: 12px;
+}
+
 </style>
+
+
+
+
 <a href="shop-details.html"><i class="fa fa-angle-left" aria-hidden="true"  style="z-index: 999;position:fixed;top:13px;left:8px;color:#fff;font-size:30px;"></i>
 </a>
 
@@ -139,7 +206,7 @@ padding:10px;
 							<div class="input-field col s2">
 								<button class="btn waves-effect waves-light " type="button" id="submit" name="action" style="background-color:#A82E30;">Upload</button>
 							</div>
-							<a class="waves-effect waves-light btn modal-trigger" href="#modal1">Modal</a>
+							
 						</div>
 				</div>
 				
@@ -148,6 +215,27 @@ padding:10px;
 		</div>
 		<img src="images/bg.png" class="responsive-img " >
     </div>
+	
+	<!-- The Modal -->
+<div id="myModal" class="s_modal">
+
+  <!-- Modal content -->
+  <div class="s_modal-content">
+    <span class="close">&times;</span>
+    <p>Edit Your Item</p>
+	 <div class="row">
+        <div class="col s12">
+         
+          <div class="input-field inline">
+            <input id="item_desc" type="text" class="validate" placeholder="">
+            <label for="item_desc" data-error="wrong" data-success="right">Item Desc</label>
+          </div>
+        </div>
+      </div>
+	<input type="button" id="item_btn" class="btn waves-effect waves-light" style="background-color:#A82E30" value="Update"/>
+  </div>
+
+</div>
 	<script>
 		$(document).ready(function(){
 		
@@ -164,7 +252,7 @@ padding:10px;
 					if($item!=""){
 						$("#item").val("");
 						$("#quantity").val("");
-						$("#item-list").append('<li id="'+$i+'" style="padding:5px;border-bottom:1px solid #A82E30;"><b>'+$i+'.</b>&nbsp;&nbsp;'+$item+'&nbsp;&nbsp;('+$quantity+')<i class="fa fa-trash pull-right delete-item" aria-hidden="true" style="color:red;font-size:20px;"></i><a href="#modal1"><i class="fa fa-pencil-square-o fa-3x pull-right edit-item" aria-hidden="true" style="color:green;margin-right:10px;font-size:20px;"></i> </a></li>');
+						$("#item-list").append('<li id="'+$i+'" style="padding:5px;border-bottom:1px solid #A82E30;"><b>'+$i+'.</b>&nbsp;&nbsp;'+$item+'&nbsp;&nbsp;('+$quantity+')<i class="fa fa-trash pull-right delete-item" aria-hidden="true" style="color:red;font-size:20px;"></i><i class="fa fa-pencil-square-o fa-3x pull-right edit-item" aria-hidden="true" style="color:green;margin-right:10px;font-size:20px;"></i></li>');
 						$("#item-list1").append('<li id="'+$i+'">'+$item+'('+$quantity+')</li>');
 					
 						$i++;
@@ -197,8 +285,39 @@ padding:10px;
 		
 		});
 		
+		$(document).on('click','.edit-item',function(){
 		
+			$str=$(this).parent().text();
+			$str2=$(this).parent().text();
+			$obj=$(this);
+			
+			$("#item_desc").val($.trim($str));
+			
+			$("#item_btn").click(function(){
+			
+			$str2=$("#item_desc").val();
+			$obj.parent().html($str2+'<i class="fa fa-trash pull-right delete-item" aria-hidden="true" style="color:red;font-size:20px;"></i><i class="fa fa-pencil-square-o fa-3x pull-right edit-item" aria-hidden="true" style="color:green;margin-right:10px;font-size:20px;">');
+				$('#myModal').css("display","none");
+			});
+			
+			$('#myModal').css("display","block");
+			
+		});
 		
+		// When the user clicks on <span> (x), close the modal
+		$(document).on('click','.close',function(){
+		
+			$('#myModal').css("display","none");
+			
+		});
+
+	// When the user clicks anywhere outside of the modal, close it
+	var modal = document.getElementById('myModal');
+		window.onclick = function(event) {
+		if (event.target == modal) {
+			modal.style.display = "none";
+		}
+		}
 		
 		</script>
 		
@@ -282,28 +401,10 @@ padding:10px;
 		$(document).on("click",".edit-item",function(){
 		
 		$val=$(this).parent().parent().text();
-		$("#item1").val($val);
-		
-		
-		//alert($val);	
-			
-		
-		});
-		$(document).on("click","#editadd",function(){
-		$item=$("#item1").val();
-					
-					if($item!=""){
-						$("#item").val("");
-						
-						$("#item-list").append('<li id="'+$i+'" style="padding:5px;border-bottom:1px solid #A82E30;"><b>'+$i+'.</b>&nbsp;&nbsp;'+$item+'&nbsp;&nbsp;('+$quantity+')<i class="fa fa-trash pull-right delete-item" aria-hidden="true" style="color:red;font-size:20px;"></i><a href="#modal1"><i class="fa fa-pencil-square-o fa-3x pull-right edit-item" aria-hidden="true" style="color:green;margin-right:10px;font-size:20px;"></i> </a></li>');
-						//$("#item-list1").append('<li id="'+$i+'">'+$item+'('+$quantity+')</li>');
-					
-						//$i++;
-					}
+		$("#sitem").val($val);
 		
 		
 		
-		alert("");	
 			
 		
 		});
@@ -400,32 +501,7 @@ images.push("http://cartway.in/fileupload/uploads/"+file.name);
  });
 
 </script>
-<script>
 
-  $(document).ready(function(){
-    // the "href" attribute of the modal trigger must specify the modal ID that wants to be triggered
-    
-  
-          
- $('.modal').modal({
-      dismissible: true, // Modal can be dismissed by clicking outside of the modal
-      opacity: .5, // Opacity of modal background
-      inDuration: 300, // Transition in duration
-      outDuration: 200, // Transition out duration
-      startingTop: '4%', // Starting top style attribute
-      endingTop: '10%', // Ending top style attribute
-      ready: function(modal, trigger) { // Callback for Modal open. Modal and trigger parameters available.
-        
-        console.log(modal, trigger);
-      },
-      complete: function() {  } // Callback for Modal close
-	 
-    }
-	
-  );
-   $('#editadd').modal('close');
-  });
-</script>
 <script type="text/javascript" src="cordova.js"></script>
 <script type="text/javascript">
         app.initialize();

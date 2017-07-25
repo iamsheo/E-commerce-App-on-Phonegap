@@ -74,6 +74,7 @@ font-family: 'Lato', sans-serif;
 													
 													//alert(val.shop_name);
 													$status=val.status;
+													
 													$str ="";
 													if($status == "Pending"){
 													
@@ -86,7 +87,7 @@ font-family: 'Lato', sans-serif;
 													$str =$str+'<div class="col s12">Payment Mode : <span style="color:#a5a5a5">'+val.payment_mode+'</span></div>';
 													$str =$str+'<div class="col s12">Order Date : <span style="color:#a5a5a5">'+val.order_date+'</span></div>';
 													$str =$str+'<div class="col s12">Item List : <span style="color:#a5a5a5">'+val.list+'</span></div>';
-													$str =$str+'<div class="col s12"><a class="waves-effect waves-light btn cancel" id="'+val.id+'" style="height:35px;">Cancel</a></div>';
+													$str =$str+'<div class="col s12"><a class="waves-effect waves-light btn cancel" id="'+val.id+'"  style="background-color:#A82E30;height:35px;">Cancel</a></div>';
 													
 													$str =$str+'</div>';
 													$str =$str+'</div>';
@@ -110,9 +111,9 @@ font-family: 'Lato', sans-serif;
 													
 													
 													}
-													
+													$(".track").append($str);	
 												});
-												$(".track").append($str);	
+												
 												
 												}
 												
@@ -184,7 +185,7 @@ font-family: 'Lato', sans-serif;
 							crossDomain: true,
 						})
 				alert("Order Canceled");
-			
+				location.reload();
 					
 			});
 });

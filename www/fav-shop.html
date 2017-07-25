@@ -24,34 +24,82 @@ font-family: 'Lato', sans-serif;
 			</div>
 		</nav>
 	</div>
-<ul id="slide-out" class="side-nav ">
-    <li><div class="userView">
-      <div class="background" style="background:#A82E30">
-        
-      </div>
-      <a href="#!user"><img class="circle" src="images/user.jpeg"></a>
-      <a href="#!name"><span class="white-text name">Sheo Shankar</span></a>
-      <a href="#!email"><span class="white-text email">sheointime@gmail.com</span></a>
-    </div></li>
-	<li><a class="waves-effect"  href="shop-type.html"><i class="fa fa-home" aria-hidden="true" style="color:#A82E30;"></i>Home</a></li>
-    <li><a class="waves-effect"  href="shop-type.html"><i class="fa fa-shopping-cart" aria-hidden="true" style="color:#A82E30;"></i>Shop Now</a></li>
-	<li><a class="waves-effect"  href="fav-shop.html"><i class="fa fa-list" aria-hidden="true" style="color:#A82E30;"></i>Fav Shop</a></li>
-    <li><a class="waves-effect"  href="last-bills.html"><i class="fa fa-inr" aria-hidden="true" style="color:#A82E30;"></i>Last Bills</a></li>
-    <li><a class="waves-effect"  href="unpaid-bills.html"><i class="fa fa-times" aria-hidden="true" style="color:#A82E30;"></i>Unpaid Bills</a></li>
-	<li><a class="waves-effect"  id="logout"><i class="fa fa-sign-out" aria-hidden="true" style="color:#A82E30;"></i>Log Out</a></li>
-	 <li><div class="divider"></div></li>
-	<li><a class="waves-effect"  href="about.html"><i class="fa fa-info-circle" aria-hidden="true" style="color:#A82E30;"></i>About App</a></li>
-	<li><a class="waves-effect"  href="privacy-policy.html"><i class="fa fa-user-secret" aria-hidden="true" style="color:#A82E30;"></i>Privacy Policy </a></li>
-	<li><a class="waves-effect"  href="term-of-use.html"><i class="fa fa-user-circle-o" aria-hidden="true" style="color:#A82E30;"></i>Terms of use</a></li>
-  </ul>
-  <a href="#" data-activates="slide-out" class="button-collapse"><i class="fa fa-bars" aria-hidden="true" style="position:absolute;top:18px;left:8px;color:#fff;font-size:23px;"></i></a>
-
-
+	<div class="row">
+	<div class="col s12 " style="background-color:#EEEEEE">
+				<div class="susers">
+				<p style="margin:3px">Favourite Shop List</p>
+				<div id="info3"></div>
+				</div>
+				<br><br><img src="images/bg.png" class="responsive-img " >
+			</div>
+			</div>
+<a href="shop-type.html" data-activates="slide-out" >
+<i class="fa fa-angle-left" aria-hidden="true"  style="z-index: 999;position:fixed;top:13px;left:8px;color:#fff;font-size:30px;"></i>
+</a>
 <script>
 		$(document).ready(function(){
 			// Initialize collapse button
 			$(".button-collapse").sideNav();
 			// Initialize collapsible (uncomment the line below if you use the dropdown variation)
+			if (typeof(Storage) !== "undefined") {
+							$id=localStorage.getItem("shop_id");
+							$mob=localStorage.getItem("mobile");
+							
+							$.ajax({
+									type: 'GET',
+									url: 'http://cartway.in/app-work/web-api/public/fav-shop',
+									data: {
+										user_id:$id,
+										mob:$mob,
+										
+									},
+									dataType: 'jsonp',
+									crossDomain: true,
+									
+							}).done(function(response){
+									console.log(response);
+									
+									$.each( response, function( key, val ) {
+												//alert( key+ val.response  );
+												
+												$status=val.response;
+												$str="Error"
+												if($status == $str){
+													$("#info3").html("Data Not Found");
+												}else{
+													$favslist=val.favslist;
+													$str="";
+													$.each( $favslist, function( key, val ) {
+													
+													$str =$str+'<div class="card row" style="padding-top:5px;margin:4px;padding-bottom:5px;border-top:3px solid #A82E30">';
+													$str =$str+'<div class="col s12 ">';
+													$str =$str+'<div class="col s3 ">';
+													$str =$str+'<img class="responsive-img" src="'+val.image+'" style="height:90px;width:90px;border:1px solid #f2f2f2;padding:3px;margin:5px 0px 0px 3px;"></img>';
+													$str =$str+'</div>';
+													$str =$str+'<div class="col s9 ">';
+													$str =$str+'<div class="col s12 shop-details">Shop Name :<span style="margin-top: 2px;padding-left:4px;color:#a5a5a5;">'+val.shop_name+'</span></div>';
+													$str =$str+'<div class="col s12 shop-details">Owner Name :<span style="margin-top: 2px;padding-left:4px;color:#a5a5a5;">'+val.name+'</span></div>';
+													
+													$str =$str+'<div class="col s12 shop-details">Mobile :<span style="margin-top: 2px;padding-left:4px;color:#a5a5a5;">'+val.mobile+'</span></div>';
+													$str =$str+'<div class="col s12 shop-details">Shop Address :<span style="margin-top: 2px;padding-left:4px;color:#a5a5a5;">'+val.address+'</span></div>';
+													$str =$str+'<div class="col s12 shop-details">Shop Category :<span style="margin-top: 2px;padding-left:4px;color:#a5a5a5;">'+val.shop_category+'</span></div>';
+													$str =$str+'</div>';
+													$str =$str+'</div>';
+													$str =$str+'</div>';
+												});
+												$(".susers").append($str);
+												}
+												
+												$('#loading-image').hide();
+											});
+											
+							}).fail(function(error){
+									console.log(error.statusText);
+									$('#loading-image').hide();
+							});
+					} else {
+							$("#localstorage").html("Sorry, your browser does not support Web Storage...");
+						} 
 			//$('.collapsible').collapsible();
 			$("#logout").click(function(){
 				localStorage.clear();

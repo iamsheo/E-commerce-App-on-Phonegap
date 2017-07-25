@@ -38,7 +38,7 @@
     position: absolute;
     bottom: 0;
     height: 2px;
-    background-color: green;
+    background-color: #fff;
     will-change: left, right;
 }
 .tabs .tab {
@@ -51,17 +51,46 @@
     color: green;
     
 }
+.tabs .tab a:hover, .tabs .tab a.active {
+    background-color: #fff;
+    color: green;
+    border:none;
+}
+.tabs .tab a:hover, .tabs .tab a.hover {
+    background-color: #fff;
+    color: green;
+    border:none;
+}
+.img-gallery{
+	height:150px;
+}
+.img-gallery > img{
+width:120px;
+height:120px;
+border-radius:5px;
+float:left;
+padding:10px;
+box-shadow:0 2px 2px 0 rgba(0,0,0,0.14), 0 1px 5px 0 rgba(0,0,0,0.12), 0 3px 1px -2px rgba(0,0,0,0.2);
+margin:3px;
+}
+.imgzoom{
+width:50px;
+}
 </style>
 
 <!-- Auto Refersh  -->
 
 <body>
 	<div class="navbar-fixed">
-		<nav>
-			<div class="nav-wrapper">
-				<a href="#" class="brand-logo center"><b><span  style="color:blue">CART</span><span style="color:green">way</span></b></a>
-			</div>
-		</nav>
+	<nav>	
+    <div class="nav-wrapper">
+      <a href="#" class="brand-logo center"><b><span  style="color:blue">CART</span><span style="color:green">way</span></b></a>
+      <ul id="nav-mobile" class="right hide-on-med-and-down ">
+        <li><a href="get-chat-list2.html">Chat</a></li>
+        
+      </ul>
+    </div>
+  </nav>
 	</div>
 	<div class="row" style="margin:4px;">
 		<div class="card col s12" style="margin: 0rem 0 0rem 0">
@@ -81,7 +110,7 @@
 						<div  style="margin:4px;">
 							<div class="row" style="margin-bottom:2px;" >
 								<div class="col s3">
-									<img class="responsive-img image" id="image" src="" style="height:100px;width:100px;"></img>
+									<img class="responsive-img image" id="image" src="" style="height:90px;width:90px;border:1px solid #f2f2f2;padding:3px;"></img>
 								</div>
 								<div class="col s6" style="padding:10px;">
 									<span class="shop_name" style="font-size:18px;"></span><br>
@@ -93,17 +122,15 @@
 								</div>
 							</div>
 							<div class="row" style="font-size:18px;">
-							<hr style="border-color:#eee;">
+							
 							<p>Shop Images</p>
-								<div class="carousel">
-									<a class="carousel-item"  href="#one!"><img style="width:auto:"src="../images/g-1.jpg"></a>
-									<a class="carousel-item" href="#two!"><img  src="../images/g-2.jpg"></a>
-									<a class="carousel-item" href="#three!"><img src="../images/g-3.jpg"></a>
-									<a class="carousel-item" href="#four!"><img src="../images/g-4.jpg"></a>
-									<a class="carousel-item" href="#five!"><img  src="../images/g-5.jpg"></a>
+								<div class="img-gallery" style="overflow:auto">
+								
 								</div>
+								<div style="clear:both"></div>
 							</div>
-							<div class="row" style="font-size:18px;margin-top:-130px;z-index: 9999;">
+							
+							<div class="row" style="font-size:18px;">
 								<hr style="border-color:#eee;">
 								<p>Shop Details</p>
 								<table class="bordered"style="font-size:15px;">
@@ -286,11 +313,6 @@
 													$str="";
 													$.each( $shoporder, function( key, val ) {
 													$status=val.status;
-													
-													
-													
-													
-													
 													if($status == "Pending"){
 													$str =$str+'<div class="row card " style="padding-top:5px;margin:4px;padding-bottom:5px;border-top:3px solid #A82E30;">';
 													$str =$str+'<div class="col s12 shop-details">Order Status:<span style="margin-top: 2px;padding-left:4px;color:#a5a5a5;">'+val.status+'</span></div>';
@@ -298,10 +320,21 @@
 													$str =$str+'<div class="col s12 shop-details">Delivery and Time Slot :<span style="margin-top: 2px;padding-left:4px;color:#a5a5a5;">'+val.when+'-'+val.time_slot+'</span></div>';
 													$str =$str+'<div class="col s12 shop-details">Service :<span style="margin-top: 2px;padding-left:4px;color:#a5a5a5;">'+val.service+'</span></div>';
 													$str =$str+'<div class="col s12 shop-details">Payment Mode :<span style="margin-top: 2px;padding-left:4px;color:#a5a5a5;">'+val.payment_mode+'</span></div>';
-													$str =$str+'<div class="col s12 shop-details">Item :<span style="margin-top: 2px;padding-left:4px;color:#a5a5a5;">'+val.list+'</span></div>';
+													$str =$str+'<div class="col s12 shop-details"><span style="margin-top: 2px;padding-left:4px;color:#000;text-align:center;">Item</span></div>';
+													$str =$str+'<div class="col s12 shop-details"><span style="margin-top: 2px;padding-left:4px;color:#a5a5a5;">'+val.list+'</span></div>';
+													$str =$str+'<div class="col s12 shop-details"><span style="margin-top: 2px;padding-left:4px;color:#a5a5a5;">';
+													var images=val.list_img.split(',');
+													
+													for(var i=1; i<images.length-1; i++){
+													$imgstr="<img class='imgzoom' src='"+images[i]+"'>";
+														//$(".img-gallery").append($imgstr);
+														//alert(images[i]);
+													$str =$str+'<div class="col s12 shop-details" style="width:35px">'+$imgstr+'</div>';
+													}
+													$str =$str+'</span></div>';
 													$str =$str+'<div class="row" style="">';
-													$str =$str+'<div class="col s6 shop-details"><button type="button" class="waves-effect waves-light btn green accept" id="'+val.id+'">Accept</button></div>';
-													$str =$str+'<div class="col s6 shop-details"><a class="waves-effect waves-light btn reject" id="'+val.id+'">reject</a></div>';
+													$str =$str+'<div class="col s6 shop-details"><button type="button" class="waves-effect waves-light btn green accept" id="'+val.id+'" style="border:green">Accept</button></div>';
+													$str =$str+'<div class="col s6 shop-details"><a class="waves-effect waves-light btn reject" id="'+val.id+'" style="background-color:#A82E30">reject</a></div>';
 													$str =$str+'</div>';
 													$str =$str+'</div>';
 													}
@@ -383,6 +416,16 @@
 													$(".shop_google_location").html(val.shop_google_location);
 													$(".image").html(val.image);
 													$("#image").attr("src",""+val.image+"");
+													
+													var images=val.shop_images.split(',');
+													
+													for(var i=0; i<images.length-1; i++){
+													$imgstr="<img class='imgzoom' src='"+images[i]+"'>";
+														$(".img-gallery").append($imgstr);
+														//alert(images[i]);
+													
+													}
+													
 												});
 												
 												}
@@ -538,12 +581,14 @@
 													$str =$str+'<div class="card row" style="padding-top:5px;margin:4px;padding-bottom:5px;border-top:3px solid #A82E30">';
 													$str =$str+'<div class="col s12 ">';
 													$str =$str+'<div class="col s3 ">';
-													$str =$str+'<img class="responsive-img" src="images/user.jpeg"></img>';
+													$str =$str+'<img class="responsive-img" src="images/User.png" style="margin-top:3px"></img>';
 													$str =$str+'</div>';
 													$str =$str+'<div class="col s9 ">';
 													$str =$str+'<div class="col s12 shop-details">Name :<span style="margin-top: 2px;padding-left:4px;color:#a5a5a5;">'+val.name+'</span></div>';
 													$str =$str+'<div class="col s12 shop-details">Address :<span style="margin-top: 2px;padding-left:4px;color:#a5a5a5;">'+val.address+'</span></div>';
-													$str =$str+'<div class="col s12 shop-details"><a href="tel:'+val.mobile+'" class="waves-effect waves-light btn" style="height:35px;width:150px;">Call Now</a></span></div>';
+													$str =$str+'<div class="col s12 ">';
+													$str =$str+'<div class="col s7 shop-details"><a href="tel:'+val.mobile+'" class="waves-effect waves-light btn" style="height:35px;width:100px;background-color:#A82E30;">Call Now</a></span></div>';
+													$str =$str+'</div>';
 													$str =$str+'</div>';
 													$str =$str+'</div>';
 													$str =$str+'</div>';
@@ -572,7 +617,7 @@
 </script>
 <script>
 		$(document).ready(function(){
-			
+			$('.materialboxed').materialbox();
 			localStorage.setItem("id", $id);
 			$(document).on("click",".accept", function(){
 			$id=$(this).attr("id");
@@ -779,7 +824,134 @@
 				
 				
 			});
-</script>	
+</script>
+<script>
+	
+		$(document).on("click",".cuschat", function(){
+		
+			if (typeof(Storage) !== "undefined") {
+				
+				window.location.href="chat.html";
+				} else {
+				$("#localstorage").html("Sorry, your browser does not support Web Storage...");
+				}
+		});
+	
+</script>
+<div id="myModal" class="modal2">
+  <span class="close">×</span>
+  <img class="modal-content2" id="img01">
+ 
+</div>
+<style>
+#myImg {
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+#myImg:hover {opacity: 0.7;}
+
+/* The Modal (background) */
+.modal2 {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    padding-top: 100px; /* Location of the box */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.9); /* Black w/ opacity */
+}
+
+/* Modal Content (image) */
+.modal2-content {
+    margin: auto;
+    display: block;
+    width: 80%;
+    max-width: 700px;
+}
+
+
+/* Add Animation */
+.modal2-content, #caption {    
+    -webkit-animation-name: zoom;
+    -webkit-animation-duration: 0.6s;
+    animation-name: zoom;
+    animation-duration: 0.6s;
+}
+
+@-webkit-keyframes zoom {
+    from {-webkit-transform: scale(0)} 
+    to {-webkit-transform: scale(1)}
+}
+
+@keyframes zoom {
+    from {transform: scale(0.1)} 
+    to {transform: scale(1)}
+}
+
+/* The Close Button */
+.close {
+    position: absolute;
+    top: 15px;
+    right: 35px;
+    color: #f1f1f1;
+    font-size: 40px;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.close:hover,
+.close:focus {
+    color: #bbb;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+/* 100% Image Width on Smaller Screens */
+@media only screen and (max-width: 700px){
+    .modal-content {
+        width: 100%;
+    }
+}
+#img01{
+	width:60%;
+	margin-left:20%;
+	
+}
+</style>
+<script>
+
+$(document).on("click",".imgzoom", function(){
+
+
+$link=$(this).attr("src");
+$("#img01").attr("src",$link);
+
+var modal = document.getElementById('myModal');
+modal.style.display = "block";
+   
+
+
+});
+
+
+</script>
+<script>
+var modal = document.getElementById('myModal');
+window.onclick = function(event) {
+    if (event.target == modal) {
+        modal.style.display = "none";
+    }
+	}
+
+</script>
+
+	
 <script type="text/javascript" src="cordova.js"></script>
 <script type="text/javascript">
         app.initialize();
