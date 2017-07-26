@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0"/>
+  <title>Mobile App</title>
+	<link href="css/materialize.min.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+	<script src="js/jquery-3.2.1.min.js"></script>
+	<script src="js/materialize.min.js"></script>
+	<link rel="stylesheet" href="css/style.css">
+	<link rel="stylesheet" href="icons/css/font-awesome.min.css">
+<link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet"> 
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+</head>
+<style>
+ul,li,div,nav{
+font-family: 'Lato', sans-serif;
+}
+.img-gallery > img{
+width:120px;
+height:120px;
+border-radius:5px;
+float:left;
+padding:10px;
+box-shadow:0 2px 2px 0 rgba(0,0,0,0.14), 0 1px 5px 0 rgba(0,0,0,0.12), 0 3px 1px -2px rgba(0,0,0,0.2);
+margin:3px;
+}
+.imgzoom{
+width:50px;
+}
+</style>
+<body>
+	<div class="navbar-fixed">
+		<nav>
+			<div class="nav-wrapper">
+				<a href="#" class="brand-logo center">CARTway</a>
+			</div>
+		</nav>
+	</div>
+
+  <a href="shop-type.html"><i class="fa fa-angle-left" aria-hidden="true"  style="z-index: 999;position:fixed;top:13px;left:8px;color:#fff;font-size:30px;"></i>
+</a>
+<div class="row card" style="text-align:center;margin:4px;min-height:10px;padding:5px;">
+		<span style="font-size:15px;color:#A82E30;">Unpaid Bills</span>
+	</div>
+	<div class="error">No Data Found OR Check Your Internet Connection</div>
+	<div id="info"></div>
+<script>
+		$(document).ready(function(){
+			
+				 $(".button-collapse").sideNav();
+				 
+						$id=localStorage.getItem("mobile");
+				 
+							$.ajax({
+									type: 'GET',
+									url: 'http://cartway.in/app-work/web-api/public/unpaid-bills',
+									data: {
+										user_id:$id,
+										location:'loaction',
+										category:'category',
+									},
+									dataType: 'jsonp',
+									crossDomain: true,
+									
+							}).done(function(response){
+									console.log(response);
+									$(".error").html("");
+									$.each( response, function( key, val ) {
+												//alert( key+ val.response  );
+												
+												$status=val.response;
+												$str="Error"
+												
+												if($status == $str){
+													$("#info").html("Error Not Data Found");
+												}else{
+												
+													
+													
+													$lastbills=val.lastbills;
+													
+													$.each( $lastbills, function( key, val ) {
+													
+													//alert(val.shop_name);
+													
+													$str='<div class="shop" id="'+val.id+'">';
+													
+													$str =$str+'<div class="row card " style="padding-top:5px;margin:4px;border-top:3px solid #A82E30;">';
+													
+													$str =$str+'<div class="col s12 shop-details">';
+													$str =$str+'<div class="col s12">Shop Name : <span style="color:#a5a5a5">'+val.shop_name+'</span></div>';
+													$str =$str+'<div class="col s12">Total Amount : <span style="color:#a5a5a5">'+val.amount+'</span></div>';
+													$str =$str+'<div class="col s12">Paid Amount : <span style="color:#a5a5a5">'+val.paid_amount+'</span></div>';
+													$str =$str+'<div class="col s12">Remaining Amount : <span style="color:#a5a5a5">'+val.remaning_amount+'</span></div>';
+													
+													$str =$str+'<div class="col s12">Order Date : <span style="color:#a5a5a5">'+val.order_date+'</span></div>';
+													$str =$str+'<div class="col s12">Order Status : <span style="color:#A82E30">'+val.status+'</span></div>';
+													$str =$str+'<div class="col s12 shop-details"><span style="margin-top: 2px;padding-left:4px;color:#000;text-align:center;">Item</span></div>';
+													$str =$str+'<div class="col s12 shop-details"><span style="margin-top: 2px;padding-left:4px;color:#a5a5a5;">'+val.list+'</span></div>';
+													$str =$str+'<div class="col s12 shop-details"><span style="margin-top: 2px;padding-left:4px;color:#a5a5a5;">';
+													var images=val.list_img.split(',');
+													
+													for(var i=1; i<images.length-1; i++){
+													$imgstr="<img class='imgzoom' src='"+images[i]+"'>";
+														//$(".img-gallery").append($imgstr);
+														//alert(images[i]);
+													$str =$str+'<div class="col s12 shop-details" style="width:35px">'+$imgstr+'</div>';
+													}
+													$str =$str+'</span></div>';
+													
+													$str =$str+'</div>';
+													
+								
+													$("body").append($str);
+													
+	
+													
+													
+													
+													
+													
+													
+													
+													});
+													
+												
+												}
+												//$("#info").html("Data Not Found");
+												$('#loading-image').hide();
+												
+											});
+									
+									
+									
+							}).fail(function(error){
+									console.log(error.statusText);
+									$('#loading-image').hide();
+							});
+					
+					
+					
+				
+				
+				  
+						
+		});
+		</script>
+		
+		<script>
+			$(document).on("click",".shop", function(){
+				
+				$id=$(this).attr('id');
+				
+				
+									if (typeof(Storage) !== "undefined") {
+										
+										localStorage.setItem("shop_id", $id);
+										window.location.href="shop-details.html";
+											
+									} else {
+										$("#localstorage").html("Sorry, your browser does not support Web Storage...");
+									}
+									
+				
+				
+				
+			});
+		</script>
+<script>
+		$(document).ready(function(){
+			// Initialize collapse button
+			$(".button-collapse").sideNav();
+			// Initialize collapsible (uncomment the line below if you use the dropdown variation)
+			//$('.collapsible').collapsible();
+			$("#logout").click(function(){
+				localStorage.clear();
+				window.location.replace("login.html");
+			});
+		});
+</script>
+<div id="myModal" class="modal2">
+  <span class="close">×</span>
+  <img class="modal-content2" id="img01">
+ 
+</div>
+<style>
+#myImg {
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+#myImg:hover {opacity: 0.7;}
+
+/* The Modal (background) */
+.modal2 {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    padding-top: 100px; /* Location of the box */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.9); /* Black w/ opacity */
+}
+
+/* Modal Content (image) */
+.modal2-content {
+    margin: auto;
+    display: block;
+    width: 80%;
+    max-width: 700px;
+}
+
+
+/* Add Animation */
+.modal2-content, #caption {    
+    -webkit-animation-name: zoom;
+    -webkit-animation-duration: 0.6s;
+    animation-name: zoom;
+    animation-duration: 0.6s;
+}
+
+@-webkit-keyframes zoom {
+    from {-webkit-transform: scale(0)} 
+    to {-webkit-transform: scale(1)}
+}
+
+@keyframes zoom {
+    from {transform: scale(0.1)} 
+    to {transform: scale(1)}
+}
+
+/* The Close Button */
+.close {
+    position: absolute;
+    top: 15px;
+    right: 35px;
+    color: #f1f1f1;
+    font-size: 40px;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.close:hover,
+.close:focus {
+    color: #bbb;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+/* 100% Image Width on Smaller Screens */
+@media only screen and (max-width: 700px){
+    .modal-content {
+        width: 100%;
+    }
+}
+#img01{
+	width:60%;
+	margin-left:20%;
+	
+}
+</style>
+<script>
+
+$(document).on("click",".imgzoom", function(){
+
+
+$link=$(this).attr("src");
+$("#img01").attr("src",$link);
+
+var modal = document.getElementById('myModal');
+modal.style.display = "block";
+   
+
+
+});
+
+
+</script>
+<script>
+var modal = document.getElementById('myModal');
+window.onclick = function(event) {
+    if (event.target == modal) {
+        modal.style.display = "none";
+    }
+	}
+
+</script>
+<script type="text/javascript" src="cordova.js"></script>
+<script type="text/javascript">
+    app.initialize();
+</script>
+	  
+</body>
+</html>

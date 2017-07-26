@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0"/>
+  <title>Mobile App</title>
+
+  
+	<link href="../css/materialize.min.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+	<script src="../js/jquery-3.2.1.min.js"></script>
+	<script src="../js/materialize.min.js"></script>
+	<link rel="stylesheet" href="../css/style.css">
+	<link rel="stylesheet" href="../icons/css/font-awesome.min.css">
+<link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet"> 
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+</head>
+<body>
+<style>
+body{
+background-color:#eee;
+}
+.row .col {
+    float: left;
+    box-sizing: border-box;
+    padding: 0 .75rem;
+    min-height: 1px;
+    padding: 0px;
+}
+.row {
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 0px;
+}
+.shop-details{
+	  padding: 10px 0px 0px 10px !important;
+}
+.shop-rating{
+padding-top:5px !important;
+}
+.shop-rating i{
+color:green;
+}
+.select-location{
+border-bottom:1px solid #eee;
+border-right:1px solid #eee;
+padding:5px;
+}
+.select-location img{
+width:50px;
+
+}
+.select-location{
+font-size:10px;
+text-align:center;
+}
+nav .brand-logo {
+    position: absolute;
+    color: #fff;
+    display: inline-block;
+    font-size: 15px;
+    padding: 0;
+    white-space: nowrap;
+}
+
+#map {
+        height: 500px;
+        width: 100%;
+       }
+	  ul,li,div,nav{
+font-family: 'Lato', sans-serif;
+}
+.input-field .prefix {
+    position: absolute;
+    width: 0rem;
+    font-size: 2rem;
+    transition: color .2s;
+    padding-top: 13px;
+    
+}
+ </style>
+<div class="navbar-fixed">
+		<nav>
+			<div class="nav-wrapper">
+				<a href="#" class="brand-logo center">CARTway</a>
+			</div>
+		</nav>
+	</div>
+	<div class="row" style="margin:2px">
+	<div class=" col s12">
+ <form  style="position:absolute;top:60px;z-index:10;background:#fff;width:100%;" action="address-details.html">
+      <div class="row">
+        <div class="input-field col s9">
+			<i class="material-icons prefix">location_on</i>
+			<input  id="search-location" type="text" class="validate controls" Placeholder="Pin you Shop location" required>
+			<label for="location">Pin you Shop location</label>
+        </div>
+		  <div class="input-field col s3">
+       	 <button class="btn waves-effect waves-light" type="submit" name="action" style="width: 70px;">go</button>
+		 </div>
+	  </div>
+</form>
+</div>
+</div>
+  <div id="map"></div>
+
+
+<script>
+      function initMap() {
+        var uluru = {lat: 28.6415, lng: 77.3714};
+        var map = new google.maps.Map(document.getElementById('map'), {
+          zoom: 10,
+          center: uluru
+        });
+        var marker = new google.maps.Marker({
+          position: uluru,
+          map: map
+        });
+		
+		// Create the search box and link it to the UI element.
+        var input = document.getElementById('search-location');
+        var searchBox = new google.maps.places.SearchBox(input);
+       
+		
+		        // Bias the SearchBox results towards current map's viewport.
+        map.addListener('bounds_changed', function() {
+          searchBox.setBounds(map.getBounds());
+        });
+
+        var markers = [];
+        // Listen for the event fired when the user selects a prediction and retrieve
+        // more details for that place.
+        searchBox.addListener('places_changed', function() {
+          var places = searchBox.getPlaces();
+
+          if (places.length == 0) {
+            return;
+          }
+
+          // Clear out the old markers.
+          markers.forEach(function(marker) {
+            marker.setMap(null);
+          });
+          markers = [];
+
+          // For each place, get the icon, name and location.
+          var bounds = new google.maps.LatLngBounds();
+          places.forEach(function(place) {
+            if (!place.geometry) {
+              console.log("Returned place contains no geometry");
+              return;
+            }
+            
+	
+            // Create a marker for each place.
+            markers.push(new google.maps.Marker({
+              map: map,
+             title: place.name,
+              position: place.geometry.location
+            }));
+
+            if (place.geometry.viewport) {
+              // Only geocodes have viewport.
+              bounds.union(place.geometry.viewport);
+            } else {
+              bounds.extend(place.geometry.location);
+            }
+          });
+          map.fitBounds(bounds);
+        });
+
+
+
+		
+      }
+</script>	
+<script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAE5f8nvcgndanDyr0Sawp8De82en_KngE&callback=initMap&libraries=places">
+    </script>  
+
+	  
+	  
+<script type="text/javascript" src="cordova.js"></script>
+<script type="text/javascript">
+        app.initialize();
+</script>
+	  
+</body>
+</html>

@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0"/>
+	<title>Mobile App</title>
+	<link href="css/materialize.min.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+	<script src="js/jquery-3.2.1.min.js"></script>
+	<script src="js/materialize.min.js"></script>
+	<link rel="stylesheet" href="css/style.css">
+	<link rel="stylesheet" href="icons/css/font-awesome.min.css">
+	<link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+</head>
+	<body>
+		<div class="navbar-fixed">
+			<nav>
+				<div class="nav-wrapper">
+					<a href="#" class="brand-logo center">CARTway</a>
+					
+        <a href="shop-details.html" class="right" style="padding-right:10px;">Shop Details</a>
+        
+      
+				</div>
+			</nav>
+		</div>
+<style>
+.carousel {
+    margin-top: -75px;
+	}
+.btn{
+	width:100%;
+	font-size: 18px;
+}
+
+.chat_window {
+  position: absolute;
+  width: calc(100% - 20px);
+  max-width: 800px;
+  height: 500px;
+  border-radius: 10px;
+  background-color: #fff;
+  left: 50%;
+  top: 50%;
+  transform: translateX(-50%) translateY(-50%);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+  background-color: #f8f8f8;
+  overflow: hidden;
+}
+
+.top_menu {
+  background-color: #fff;
+  width: 100%;
+  padding: 20px 0 15px;
+  box-shadow: 0 1px 30px rgba(0, 0, 0, 0.1);
+}
+.top_menu .buttons {
+  margin: 3px 0 0 20px;
+  position: absolute;
+}
+.top_menu .buttons .button {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  display: inline-block;
+  margin-right: 10px;
+  position: relative;
+}
+.top_menu .buttons .button.close {
+  background-color: #f5886e;
+}
+.top_menu .buttons .button.minimize {
+  background-color: #fdbf68;
+}
+.top_menu .buttons .button.maximize {
+  background-color: #a3d063;
+}
+.top_menu .title {
+  text-align: center;
+  color: #bcbdc0;
+  font-size: 20px;
+}
+
+.messages {
+  position: relative;
+  list-style: none;
+  padding: 20px 10px 0 10px;
+  margin: 0;
+  height: 347px;
+  overflow: scroll;
+}
+.messages .message {
+  clear: both;
+  overflow: hidden;
+  margin-bottom: 20px;
+  transition: all 0.5s linear;
+  opacity: 0;
+}
+.messages .message.left .avatar {
+  background-color: #f5886e;
+  float: left;
+}
+.messages .message.left .text_wrapper {
+  background-color: #ffe6cb;
+  margin-left: 20px;
+}
+.messages .message.left .text_wrapper::after, .messages .message.left .text_wrapper::before {
+  right: 100%;
+  border-right-color: #ffe6cb;
+}
+.messages .message.left .text {
+  color: #c48843;
+}
+.messages .message.right .avatar {
+  background-color: #fdbf68;
+  float: right;
+}
+.messages .message.right .text_wrapper {
+  background-color: #c7eafc;
+  margin-right: 20px;
+  float: right;
+}
+.messages .message.right .text_wrapper::after, .messages .message.right .text_wrapper::before {
+  left: 100%;
+  border-left-color: #c7eafc;
+}
+.messages .message.right .text {
+  color: #45829b;
+}
+.messages .message.appeared {
+  opacity: 1;
+}
+.messages .message .avatar {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  display: inline-block;
+}
+.messages .message .text_wrapper {
+  display: inline-block;
+  padding: 20px;
+  border-radius: 6px;
+  width: calc(100% - 85px);
+  min-width: 100px;
+  position: relative;
+}
+.messages .message .text_wrapper::after, .messages .message .text_wrapper:before {
+  top: 18px;
+  border: solid transparent;
+  content: " ";
+  height: 0;
+  width: 0;
+  position: absolute;
+  pointer-events: none;
+}
+.messages .message .text_wrapper::after {
+  border-width: 13px;
+  margin-top: 0px;
+}
+.messages .message .text_wrapper::before {
+  border-width: 15px;
+  margin-top: -2px;
+}
+.messages .message .text_wrapper .text {
+  font-size: 18px;
+  font-weight: 300;
+}
+
+.bottom_wrapper {
+  position: relative;
+  width: 100%;
+  background-color: #fff;
+  padding: 20px 20px;
+  position: absolute;
+  bottom: 0;
+}
+.bottom_wrapper .message_input_wrapper {
+  display: inline-block;
+  height: 50px;
+  border-radius: 25px;
+  border: 1px solid #bcbdc0;
+  width: calc(100% - 160px);
+  position: relative;
+  padding: 0 20px;
+}
+.bottom_wrapper .message_input_wrapper .message_input {
+  border: none;
+  height: 100%;
+  box-sizing: border-box;
+  width: calc(100% - 40px);
+  position: absolute;
+  outline-width: 0;
+  color: gray;
+}
+.bottom_wrapper .send_message {
+  width: 140px;
+  height: 50px;
+  display: inline-block;
+  border-radius: 50px;
+  background-color: #a3d063;
+  border: 2px solid #a3d063;
+  color: #fff;
+  cursor: pointer;
+  transition: all 0.2s linear;
+  text-align: center;
+  float: right;
+}
+.bottom_wrapper .send_message:hover {
+  color: #a3d063;
+  background-color: #fff;
+}
+.bottom_wrapper .send_message .text {
+  font-size: 18px;
+  font-weight: 300;
+  display: inline-block;
+  line-height: 48px;
+}
+
+.message_template {
+  display: none;
+}
+.chip {
+    font-size: 13px;
+    font-weight: 500;
+    color: rgba(0,0,0,0.6);
+    line-height: 12px;
+}
+
+</style>
+<a href="get-chat-list-2.html" data-activates="slide-out" >
+<i class="fa fa-angle-left" aria-hidden="true"  style="z-index: 999;position:fixed;top:13px;left:8px;color:#fff;font-size:30px;"></i>
+</a>
+<div class="row" style="margin-bottom:75px;margin-top:10px;margin-left:5px;margin-right:5px;">
+
+<div class="response" >
+	</div>
+</div>
+<div class="card row" style="margin:4px 4px 0px 0px;padding:3px;position:fixed;bottom:0px;width:100%;">    
+	
+	
+	<form class="col s12">
+		
+			<div class="input-field col s9" style="margin-top:0px">
+				<input id="chat" type="text"  class="validate"  placeholder="Type a message" style="margin-top:15px;margin-bottom:0px;border:1px solid #eee" required>
+				
+			</div>
+			<div class="input-field col s2 offset-s1">
+				<button type="button" class="waves-effect waves-light btn chatbtnclick" style="margin-top:0px;width: 100%;padding:0 1rem;background-color:#A82E30;"><i class="material-icons">send</i></button>
+			</div>
+	</form>	
+</div>	
+<!--<div class="card row" style="margin:4px;padding:5px;"> 
+	<h5>Chat Feature Coming Soon</h5>
+</div>--> 
+
+<script>
+
+	$(document).ready(function(){
+	
+	if (typeof(Storage) !== "undefined") {
+	
+	
+		$shopid=localStorage.getItem("shop_id");
+		$mob=localStorage.getItem("mobile");
+		$shop=localStorage.getItem("shop_name");
+		
+		
+		
+					$.ajax({
+									type: 'GET',
+									url: 'http://cartway.in/app-work/web-api/public/get-chat',
+									data: {
+										customer_id:$mob,
+										shopkeeper_id:$shopid,
+										
+									},
+									dataType: 'jsonp',
+									crossDomain: true,
+									
+							}).done(function(response){
+									console.log(response);
+									
+									$.each( response, function( key, val ) {
+												//alert( key+ val.response  );
+												$status=val.response;
+												$str="Error";
+												
+												if($status == $str){
+													$("#info").html("Error Not Data Found");
+												}else{
+												
+													$shoplist=val.list;
+													
+													$.each( $shoplist, function( key, val2 ) {
+													
+														$customer=$mob;
+														
+													if(val2.sender==$customer){
+													
+														$str3='<div class="row"  style="float:right;">';
+														
+														$str3 =$str3+'<div class="chip" style="height: auto;padding-top:5px;text-align:right;background-color:green;color:#fff;">';
+														$str3 =$str3+'<div class="col s12" style="text-align: justify;">'+val2.message+'<br><span style="color:#eee;font-size:8px;">'+val2.date+'</span></div>';
+														
+														$str3 =$str3+'</div>';
+														$str3 =$str3+'</div>';
+														$str3 =$str3+'<div style="clear:both"></div>';
+														$(".response").append($str3);
+													
+													}else{
+													
+														
+														$str4='<div class="row">';
+														$str4 =$str4+'<div class="chip " style="padding-top:5px;background-color:#A82E30;color:#fff;text-align:left;">';
+														$str4 =$str4+'<div class="col s12" style="text-align: justify;">'+val2.message+'<br><span style="color:#f2f2f2;font-size:8px;">'+val2.date+'</span></div>';
+														$str4 =$str4+'</div>';
+														$str4 =$str4+'</div>';
+														
+														
+														$(".response").append($str4);
+													
+													
+													}
+													
+													
+													});
+												}
+												
+												$('#loading-image').hide();
+											});
+											
+											
+											
+							}).fail(function(error){
+									console.log(error.statusText);
+									$('#loading-image').hide();
+							});
+		
+
+		$(".chatbtnclick").click(function(){
+		
+		
+      
+		
+		$chat=$("#chat").val();
+		$("#chat").val("");
+		
+		$.ajax({
+									type: 'GET',
+									url: 'http://cartway.in/app-work/web-api/public/insert-chat',
+									data: {
+										customer_id:$mob,
+										shopkeeper_id:$shopid,
+										chat:$chat,
+										shop:$shop,
+									},
+									dataType: 'jsonp',
+									crossDomain: true,
+									
+							}).done(function(response){
+									console.log(response);
+									
+									$.each( response, function( key, val ) {
+												//alert( key+ val.response  );
+												$status=val.response;
+												$str="Error";
+												
+												if($status == $str){
+													$("#info").html("Error Not Data Found");
+												}else{
+												
+													
+												
+													$str2="";
+													
+													$str2 =$str2+'<div class="row"  style="text-align:right;">';
+													$str2 =$str2+'<div class="chip" style="height: auto;padding-top:5px;background-color:green;color:#fff;">';
+													$str2 =$str2+'<div class="col s12 text" style="text-align: justify;">'+val.message+'<br><span style="color:#eee;font-size:8px;">'+val.date+'</span></div>';
+													$str2 =$str2+'</div>';
+													$str2 =$str2+'</div>';
+													
+												
+												$(".response").append($str2);
+												
+													
+												
+												}
+												
+												$('#loading-image').hide();
+											});
+											
+											 window.scrollBy(0, 150);
+											
+											
+							}).fail(function(error){
+									console.log(error.statusText);
+									$('#loading-image').hide();
+							});
+		
+						
+	});
+	
+	
+	
+	
+	 var source = new EventSource("http://cartway.in/fileupload/notification/notification.php?customer_id='"+$mob+"'&shopkeeper_id='"+$shopid+"'");
+    source.onmessage = function(event) {
+       // document.getElementById("result").innerHTML += event.data + "<br>";
+		
+			$str5="";
+			$str5 =$str5+'<div class="row" style="float:left;">';
+			$str5 =$str5+'<div class="chip" style="height: auto;padding:10px;background-color:#A82E30;color:#fff;">';
+			$str5 =$str5+'<div class="col s12 text" style="text-align: justify;">'+event.data+'<br></div>';
+			$str5 =$str5+'</div>';
+			$str5 =$str5+'</div>';
+			$str5 =$str5+'<div style="clear:both"></div>';										
+		 $(".response").append($str5);
+		 //var $toastContent = $('<span>'+event.data+'</span>');
+		//Materialize.toast($toastContent, 2000);
+		
+		
+    };
+	
+	
+	
+	} else {
+							$("#localstorage").html("Sorry, your browser does not support Web Storage...");
+						}
+	
+	
+});
+</script>
+<script type="text/javascript" src="cordova.js"></script>
+<script type="text/javascript">
+        app.initialize();
+</script>
+	  
+</body>
+</html>

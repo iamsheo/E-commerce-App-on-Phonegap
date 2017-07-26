@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0"/>
+  <title>Cartway App</title>
+
+  
+	<link href="css/materialize.min.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+	<script src="js/jquery-3.2.1.min.js"></script>
+	<script src="js/materialize.min.js"></script>
+	<link rel="stylesheet" href="css/style.css">
+	<link rel="stylesheet" href="icons/css/font-awesome.min.css">
+	<link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet"> 
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+</head>
+<style>
+ul,li,div,nav{
+font-family: 'Lato', sans-serif;
+}
+.input-field .prefix {
+    position: absolute;
+    width: 0rem;
+    font-size: 2rem;
+    transition: color .2s;
+    padding-top: 13px;
+    
+}
+</style>
+<body>
+
+ <div class="navbar-fixed">
+		<nav>
+			<div class="nav-wrapper">
+				<a href="#" class="brand-logo center">CARTway</a>
+			</div>
+		</nav>
+	</div>
+
+
+
+
+	<div class="row card" style="margin:4px;">
+	<br>
+	
+	<div class="col s10 offset-s1" style="padding:15px;margin-bottom:40px;text-align:center;">
+	<img src="images/logo.png" style="width:155px;"></img>
+	<p style="font-weight:600;text-align:center;">Please add your details </p>
+	<hr style="border: 1px solid #eee;">
+	
+		<form action="shop-type.html">
+			<div class="input-field col s12">
+				<i class="fa fa-home prefix" aria-hidden="true"></i>
+
+			  <input id="house" type="text" class="validate" required>
+			  <label for="house">House No.</label>
+			</div>
+			<div class="input-field col s12">
+			<i class="fa fa-building prefix" aria-hidden="true"></i>
+
+			
+			  <input id="block" type="text" class="validate" required>
+			  <label for="block">Block/Society/Appartment</label>
+			</div>
+			<div class="input-field col s12">
+			<i class="fa fa-copyright prefix" aria-hidden="true"></i>
+			  <input id="location" type="text" class="validate" required>
+			  <label for="location">City</label>
+			</div>
+			
+			 <button class="btn waves-effect waves-light" type="button" id="submit" style="background-color:#A82E30">Submit
+				
+			  </button>
+		</form>
+		<br>
+		<div id="info" style="color:red;"></div>
+		<br>
+		<div id="localstorage" style="color:red;"></div>
+		
+		
+	</div>
+	
+	<br><br><br>
+	<img src="images/bg.png" class="responsive-img " >
+	</div>
+	
+	  
+	
+<script>
+		$(document).ready(function(){
+		
+		$name="";;
+		$mobile="";;
+		
+				
+									// Check browser support
+									if (typeof(Storage) !== "undefined") {
+										
+										$name=localStorage.getItem("name");
+										$mobile=localStorage.getItem("mobile");
+										
+										
+										
+										
+									} else {
+										$("#localstorage").html("Sorry, your browser does not support Web Storage...");
+									}
+				  
+				  
+		
+			
+				$("#submit").click(function(){
+				
+					$house=$("#house").val();
+					$block=$("#block").val();
+					$location=$("#location").val();
+				
+					$address=$house+",  "+$block+", "+$location;
+					
+					
+					if(($location.length <2) && ($house.length <2) && ($block.length <2) )
+						{
+							
+							$("#info").html("Please fill the details");
+						}
+						else
+						{
+							
+						
+								$.ajax({
+									type: 'GET',
+									url: 'http://cartway.in/app-work/web-api/public/update-address',
+									data: {
+										house: $house,
+										block: $block,
+										location: $location,
+										address: $address, 
+										mobile: $mobile,
+									},
+									dataType: 'jsonp',
+									crossDomain: true,
+									
+							}).done(function(response){
+									console.log(response);
+									
+									$.each( response, function( key, val ) {
+												//alert( key+ val.response  );
+												
+												$status=val.response;
+												$str="Error"
+												
+												if($status == $str){
+													$("#info").html("Please Enter Valid OTP");
+												}else{
+												
+													localStorage.setItem("user_status", "address_update");
+													$("#info").html("Verified");
+													window.location.replace("shop-type.html");
+												
+												}
+											});
+									
+									
+									
+							}).fail(function(error){
+									console.log(error.statusText);
+							});
+					
+					
+					}
+				
+				});
+					
+				  
+				  
+				  
+				  
+						
+		});
+		</script>	  
+	  
+		
+	  
+	  
+<script type="text/javascript" src="cordova.js"></script>
+<script type="text/javascript">
+        app.initialize();
+</script>
+	  
+</body>
+</html>

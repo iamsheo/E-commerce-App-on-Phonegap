@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0"/>
+	<title>Mobile App</title>
+	<link href="css/materialize.min.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+	<script src="js/jquery-3.2.1.min.js"></script>
+	<script src="js/materialize.min.js"></script>
+	<link rel="stylesheet" href="css/style.css">
+	<link rel="stylesheet" href="icons/css/font-awesome.min.css">
+	<link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+</head>
+	<body>
+		<div class="navbar-fixed">
+			<nav>
+				<div class="nav-wrapper">
+					<a href="#" class="brand-logo center">CARTway</a>
+				</div>
+			</nav>
+		</div>
+<style>
+.carousel {
+    margin-top: -75px;
+	}
+.btn{
+	width:100%;
+	font-size: 18px;
+}
+.pic{
+	width:200px;
+	height:120px;
+}
+.zoom{
+	position: absolute;
+	width:0px;
+	-webkit-transition:width 0.3s linear 0s;
+	transition:width 0.3s linear 0s;
+	z-index:10;
+}
+.pic:hover + .zoom{
+	width:400px;
+
+}
+.img-gallery{
+	min-height:150px;
+}
+.img-gallery > img{
+width:120px;
+height:120px;
+border-radius:5px;
+float:left;
+padding:10px;
+box-shadow:0 2px 2px 0 rgba(0,0,0,0.14), 0 1px 5px 0 rgba(0,0,0,0.12), 0 3px 1px -2px rgba(0,0,0,0.2);
+margin:3px;
+}
+</style>
+<a href="shop-list.html" data-activates="slide-out" >
+<i class="fa fa-angle-left" aria-hidden="true"  style="z-index: 999;position:fixed;top:13px;left:8px;color:#fff;font-size:30px;"></i>
+</a>
+<div class="row">
+	<div class="col s12" style="padding:0px 5px 0px 5px">
+		<div class="card" style="padding:0px;">
+			<div class="row" style="margin-bottom:2px;" >
+					<div class="col s3">
+						<img class="responsive-img" src="images/male.png" style="margin:4px;border:1px solid #f2f2f2;padding:3px;"></img>
+					</div>
+					<div class="col s9" style="padding:10px;">
+						<span class="shop_name" style="font-size:18px;"></span><br>
+						<span class="shop_address"></span>
+					</div>
+			</div>
+			<div class="row" style="text-align:center;">
+				<div class="col s9" style="padding:3px;">
+					<a href="tel:" id="mobile" class="waves-effect waves-light btn"  style="background-color:#A82E30;height:35px"><i class="fa fa-phone" aria-hidden="true"></i>
+ &nbsp;Call Now</a>
+				</div>
+				<div class="col s3" style="padding:3px;">
+					<a class="waves-effect waves-light btn chatbtn" style="background-color:#A82E30;height:35px"><i class="fa fa-comments" aria-hidden="true"></i></a>
+				</div>
+			</div>
+			<div class="row" style="font-size:18px;">
+				
+				<p class="center">Shop Images</p>
+					<div class="img-gallery" style="overflow:auto">
+								
+					</div>
+					<div style="clear:both"></div>
+			</div>
+			<div class="row" style="font-size:18px;">
+				<hr style="border-color:#eee;">
+				<p>Details</p>
+					<table class="bordered"style="font-size:15px;">
+						<thead>
+							<tr>
+								<th>Name</th>
+								<th>Details</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>Shop Name</td>
+								<td class="shop_name"><span  style="font-size:18px;"></span></td>
+							</tr>
+							<tr>
+								<td>Category</td>
+								<td class="shop_category"></td>
+							</tr>
+							<tr>
+								<td>Owner</td>
+								<td class="user_name"></td>
+							</tr>
+							<!--<tr>
+								<td>Mob. No.</td>
+								<td class="shop_mobile"></td>
+							</tr>-->
+							<tr>
+								<td>Alternative Number</td>
+								<td class="anumber"></td>
+							</tr>
+							<tr>
+								<td>Address</td>
+								<td class="shop_address"></td>
+							</tr>
+							<tr>
+								<td>Location</td>
+								<td class="shop_google_location"></td>
+							</tr>
+							<tr>
+								<td>Description</td>
+								<td class="shop_description">
+								</td>
+							</tr>
+							<tr>
+								<td>Shipping</td>
+								<td>Free Home Delivery Min Order <span class="shop_shipping"></span></td>
+							</tr>
+							<tr>
+								<td>Offer</td>
+								<td class="offer"></td>
+							</tr>
+							<tr>
+								<td>Rating</td>
+								<td > <span class="shop_rating"> </span><span class="shop-rating"><i class="fa fa-star" aria-hidden="true" ></i></span>
+								</td>
+							</tr>
+						</tbody>
+			  </table>
+           </div>
+		</div>
+    </div>
+	<img src="images/bg.png" class="responsive-img " >
+</div>	
+	 
+<div style="position:fixed;bottom:0px;width:100%;">
+	<a href="make-list.html" class="waves-effect waves-light btn btn-small" style="background:green;color:#fff;border:green">Order Now</a>
+</div>  
+
+<script>
+		$(document).ready(function(){
+			$(".button-collapse").sideNav();
+				$('.carousel').carousel();
+					if (typeof(Storage) !== "undefined") {
+							$id=localStorage.getItem("shop_id");
+							$shop_name=localStorage.getItem("shop_name");
+							
+							
+							$.ajax({
+									type: 'GET',
+									url: 'http://cartway.in/app-work/web-api/public/shop-details',
+									data: {
+										shop_id:$id,
+										
+									},
+									dataType: 'jsonp',
+									crossDomain: true,
+									
+							}).done(function(response){
+									console.log(response);
+									
+									$.each( response, function( key, val ) {
+												//alert( key+ val.response  );
+												
+												$status=val.response;
+												$str="Error"
+												
+												if($status == $str){
+													$("#info").html("Error Not Data Found");
+												}else{
+													$shopdetails=val.shopdetails;
+													$.each( $shopdetails, function( key, val ) {
+													$(".shop_name").html(val.shop_name);
+													$(".mobile").html(val.mobile);
+													$("#mobile").attr("href","tel:"+val.mobile+"");
+													$(".shop_address").html(val.shop_address);
+													$(".shop_category").html(val.shop_category);
+													$(".user_name").html(val.user_name);
+													$(".shop_mobile").html(val.shop_mobile);
+													$(".anumber").html(val.anumber);
+													$(".shop_google_location").html(val.shop_google_location);
+													$(".shop_description").html(val.shop_description);
+													$(".shop_shipping").html(val.shop_shipping);
+													$(".shop_rating").html(val.shop_rating);
+													$(".offer").html(val.shop_offers);
+													var images=val.shop_images.split(',');
+													
+													for(var i=0; i<images.length-1; i++){
+													$imgstr="<img class='imgzoom' src='"+images[i]+"'>";
+														$(".img-gallery").append($imgstr);
+														//alert(images[i]);
+													
+													}
+												});
+												}
+												
+												$('#loading-image').hide();
+											});
+											
+											
+											
+							}).fail(function(error){
+									console.log(error.statusText);
+									$('#loading-image').hide();
+							});
+					} else {
+							$("#localstorage").html("Sorry, your browser does not support Web Storage...");
+						}
+		});
+</script>
+<script>
+	$(document).ready(function(){
+		$(".chatbtn").click(function(){
+			if (typeof(Storage) !== "undefined") {
+				//localStorage.setItem("shop_id", $id);
+				//localStorage.setItem("shop_name", $shop_name);
+				window.location.href="chat.html";
+				} else {
+				$("#localstorage").html("Sorry, your browser does not support Web Storage...");
+				}
+		});
+	});
+</script>	
+<div id="myModal" class="modal2">
+  <span class="close">×</span>
+  <img class="modal-content2" id="img01">
+ 
+</div>
+<style>
+#myImg {
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+#myImg:hover {opacity: 0.7;}
+
+/* The Modal (background) */
+.modal2 {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    padding-top: 100px; /* Location of the box */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.9); /* Black w/ opacity */
+}
+
+/* Modal Content (image) */
+.modal2-content {
+    margin: auto;
+    display: block;
+    width: 80%;
+    max-width: 700px;
+}
+
+
+/* Add Animation */
+.modal2-content, #caption {    
+    -webkit-animation-name: zoom;
+    -webkit-animation-duration: 0.6s;
+    animation-name: zoom;
+    animation-duration: 0.6s;
+}
+
+@-webkit-keyframes zoom {
+    from {-webkit-transform: scale(0)} 
+    to {-webkit-transform: scale(1)}
+}
+
+@keyframes zoom {
+    from {transform: scale(0.1)} 
+    to {transform: scale(1)}
+}
+
+/* The Close Button */
+.close {
+    position: absolute;
+    top: 15px;
+    right: 35px;
+    color: #f1f1f1;
+    font-size: 40px;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.close:hover,
+.close:focus {
+    color: #bbb;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+/* 100% Image Width on Smaller Screens */
+@media only screen and (max-width: 700px){
+    .modal-content {
+        width: 100%;
+    }
+}
+#img01{
+	width:60%;
+	margin-left:20%;
+	
+}
+</style>
+<script>
+
+$(document).on("click",".imgzoom", function(){
+
+
+$link=$(this).attr("src");
+$("#img01").attr("src",$link);
+
+var modal = document.getElementById('myModal');
+modal.style.display = "block";
+   
+
+
+});
+
+
+</script>
+<script>
+var modal = document.getElementById('myModal');
+window.onclick = function(event) {
+    if (event.target == modal) {
+        modal.style.display = "none";
+    }
+	}
+
+</script>
+<script type="text/javascript" src="cordova.js"></script>
+<script type="text/javascript">
+        app.initialize();
+</script>
+	  
+</body>
+</html>

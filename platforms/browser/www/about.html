@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0"/>
+  <title>Mobile App</title>
+	<link href="css/materialize.min.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+	<script src="js/jquery-3.2.1.min.js"></script>
+	<script src="js/materialize.min.js"></script>
+	<link rel="stylesheet" href="css/style.css">
+	<link rel="stylesheet" href="icons/css/font-awesome.min.css">
+<link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet"> 
+</head>
+<style>
+ul,li,div,nav{
+font-family: 'Lato', sans-serif;
+}
+</style>
+<body>
+	<div class="navbar-fixed">
+		<nav>
+			<div class="nav-wrapper">
+				<a href="#" class="brand-logo center">Cartway</a>
+			</div>
+		</nav>
+	</div>
+
+<a href="shop-type.html"><i class="fa fa-angle-left" aria-hidden="true"  style="z-index: 999;position:fixed;top:13px;left:8px;color:#fff;font-size:30px;"></i>
+</a>
+<div class="row card" style="margin:4px;min-height:100px;padding:5px;">
+		<p style="font-size:19px;color:#A82E30;text-align:center;margin:0px;">About App</p>
+		<p align="justify" style="margin:2px;">Cartway is the first ever app to bring your local known shops in your mobile
+It’s a one stop solution of your daily basic needs
+You may search, call and chat with your known shopkeepers by staying home
+Upload or make items list and send to your nearest shopkeeper get your order at
+your doorstep whenever you want to receive.</p>
+<p style="font-size:19px;color:#A82E30;text-align:center;margin:0px;">Description</p>
+<p align="justify" style="margin:2px;">Make your lifestyle better and smart by changing your way of dealing with your
+local nearby shops.</p>
+<p align="justify" style="margin:2px;">Order food in advance at your nearest restaurant and save time by Cartway app
+If you don’t find any shop nearby you, Just wait! Shops are registering with us
+You will find your known shop very soon.</p>
+<p align="justify" style="margin:2px;">Check availability or prices of products to your shopkeepers,ask and order at your
+near by shop and get you order at your doorstep just in few minutes
+You can check your last bills in Cartway app.</p>
+<p align="justify" style="margin:2px;">Simply Find your Known Grocery store, Restaurant, Bakery,Medical store and
+meat shop nearby you</p>
+<p align="justify" style="margin:2px;">If you running short on money??</p>
+<p align="justify" style="margin:2px;">No need to worry!! You can ask your shopkeeper to pay later</p>
+<p align="justify" style="margin:2px;">ORDER NOW PAY LATER!! EASY RETURN AND REPLACEMENT</p>
+</div>
+
+<script>
+		$(document).ready(function(){
+			// Initialize collapse button
+			$(".button-collapse").sideNav();
+			// Initialize collapsible (uncomment the line below if you use the dropdown variation)
+			//$('.collapsible').collapsible();
+			$("#logout").click(function(){
+				localStorage.clear();
+				window.location.replace("login.html");
+			});
+		});
+</script>
+<script type="text/javascript" src="cordova.js"></script>
+<script type="text/javascript">
+    app.initialize();
+</script>
+	  
+</body>
+</html>

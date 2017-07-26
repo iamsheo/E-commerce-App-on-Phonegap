@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0"/>
+  <title>Mobile App</title>
+
+  
+	<link href="css/materialize.min.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+	<script src="js/jquery-3.2.1.min.js"></script>
+	<script src="js/materialize.min.js"></script>
+	<link rel="stylesheet" href="css/style.css">
+	<link rel="stylesheet" href="icons/css/font-awesome.min.css">
+	<script src="js/jquery-uploadPreview.min.js"></script>
+	<link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
+</head>
+<body>
+
+ <div class="navbar-fixed">
+		<nav>
+			<div class="nav-wrapper">
+				<a href="#" class="brand-logo center">CARTway</a>
+			</div>
+		</nav>
+	</div>
+
+<style>
+.card {
+    position: relative;
+    background-color: #fff;
+    transition: box-shadow .25s;
+    border-radius: 2px;
+    margin: 0px;
+    margin-bottom: 5px;
+}
+
+</style>
+
+<ul id="slide-out" class="side-nav ">
+    <li><div class="userView">
+		<div class="background" style="background:#A82E30"></div>
+			<a href="#!user"><img class="circle" src="images/user.jpeg"></a>
+			<a href="#!name"><span class="white-text name">Sheo Shankar</span></a>
+			<a href="#!email"><span class="white-text email">sheointime@gmail.com</span></a>
+		</div>
+	</li>
+	<li><a class="waves-effect"  href="shop-type.html"><i class="fa fa-home" aria-hidden="true" style="color:#A82E30;"></i>Home</a></li>
+    <li><a class="waves-effect"  href="shop-type.html"><i class="fa fa-shopping-cart" aria-hidden="true" style="color:#A82E30;"></i>Shop Now</a></li>
+	<li><a class="waves-effect"  href="#!"><i class="fa fa-list" aria-hidden="true" style="color:#A82E30;"></i>Fav Shop</a></li>
+    <li><a class="waves-effect"  href="#!"><i class="fa fa-inr" aria-hidden="true" style="color:#A82E30;"></i>Last Bills</a></li>
+    <li><a class="waves-effect"  href="#"><i class="fa fa-times" aria-hidden="true" style="color:#A82E30;"></i>Unpaid Bills</a></li>
+	<li><a class="waves-effect"  id="logout"><i class="fa fa-sign-out" aria-hidden="true" style="color:#A82E30;"></i>Log Out</a></li>
+	<li><div class="divider"></div></li>
+	<li><a class="waves-effect"  href="#!"><i class="fa fa-info-circle" aria-hidden="true" style="color:#A82E30;"></i>About App</a></li>
+	<li><a class="waves-effect"  href="#!"><i class="fa fa-user-secret" aria-hidden="true" style="color:#A82E30;"></i>Privacy Policy </a></li>
+	<li><a class="waves-effect"  href="#!"><i class="fa fa-user-circle-o" aria-hidden="true" style="color:#A82E30;"></i>Terms of use</a></li>
+</ul>
+  <a href="#" data-activates="slide-out" class="button-collapse"><i class="fa fa-bars" aria-hidden="true" style="position:absolute;top:18px;left:8px;color:#fff;font-size:23px;"></i></a>
+
+  <style>
+.product-list li{
+
+border-bottom:1px solid #eee;
+padding:10px;
+}
+</style>
+	<div class="row" style="padding:5px 5px 0px 5px;margin-bottom:2px;">
+		<div class="col s12" style="text-align:center;">
+			<div class="card row" style="padding:10px;text-align:center;" >
+			<form enctype="multipart/form-data">
+			<div id="image-preview-1" class="image-preview">
+					<label for="image-upload-1" id="image-label-1" >Upload Item List</label>
+					<input type="file" name="image" id="image-upload-1" />
+			</div>
+			<br>
+			<input type="hidden" name="customer_id" id="customer_id" value=""/>
+			<input type="hidden" name="shopkeeper_id" id="shopkeeper_id" value=""/>
+			<a class="waves-effect waves-light btn" id="submit"> Upload <i class="fa fa-cloud-upload" aria-hidden="true"></i>
+</a>
+			</form>
+			</div>	
+			
+		</div>
+		
+		<div class="card col s10 offset-s1" style="text-align:center;">
+		
+		<br><br>
+
+			<a href="make-list.html"><img src="images/make-list.svg" style="width:40px;"></img><h6>Create Item List</h6></a>
+		</div>
+		</div>
+	</div>
+
+	  
+	  
+	  
+	  
+		<script>
+		$(document).ready(function(){
+			
+				 $(".button-collapse").sideNav();
+				  
+				  
+				  	if (typeof(Storage) !== "undefined") {
+										
+									$shopkeeper_id=localStorage.getItem("shop_id");
+									$customer_id=localStorage.getItem("mobile");
+									
+									
+									$("#submit").click(function(){
+									
+									$("#shopkeeper_id").val($shopkeeper_id);
+									$("#customer_id").val($customer_id);
+									
+									
+									$.ajax({
+									type: 'GET',
+									url: 'http://cartway.in/app-work/web-api/public/order-upload-imgage',
+									data: {
+									customer_id:$customer_id,
+									shopkeeper_id:$shopkeeper_id,
+									},
+									dataType: 'jsonp',
+									crossDomain: true,
+									
+							}).done(function(response){
+									$.each( response, function( key, val ) {
+												//alert( key+ val.response  );
+												
+												$status=val.response;
+												$str="Error"
+												
+												if($status == $str){
+													$("#info").html("Error Not Data Found");
+												}else{
+												
+													
+													localStorage.setItem("order_id",val.order_id);
+													
+													window.location.replace("pickup-time.html");
+													
+													
+													
+												
+												}
+												
+									});
+									
+									
+									
+							}).fail(function(error){
+									console.log(error.statusText);
+									$('#loading-image').hide();
+							});
+					
+					
+									
+									
+									
+									
+									
+										
+									
+									});
+									
+						} else {
+										$("#localstorage").html("Sorry, your browser does not support Web Storage...");
+									}
+
+		});
+		
+		
+		
+
+		</script>
+		
+<script type="text/javascript">
+$(document).ready(function() {
+  $.uploadPreview({
+    input_field: "#image-upload-1",
+    preview_box: "#image-preview-1",
+    label_field: "#image-label-1",
+    no_label: false     
+  });
+  
+  });
+</script>
+	  
+	  
+<script type="text/javascript" src="cordova.js"></script>
+<script type="text/javascript">
+        app.initialize();
+</script>
+	  
+</body>
+</html>

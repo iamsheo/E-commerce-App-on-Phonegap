@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0"/>
+  <title>Mobile App</title>
+
+  
+	<link href="css/materialize.min.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+	<script src="js/jquery-3.2.1.min.js"></script>
+	<script src="js/materialize.min.js"></script>
+	<link rel="stylesheet" href="css/style.css">
+	<link rel="stylesheet" href="icons/css/font-awesome.min.css">
+	<script src="js/jquery-uploadPreview.min.js"></script>
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet"> 
+</head>
+<style>
+ul,li,div,nav{
+font-family: 'Lato', sans-serif;
+}
+.card {
+    position: relative;
+    background-color: #fff;
+    transition: box-shadow .25s;
+    border-radius: 2px;
+    margin: 0px;
+    margin-bottom: 5px;
+}
+</style>
+<body>
+
+<div class="navbar-fixed">
+		<nav>
+			<div class="nav-wrapper">
+				<a href="#" class="brand-logo center">CARTway</a>
+			</div>
+		</nav>
+	</div>
+
+  <a href="shop-type.html" ><i class="fa fa-angle-left" aria-hidden="true"  style="z-index: 999;position:fixed;top:13px;left:8px;color:#fff;font-size:30px;"></i>
+</a>
+  <style>
+.product-list li{
+
+border-bottom:1px solid #eee;
+padding:10px;
+}
+</style>
+	<div class="card row" style="margin:3px;margin-bottom:2px;padding:0px 5px 0px 5px">
+		<div class="col s10 offset-s1" >
+		
+		 <div class="row" style="">
+			<br><br>
+				<h5>Your Order has been sent. <br>Please wait for approvel of your order by shopkeeper.<br> your order id is : #<span id="order_id"></span></h5>
+				<p>You will get notification when you order approved or packed.Thank you for your order.</p>
+				<br><br>
+				<a class="waves-effect waves-light btn" href="track-order.html"  style="background-color:#A82E30;width:100%">Track Order</a>
+		
+			
+		</div>
+	</div>
+	</div>
+<br>
+<img src="images/bg.png" class="responsive-img " >	  
+	  
+	  
+	  
+		<script>
+		$(document).ready(function(){
+			
+				 $(".button-collapse").sideNav();
+				  
+				  $order_id=localStorage.getItem("order_id");
+				   $("#order_id").html($order_id);
+					
+				  	
+
+		});
+		
+		
+		
+
+		</script>
+		
+
+	  
+	  
+<script type="text/javascript" src="cordova.js"></script>
+<script type="text/javascript">
+        app.initialize();
+</script>
+	  
+</body>
+</html>
