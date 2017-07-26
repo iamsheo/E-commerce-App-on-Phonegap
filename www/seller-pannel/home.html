@@ -80,6 +80,15 @@ font-family: 'Lato', sans-serif;
 	  
 		<script>
 		$(document).ready(function(){
+		
+		$admin=localStorage.getItem("admin_login");
+		
+		if($admin=="yes"){
+		
+		window.location.replace("dashboard.html");
+		
+		}
+		
 				
 				
 						$("#submit").click(function(){
@@ -132,6 +141,8 @@ font-family: 'Lato', sans-serif;
 														localStorage.setItem("admin_id", val.id);
 														localStorage.setItem("admin_name", val.name);
 														localStorage.setItem("admin_shop_name", val.shop_name);
+														
+														localStorage.setItem("admin_login", "yes");
 														
 													});
 													
