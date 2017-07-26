@@ -21,7 +21,8 @@
 				</div>
 			</nav>
 		</div>
-	<div class="row">
+	<div class="row" >
+		<div class="error">No Data Found OR Check Your Internet Connection</div>
 		<div class="chat">
 				
 				
@@ -52,7 +53,7 @@
 									
 							}).done(function(response){
 									console.log(response);
-									
+									$(".error").html("");
 									$.each( response, function( key, val ) {
 												//alert( key+ val.response  );
 												$status=val.response;
@@ -66,7 +67,7 @@
 													$str="";
 													$.each( $shoplist, function( key, val2 ) {
 													$str=$str+'<div class="chatview" id="'+val2.shopkeeper_id+'" shop_name="'+val2.shop+'">';
-													$str =$str+'<div class="row card " style="padding-top:5px;margin:4px;padding-bottom:5px;border-top:3px solid #A82E30;">';
+													$str =$str+'<div class="row card " style="cursor:pointer;padding-top:5px;margin:4px;padding-bottom:5px;border-top:3px solid #A82E30;">';
 													
 													$str =$str+'<div class="col s12 shop-details" ><span style="margin-top: 2px;padding-left:4px;color:#a5a5a5;">'+val2.shop+'</span></div>';													
 													$str =$str+'</div>';

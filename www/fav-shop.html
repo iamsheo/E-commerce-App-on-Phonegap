@@ -28,6 +28,7 @@ font-family: 'Lato', sans-serif;
 	<div class="col s12 " style="background-color:#EEEEEE">
 				<div class="susers">
 				<p style="margin:3px">Favourite Shop List</p>
+				<div class="error">No Data Found OR Check Your Internet Connection</div>
 				<div id="info3"></div>
 				</div>
 				<br><br><img src="images/bg.png" class="responsive-img " >
@@ -58,7 +59,7 @@ font-family: 'Lato', sans-serif;
 									
 							}).done(function(response){
 									console.log(response);
-									
+									$(".error").html("");
 									$.each( response, function( key, val ) {
 												//alert( key+ val.response  );
 												

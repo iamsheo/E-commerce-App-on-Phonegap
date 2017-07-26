@@ -32,6 +32,7 @@ font-family: 'Lato', sans-serif;
 			<span style="font-size:15px;color:#A82E30;">Track Order</span>
 			
 		</div>
+		<div class="error">No Data Found OR Check Your Internet Connection</div>
 		<div class="track">
 		<div id="info"></div>
 		</div>
@@ -55,7 +56,7 @@ font-family: 'Lato', sans-serif;
 									
 							}).done(function(response){
 									console.log(response);
-									
+									$(".error").html("");
 									$.each( response, function( key, val ) {
 												//alert( key+ val.response  );
 												

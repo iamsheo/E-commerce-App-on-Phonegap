@@ -6,10 +6,10 @@
   <title>Mobile App</title>
 
   
-	<link href="../css/materialize.min.css" type="text/css" rel="stylesheet" media="screen,projection"/>
-	<script src="../js/jquery-3.2.1.min.js"></script>
-	<script src="../js/materialize.min.js"></script>
-	<link rel="stylesheet" href="../css/style.css">
+	<link href="css/materialize.min.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+	<script src="js/jquery-3.2.1.min.js"></script>
+	<script src="js/materialize.min.js"></script>
+	<link rel="stylesheet" href="css/style.css">
 	<link rel="stylesheet" href="icons/css/font-awesome.min.css">
 <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
@@ -44,40 +44,34 @@ font-family: 'Lato', sans-serif;
 
 
 	<div class="row card" style="margin:4px">
-	<br><br>
-	<div class="col s10 offset-s1" style="text-align:center;padding:15px;margin-bottom:40px;">
-	<img src="images/logo.png" style="position:relative;width:155px;"></img>
-		<p style="font-weight:600;text-align:center;">Shopkeeper Login </p>
-		<hr style="border: 1px solid #eee;">
-		<form action="otp-verify.html">
-		
-			<div class="input-field col s12">
-				<i class="material-icons prefix">account_circle</i>
-				<input id="user_name" type="text" class="validate" required>
-				<label for="user_name">User Name</label>
+		<br><br>
+			<div class="col s10 offset-s1" style="text-align:center;padding:15px;margin-bottom:40px;">
+				<img src="images/logo.png" style="position:relative;width:155px;"></img>
+					<p style="font-weight:600;text-align:center;">Shopkeeper Login </p>
+						<hr style="border: 1px solid #eee;">
+							<form action="otp-verify.html">
+								<div class="input-field col s12">
+									<i class="fa fa-user-circle prefix" aria-hidden="true"></i>
+									<input id="user_name" type="text" class="validate" required>
+									<label for="user_name">User Name</label>
+								</div>
+								<div class="input-field col s12">
+									<i class="fa fa-lock prefix" aria-hidden="true" style="padding-left: 5px;"></i>
+									<input id="password" type="password" class="validate"  required>
+									<label for="password">Password</label>
+								</div>
+								<button class="btn waves-effect waves-light" type="button" id="submit" name="action"  style="background-color:#A82E30">Login</button>
+							</form>
+					<div id="info" style="color:red;"></div>
+					<br>
+					<div id="localstorage" style="color:red;"></div>
 			</div>
-			<div class="input-field col s12">
-				<i class="material-icons prefix">lock</i>
-				<input id="password" type="password" class="validate"  required>
-				<label for="password">Password</label>
+			<div style="padding-left:10px;padding-right:10px;clear:both;">
+				<p style="text-align:center;"> Not Our Memeber Yet ?</p>
+				<a href="registartion.html" class="btn waves-effect waves-light btn-large"  style="background-color:#A82E30;width:100%;line-height: 40px;" >Register With Us </a>
 			</div>
-			
-			 <button class="btn waves-effect waves-light" type="button" id="submit" name="action"  style="background-color:#A82E30">Login
-				
-			  </button>
-		</form>
-		
-		
-		<div id="info" style="color:red;"></div>
-		<br>
-		<div id="localstorage" style="color:red;"></div>
-	</div>
-	<div style="padding-left:10px;padding-right:10px;clear:both;">
-	<p style="text-align:center;"> Not Our Memeber Yet ?</p>
-	 <a href="registartion.html" class="btn waves-effect waves-light btn-large"  style="background-color:#A82E30;width:100%;line-height: 40px;" >Register With Us </a>
-	 </div>
-	<br><br><br>
-	<img src="images/bg.png" class="responsive-img">	
+			<br><br><br>
+			<img src="images/bg.png" class="responsive-img">	
 	</div>
 	  
 	
@@ -175,12 +169,7 @@ font-family: 'Lato', sans-serif;
 	});
 </script>
 
-<script>
-
-</script>
-
-
-	  
+  
 	  
 <script type="text/javascript" src="cordova.js"></script>
 <script type="text/javascript">

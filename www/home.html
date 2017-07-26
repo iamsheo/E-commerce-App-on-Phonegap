@@ -44,19 +44,21 @@ font-family: 'Lato', sans-serif;
 
 	<div class="row card" style="margin:4px;">
 	<br><br>
-	<div class="col s10 offset-s1"  style="padding:15px;margin-bottom:40px;">
-	<img src="images/logo.png" style="width:100%;"></img>
+	<div class="col s10 offset-s1"  style="text-align:center;padding:15px;margin-bottom:40px;">
+	<img src="images/logo.png" style="width:155px;"></img>
 		<p style="font-weight:600;text-align:center;">Get In Cartway </p>
 		<hr style="border: 1px solid #eee;">
 		<form action="otp-verify.html">
 		
 			<div class="input-field col s12">
-				<i class="material-icons prefix">account_circle</i>
+				<i class="fa fa-user-circle prefix" aria-hidden="true"></i>
+
 			  <input id="name" type="text" class="validate" required>
 			  <label for="name">Name</label>
 			</div>
 			<div class="input-field col s12">
-				<i class="material-icons prefix">phone</i>
+				<i class="fa fa-mobile prefix" aria-hidden="true" style="padding-left: 5px;"></i>
+
 			  <input id="mobile_number" type="text" class="validate" pattern="\d{3}[\-]\d{3}[\-]\d{4}"  required>
 			  <label for="mobile_number">Mobile Number</label>
 			</div>

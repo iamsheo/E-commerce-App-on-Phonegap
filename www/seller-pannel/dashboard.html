@@ -249,6 +249,7 @@ width:50px;
 				<a href="dashboard.html" class="right btn-floating btn-small waves-effect waves-light red"><i class="fa fa-refresh" aria-hidden="true"></i></a>
 				</div>
 				</div>
+				<div class="error">No Data Found OR Check Your Internet Connection</div>
 				<div class="sorder">
 				
 				
@@ -303,7 +304,7 @@ width:50px;
 									
 							}).done(function(response){
 									console.log(response);
-									
+									$(".error").html("");
 									$.each( response, function( key, val ) {
 												//alert( key+ val.response  );
 												
@@ -352,7 +353,18 @@ width:50px;
 													$str =$str+'<div class="col s12 shop-details">Delivery and Time Slot :<span style="margin-top: 2px;padding-left:4px;color:#a5a5a5;">'+val.when+'-'+val.time_slot+'</span></div>';
 													$str =$str+'<div class="col s12 shop-details">Service :<span style="margin-top: 2px;padding-left:4px;color:#a5a5a5;">'+val.service+'</span></div>';
 													$str =$str+'<div class="col s12 shop-details">Payment Mode :<span style="margin-top: 2px;padding-left:4px;color:#a5a5a5;">'+val.payment_mode+'</span></div>';
-													$str =$str+'<div class="col s12 shop-details">Item :<span style="margin-top: 2px;padding-left:4px;color:#a5a5a5;">'+val.list+'</span></div>';
+													$str =$str+'<div class="col s12 shop-details"><span style="margin-top: 2px;padding-left:4px;color:#000;text-align:center;">Item</span></div>';
+													$str =$str+'<div class="col s12 shop-details"><span style="margin-top: 2px;padding-left:4px;color:#a5a5a5;">'+val.list+'</span></div>';
+													$str =$str+'<div class="col s12 shop-details"><span style="margin-top: 2px;padding-left:4px;color:#a5a5a5;">';
+													var images=val.list_img.split(',');
+													
+													for(var i=1; i<images.length-1; i++){
+													$imgstr="<img class='imgzoom' src='"+images[i]+"'>";
+														//$(".img-gallery").append($imgstr);
+														//alert(images[i]);
+													$str =$str+'<div class="col s12 shop-details" style="width:35px">'+$imgstr+'</div>';
+													}
+													$str =$str+'</span></div>';
 													$str =$str+'</div>';
 													
 													$str =$str+'</div>';
@@ -482,7 +494,18 @@ width:50px;
 													$str =$str+'<div class="col s12 shop-details">Service :<span style="margin-top: 2px;padding-left:4px;color:#a5a5a5;">'+val.service+'</span></div>';
 													$str =$str+'<div class="col s12 shop-details">Total Amount :<span style="margin-top: 2px;padding-left:4px;color:#a5a5a5;">'+val.amount+'</span></div>';
 													$str =$str+'<div class="col s12 shop-details">Unpaid Amount :<span style="margin-top: 2px;padding-left:4px;color:#a5a5a5;">'+val.remaning_amount+'</span></div>';
-													$str =$str+'<div class="col s12 shop-details">Item List :<span style="margin-top: 2px;padding-left:4px;color:#a5a5a5;">'+val.list+'</span></div>';
+													$str =$str+'<div class="col s12 shop-details"><span style="margin-top: 2px;padding-left:4px;color:#000;text-align:center;">Item</span></div>';
+													$str =$str+'<div class="col s12 shop-details"><span style="margin-top: 2px;padding-left:4px;color:#a5a5a5;">'+val.list+'</span></div>';
+													$str =$str+'<div class="col s12 shop-details"><span style="margin-top: 2px;padding-left:4px;color:#a5a5a5;">';
+													var images=val.list_img.split(',');
+													
+													for(var i=1; i<images.length-1; i++){
+													$imgstr="<img class='imgzoom' src='"+images[i]+"'>";
+														//$(".img-gallery").append($imgstr);
+														//alert(images[i]);
+													$str =$str+'<div class="col s12 shop-details" style="width:35px">'+$imgstr+'</div>';
+													}
+													$str =$str+'</span></div>';
 													$str =$str+'</div>';
 												});
 												$(".spending").append($str);
@@ -535,7 +558,18 @@ width:50px;
 													$str =$str+'<div class="col s12 shop-details">Service :<span style="margin-top: 2px;padding-left:4px;color:#a5a5a5;">'+val.service+'</span></div>';
 													$str =$str+'<div class="col s12 shop-details">Status :<span style="margin-top: 2px;padding-left:4px;color:#a5a5a5;">'+val.status+'</span></div>';
 													$str =$str+'<div class="col s12 shop-details">Total Amount :<span style="margin-top: 2px;padding-left:4px;color:#a5a5a5;">'+val.amount+'</span></div>';
-													$str =$str+'<div class="col s12 shop-details">Item List :<span style="margin-top: 2px;padding-left:4px;color:#a5a5a5;">'+val.list+'</span></div>';
+													$str =$str+'<div class="col s12 shop-details"><span style="margin-top: 2px;padding-left:4px;color:#000;text-align:center;">Item</span></div>';
+													$str =$str+'<div class="col s12 shop-details"><span style="margin-top: 2px;padding-left:4px;color:#a5a5a5;">'+val.list+'</span></div>';
+													$str =$str+'<div class="col s12 shop-details"><span style="margin-top: 2px;padding-left:4px;color:#a5a5a5;">';
+													var images=val.list_img.split(',');
+													
+													for(var i=1; i<images.length-1; i++){
+													$imgstr="<img class='imgzoom' src='"+images[i]+"'>";
+														//$(".img-gallery").append($imgstr);
+														//alert(images[i]);
+													$str =$str+'<div class="col s12 shop-details" style="width:35px">'+$imgstr+'</div>';
+													}
+													$str =$str+'</span></div>';
 													$str =$str+'</div>';
 												});
 												$(".sshistory").append($str);
